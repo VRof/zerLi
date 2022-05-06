@@ -7,36 +7,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.LoginGUIController">
    <children>
       <Label layoutX="279.0" layoutY="136.0" text="Hello, please login">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField layoutX="307.0" layoutY="236.0" promptText="username" />
-      <TextField layoutX="308.0" layoutY="306.0" promptText="password" />
-      <Label layoutX="833.0" layoutY="4.0" text="Error message" />
+      <TextField fx:id="txt_username" layoutX="307.0" layoutY="236.0" promptText="username" />
+      <TextField fx:id="txt_password" layoutX="308.0" layoutY="306.0" promptText="password" />
+      <Label fx:id="lbl_error" layoutX="180.0" layoutY="429.0" prefHeight="35.0" prefWidth="444.0" text="Error message" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
       <Label layoutX="365.0" layoutY="206.0" text="Username:" />
       <Label layoutX="367.0" layoutY="279.0" text="Password:" />
-      <ImageView fitHeight="45.0" fitWidth="127.0" layoutX="349.0" layoutY="370.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btn_login" fitHeight="45.0" fitWidth="127.0" layoutX="349.0" layoutY="370.0" onMouseClicked="#clickedLoginBtn" onMouseEntered="#enteredLoginBtn" onMouseExited="#leavedLoginBTn" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@button_login.png" />
+            <Image url="@../pictures/button_login.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="45.0" fitWidth="94.0" layoutX="655.0" layoutY="523.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btn_exit" fitHeight="45.0" fitWidth="94.0" layoutX="655.0" layoutY="523.0" onMouseClicked="#clickedExitBtn" onMouseEntered="#enteredExitBtn" onMouseExited="#leavedExitBtn" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@button_exit.png" />
+            <Image url="@../pictures/button_exit.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@pina.png" />
+            <Image url="@../pictures/pina.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="636.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@pina%20-%20Copy.png" />
+            <Image url="@../pictures/pina3.png" />
          </image>
       </ImageView>
    </children>
