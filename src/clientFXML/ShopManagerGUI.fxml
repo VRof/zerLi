@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="135.0" layoutY="147.0" text="Hello, Shop Manager" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@pina.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="200.0" layoutX="51.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@button_logout.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="42.0" fitWidth="255.0" layoutX="287.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@button_view-reports.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="42.0" fitWidth="224.0" layoutX="288.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@button_view-cancelation-request.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="55.0" fitWidth="224.0" layoutX="287.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@button_view-orders.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

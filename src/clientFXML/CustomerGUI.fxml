@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="39.0" layoutY="182.0" text="Hello, Yossi">
+         <font>
+            <Font name="AdobeDevanagari-Regular" size="25.0" />
+         </font></Label>
+      <ImageView fitHeight="46.0" fitWidth="233.0" layoutX="285.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@button_my-orders.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="63.0" fitWidth="231.0" layoutX="285.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@button_new-order.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="46.0" fitWidth="231.0" layoutX="285.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@button_view-catalog.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="46.0" fitWidth="133.0" layoutX="39.0" layoutY="527.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@button_logout.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@pina.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="39.0" layoutY="248.0" text="Your balance: 0 NIS">
+         <font>
+            <Font name="AdobeDevanagari-Regular" size="25.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

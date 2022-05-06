@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane layoutX="11.0" layoutY="14.0" prefHeight="483.0" prefWidth="778.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab style="-fx-background-color: #15d798; -fx-border-color: #76a5af;" text="Bundle catalog">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="483.0" prefWidth="739.0">
+                          <columns>
+                            <TableColumn prefWidth="155.0" text="Picture" />
+                            <TableColumn prefWidth="188.0" text="Name" />
+                              <TableColumn prefWidth="56.0" text="ID" />
+                              <TableColumn prefWidth="185.0" text="Color" />
+                              <TableColumn prefWidth="73.0" text="Quantity" />
+                              <TableColumn prefWidth="81.0" text="Price" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab style="-fx-background-color: #15d798; -fx-border-color: #76a5af;" text="Create bundle">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView prefHeight="483.0" prefWidth="739.0">
+                          <columns>
+                            <TableColumn prefWidth="155.0" text="Picture" />
+                            <TableColumn prefWidth="188.0" text="Name" />
+                              <TableColumn prefWidth="56.0" text="ID" />
+                              <TableColumn prefWidth="185.0" text="Color" />
+                              <TableColumn prefWidth="73.0" text="Quantity" />
+                              <TableColumn prefWidth="81.0" text="Price" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <ImageView fitHeight="56.0" fitWidth="261.0" layoutX="525.0" layoutY="533.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_proceed-with-the-order.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="63.0" fitWidth="68.0" layoutX="14.0" layoutY="523.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_back.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
