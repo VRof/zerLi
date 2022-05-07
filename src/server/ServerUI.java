@@ -2,7 +2,6 @@ package server;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import serverFrameControllers.ServerWindowFrameController;
 
 public class ServerUI extends Application {
 

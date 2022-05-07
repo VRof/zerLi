@@ -3,12 +3,15 @@ package client;
 import java.io.IOException;
 import javax.sql.rowset.CachedRowSet;
 
+import clientClasses.Message;
+import clientClasses.UserLoginData;
 import ocsf.client.*;
 
 public class ClientController extends AbstractClient {
 	private static ClientController clientController;
 	public static boolean awaitResponse = false;
-	public static CachedRowSet cachedMsg;
+	public static Object dataFromServer;
+	public static UserLoginData userLoginData;
 	public ClientController(String host, int port) throws IOException {
 		super(host, port);
 		openConnection();
@@ -18,12 +21,8 @@ public class ClientController extends AbstractClient {
 	@Override
 	protected void handleMessageFromServer(Object msg) {
 		awaitResponse = false;
-		System.out.println("recieved :"+msg);
-		try {
-		cachedMsg = (CachedRowSet)msg;
-		} catch(ClassCastException e) {
-			System.out.println();
-		}
+		System.out.println("recieved :" + msg);
+		dataFromServer = msg;
 	}
 	
 	

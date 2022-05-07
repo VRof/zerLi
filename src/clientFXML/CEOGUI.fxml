@@ -14,22 +14,22 @@
          </font></Label>
       <ImageView fitHeight="50.0" fitWidth="125.0" layoutX="14.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@button_logout.png" />
+            <Image url="@../pictures/button_logout.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="60.0" fitWidth="294.0" layoutX="253.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@button_view-annual-report.png" />
+            <Image url="@../pictures/button_view-annual-report.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@pina.png" />
+            <Image url="@../pictures/pina.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="98.0" fitWidth="294.0" layoutX="253.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@button_view-specific-shop-reports.png" />
+            <Image url="@../pictures/button_view-specific-shop-reports.png" />
          </image>
       </ImageView>
    </children>

@@ -1,7 +1,4 @@
-package serverFrameControllers;
-
-import java.io.IOException;
-import java.sql.SQLException;
+package server;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -10,7 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import server.ServerControl;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class ServerWindowFrameController extends Application {
 	private Stage primaryStage;
