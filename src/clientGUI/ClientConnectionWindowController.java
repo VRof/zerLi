@@ -1,7 +1,8 @@
 package clientGUI;
 
 import client.ClientController;
-import clientFrameControllers.LoginWindowFrameController;
+import client.LoginWindowFrameController;
+import client.NewWindowFrameController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -37,8 +38,8 @@ public class ClientConnectionWindowController {
     		int port = Integer.parseInt(txt_serverPort.getText());
 			clientCtrl = new ClientController(txt_serveripaddress.getText(),port);
 			if (clientCtrl.isConnected()) {
-				LoginWindowFrameController tableWindow = new LoginWindowFrameController();
-				tableWindow.start(new Stage());
+				LoginWindowFrameController loginWindow = new LoginWindowFrameController("LoginGUI");
+				loginWindow.start(new Stage());
 				btn_connect.getScene().getWindow().hide();
 			}
 		} catch (NumberFormatException e) {
