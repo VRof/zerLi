@@ -37,9 +37,11 @@ public class CustomerGUIController {
 
     @FXML
     void clickedLogoutBtn(MouseEvent event) throws Exception {
-        Message msg = new Message();
+
+        clientClasses.Message msg = new clientClasses.Message();
         msg.setCommand("disconnect");
-        msg.setMsg((Object) ClientController.userLoginData.getUserid());
+        int userid = ClientController.userLoginData.getUserid();
+        msg.setMsg((Object)userid);
         ClientController.getClientController().send(msg);
         Stage stage = (Stage)lbl_username.getScene().getWindow();
         stage.close();

@@ -54,9 +54,6 @@ public class LoginGUIController {
      */
     @FXML
     void clickedExitBtn(MouseEvent event) throws IOException {
-        Message msg = new Message();
-        msg.setCommand("disconnect");
-        connection.send(msg);
         connection.closeConnection();
         System.exit(0);
     }
@@ -87,7 +84,13 @@ public class LoginGUIController {
         msg.setMsg((Object) userData);
         connection.send(msg);
         while(connection.awaitResponse); //wait for data
-        cachedMsg = (CachedRowSet) connection.dataFromServer; //message received from server
+
+        if(connection.dataFromServer == null){ //if client already connected, dataFromServer = null (server sends null)
+            lbl_error.setText("       this user is already connected");
+            return;
+        }
+
+        cachedMsg = (CachedRowSet) connection.dataFromServer; //message received from server (row from login table)
 
         while (cachedMsg.next()) { //get user data
             isnull = false;
@@ -103,13 +106,11 @@ public class LoginGUIController {
             return;
         }
 
-        if(userLoginData.getIsLoggedIn().equals("true")){
-            lbl_error.setText("User already logged in");
-            return;
-        }
-        else{
+//        if(userLoginData.getIsLoggedIn().equals("true")){
+//            lbl_error.setText("User already logged in");
+//            return;
+//        }
 
-        }
         connection.userLoginData = userLoginData; //save user login data for future use
 
         if (userLoginData.getStatus().equals("frozen")) { //if account status is frozen

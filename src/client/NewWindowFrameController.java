@@ -19,10 +19,6 @@ public class NewWindowFrameController extends Application {
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Message msg = new Message();
-        msg.setCommand("disconnect");
-        int userid = ClientController.userLoginData.getUserid();
-        msg.setMsg((Object)userid);
         primaryStage.setTitle("ZerLi");
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/clientFXML/" + windowName +".fxml"));
@@ -32,6 +28,10 @@ public class NewWindowFrameController extends Application {
         primaryStage.setScene(scene);
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
+                Message msg = new Message();
+                msg.setCommand("disconnect");
+                int userid = ClientController.userLoginData.getUserid();
+                msg.setMsg((Object)userid);
                 ClientController.getClientController().send(msg);
                 try {
                     ClientController.getClientController().closeConnection();
