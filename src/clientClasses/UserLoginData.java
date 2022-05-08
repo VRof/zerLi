@@ -6,7 +6,6 @@ public class UserLoginData {
     private String password;
     private String usertype;
     private String status;
-    private String isLoggedIn;
 
     public int getUserid() {
         return userid;
@@ -48,11 +47,4 @@ public class UserLoginData {
         this.status = status;
     }
 
-    public String getIsLoggedIn() {
-        return isLoggedIn;
-    }
-
-    public void setIsLoggedIn(String isLoggedIn) {
-        this.isLoggedIn = isLoggedIn;
-    }
 }

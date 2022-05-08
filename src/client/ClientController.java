@@ -1,7 +1,6 @@
 package client;
 
 import java.io.IOException;
-import javax.sql.rowset.CachedRowSet;
 
 import clientClasses.Message;
 import clientClasses.UserLoginData;
@@ -10,7 +9,7 @@ import ocsf.client.*;
 public class ClientController extends AbstractClient {
 	private static ClientController clientController;
 	public static boolean awaitResponse = false;
-	public static Object dataFromServer;
+	public static Message messageFromServer;
 	public static UserLoginData userLoginData;
 	public ClientController(String host, int port) throws IOException {
 		super(host, port);
@@ -21,8 +20,8 @@ public class ClientController extends AbstractClient {
 	@Override
 	protected void handleMessageFromServer(Object msg) {
 		awaitResponse = false;
-		System.out.println("recieved :" + msg);
-		dataFromServer = msg;
+		messageFromServer = (Message) msg;
+		System.out.println("received command : " + messageFromServer.getCommand() + " data: "  + messageFromServer.getMsg());
 	}
 	
 	
@@ -43,6 +42,14 @@ public class ClientController extends AbstractClient {
 					e.printStackTrace();
 				}
 			}
+	}
+
+
+	public void logout(){
+		clientClasses.Message msg = new clientClasses.Message();
+		msg.setCommand("disconnect");
+		msg.setMsg((Object)(userLoginData.getUserid()));
+		send(msg);
 	}
 	
 	public static ClientController getClientController() {

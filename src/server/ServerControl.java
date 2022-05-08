@@ -17,8 +17,8 @@ import ocsf.server.ConnectionToClient;
 import serverGUI.ServerWindowController;
 
 public class ServerControl extends AbstractServer {
-    public static List<ConnectionToClient> clientsList = new ArrayList<ConnectionToClient>();
-    private List<Integer> connectedClientdIdList = new ArrayList<>();
+    public static List<ConnectionToClient> clientsList = new ArrayList<>(); //list of connected users to server (used in table of connected clients in serverGUI)
+    private List<Integer> connectedClientdIdList = new ArrayList<>(); //list of id's of connected users to server to prevent multiply login of the same user
     private static ServerControl sv;
 
     public ServerControl(int port) {
@@ -94,18 +94,30 @@ public class ServerControl extends AbstractServer {
     private void login(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         Message message = (Message) msg;
-
-        String[] userdata = {((String[]) message.getMsg())[0], ((String[]) message.getMsg())[1]};
+        Message userLoginData = new Message();
+        String[] userdata = {((String[]) message.getMsg())[0], ((String[]) message.getMsg())[1]}; //username,password
         String SQL = "SELECT * FROM login l WHERE l.username = " + "\"" + userdata[0] + "\"" + " AND " + "l.password = " + "\"" + userdata[1] + "\"" + ";";
         CachedRowSet cachedMsg = null;
         ResultSet rs;
+        int userid = -1;
         try {
             rs = dbConn.createStatement().executeQuery(SQL);
+            //  rs.next();
+
+            if(rs.next() == false){
+                userLoginData.setCommand("wrong");
+                client.sendToClient(userLoginData);
+                return;
+            }
+
+            userid = rs.getInt("userid");
+            rs.beforeFirst(); //reset rs pointer
             RowSetFactory factory = RowSetProvider.newFactory();
             cachedMsg = factory.createCachedRowSet();
             cachedMsg.populate(rs);
             rs.close();
-        } catch (SQLException e) {
+
+        } catch (SQLException | IOException e) {
             System.out.println("SQL request from client " + client + " error " + e);
             try {
                 client.sendToClient("error in sql request or server");
@@ -113,29 +125,25 @@ public class ServerControl extends AbstractServer {
                 System.out.println("sending data to client " + client + " error " + e1);
             }
         }
-        int userid = 0;
-        try {
-            rs = dbConn.createStatement().executeQuery(SQL);
-            rs.next();
-            userid = rs.getInt("userid");
-            dbConn.createStatement().executeUpdate("UPDATE login l SET l.isloggedin = " + "\"" + "true" + "\"" + " WHERE l.userid = " + userid + ";");
-            rs.close();
-        } catch (SQLException e) {
-            System.out.println("error updating logged in to true " + e);
-        }
-        for(int i = 0; i< connectedClientdIdList.size(); i++){
-            if(connectedClientdIdList.get(i) == userid) {
+
+
+        for (int i = 0; i < connectedClientdIdList.size(); i++) { //check if the client is already connected
+            if (connectedClientdIdList.get(i) == userid) { //if connected
                 try {
-                    client.sendToClient(null);
+                    userLoginData.setCommand("already logged in");
+                    client.sendToClient(userLoginData); //send null to client
                     return;
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
         }
-        connectedClientdIdList.add(userid);
+      //  if (userid != -1)
+            connectedClientdIdList.add(userid); //add new user id to the list
         try {
-            client.sendToClient(cachedMsg);
+            userLoginData.setCommand("logged in");
+            userLoginData.setMsg(cachedMsg);
+            client.sendToClient(userLoginData); //send login data to client
         } catch (IOException e) {
             System.out.println("sending data to client " + client + " error " + e);
 
@@ -143,15 +151,14 @@ public class ServerControl extends AbstractServer {
     }
 
 
-    private void disconnect(Object msg, ConnectionToClient client){
+    private void disconnect(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         Message message = (Message) msg;
         int userid = (int) message.getMsg();
         ServerWindowController.clientDisconected(client); //change status in server window to "disconnected"
 
-        for(int i = 0;i<connectedClientdIdList.size();i++){ //remove user from the list of connected users
-            if(connectedClientdIdList.get(i) == userid)
-            {
+        for (int i = 0; i < connectedClientdIdList.size(); i++) { //remove user from the list of connected users
+            if (connectedClientdIdList.get(i) == userid) {
                 connectedClientdIdList.remove(i);
             }
         }
@@ -166,6 +173,7 @@ public class ServerControl extends AbstractServer {
             System.out.println("Error sending msg to server");
         }
     }
+
     public static void setConnection(ServerControl svconn) {
         sv = svconn;
     }

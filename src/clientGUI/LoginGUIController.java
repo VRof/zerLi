@@ -68,48 +68,43 @@ public class LoginGUIController {
     void clickedLoginBtn(MouseEvent event) throws Exception {
         Boolean isnull = true; //flag if no user returned from db (wrong username or password)
         CachedRowSet cachedMsg = null; //row from db with user login data
-        UserLoginData userLoginData = new UserLoginData();
-        String[] userData = new String[2]; //array which send to server
-        Message msg = new Message();
+        UserLoginData userLoginData = new UserLoginData(); //user login data from server (id,username,password,usertype,status)
+        String[] userData = new String[2]; //array which is sent to server (username,password)
+        Message msg = new Message(); //msg to be sent to server
 
         userData[0] = txt_username.getText();
         userData[1] = txt_password.getText();
 
         if (txt_username.getText().equals("") || txt_password.getText().equals("")) { //if username or password is empty fields
-            lbl_error.setText("Please enter username and password");
+            lbl_error.setText("  Please enter username and password");
             return;
         }
         //convert and send to server:
         msg.setCommand("login");
         msg.setMsg((Object) userData);
         connection.send(msg);
-        while(connection.awaitResponse); //wait for data
+        while(connection.awaitResponse); //wait for data from server
 
-        if(connection.dataFromServer == null){ //if client already connected, dataFromServer = null (server sends null)
+        if(connection.messageFromServer.getCommand().equals("already logged in")){ //if client already connected
             lbl_error.setText("       this user is already connected");
             return;
         }
 
-        cachedMsg = (CachedRowSet) connection.dataFromServer; //message received from server (row from login table)
+
+        if (connection.messageFromServer.getCommand().equals("wrong")) { //wrong username or password
+            lbl_error.setText("    Wrong username or password");
+            return;
+        }
+
+        cachedMsg = (CachedRowSet) (connection.messageFromServer.getMsg()); //message received from server (row from login table)
 
         while (cachedMsg.next()) { //get user data
-            isnull = false;
             userLoginData.setUserid(cachedMsg.getInt("userid"));
             userLoginData.setUsername(cachedMsg.getString("username"));
             userLoginData.setPassword(cachedMsg.getString("password"));
             userLoginData.setUsertype(cachedMsg.getString("usertype"));
             userLoginData.setStatus(cachedMsg.getString("status"));
-            userLoginData.setIsLoggedIn(cachedMsg.getString("isloggedin"));
         }
-        if (isnull == true) {
-            lbl_error.setText("Wrong username or password");
-            return;
-        }
-
-//        if(userLoginData.getIsLoggedIn().equals("true")){
-//            lbl_error.setText("User already logged in");
-//            return;
-//        }
 
         connection.userLoginData = userLoginData; //save user login data for future use
 

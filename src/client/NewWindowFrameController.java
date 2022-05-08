@@ -28,11 +28,7 @@ public class NewWindowFrameController extends Application {
         primaryStage.setScene(scene);
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
-                Message msg = new Message();
-                msg.setCommand("disconnect");
-                int userid = ClientController.userLoginData.getUserid();
-                msg.setMsg((Object)userid);
-                ClientController.getClientController().send(msg);
+                ClientController.getClientController().logout();
                 try {
                     ClientController.getClientController().closeConnection();
                 } catch (IOException e) {
