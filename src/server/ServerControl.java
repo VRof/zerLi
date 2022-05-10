@@ -100,6 +100,7 @@ public class ServerControl extends AbstractServer {
         CachedRowSet cachedMsg = null;
         ResultSet rs;
         int userid = -1;
+        String status = "";
         try {
             rs = dbConn.createStatement().executeQuery(SQL);
             //  rs.next();
@@ -111,6 +112,7 @@ public class ServerControl extends AbstractServer {
             }
 
             userid = rs.getInt("userid");
+            status = rs.getString("status");
             rs.beforeFirst(); //reset rs pointer
             RowSetFactory factory = RowSetProvider.newFactory();
             cachedMsg = factory.createCachedRowSet();
@@ -139,6 +141,7 @@ public class ServerControl extends AbstractServer {
             }
         }
       //  if (userid != -1)
+        if(status.equals("active"))
             connectedClientdIdList.add(userid); //add new user id to the list
         try {
             userLoginData.setCommand("logged in");
