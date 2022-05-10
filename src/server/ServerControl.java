@@ -51,31 +51,35 @@ public class ServerControl extends AbstractServer {
         Message message = (Message) msg;
         System.out.println("Message received: command: " + message.getCommand() + " data: " + message.getMsg() + " from " + client);
 
-
-//		} else if (message.getCommand().equals("update")) {
-//			String SQL = ((String) msg);
-//			SQL = SQL.substring("update ".length(), SQL.length());
-//			try {
-//				dbConn.createStatement().executeUpdate(SQL);
-//			} catch (SQLException e) {
-//				System.out.println("Error update orders table : " + SQL + " " + e);
-//				try {
-//					client.sendToClient("update failed");
-//				} catch (IOException e1) {
-//					System.out.println("sending data to client " + client + " error " + e1);
-//				}
-//			}
-//			try {
-//				client.sendToClient((Object) "updated");
-//			} catch (IOException e) {
-//				System.out.println("sending data to client " + client + " error " + e);
-//			}
-        if (message.getCommand().equals("login")) {
-            login(msg, client);
-        } else if (message.getCommand().equals("disconnect")) {
-            disconnect(msg, client);
+        switch (message.getCommand()){
+            case "login":
+                login(msg, client);
+                break;
+            case "disconnect":
+                disconnect(msg, client);
+                break;
+            case "logout":
+                logout(msg,client);
+                break;
         }
 
+    }
+
+    private void logout(Object msg, ConnectionToClient client) {
+        Message message = (Message) msg;
+        int userid = -1;
+        userid = (int) message.getMsg();
+        for (int i = 0; i < connectedClientdIdList.size(); i++) { //remove user from the list of connected users
+            if (connectedClientdIdList.get(i) == userid) {
+                connectedClientdIdList.remove(i);
+            }
+        }
+        try {
+            message.setCommand("logout accepted");
+            client.sendToClient( message);
+        } catch (IOException e) {
+            System.out.println("Error sending msg to server");
+        }
     }
 
     public static void closeAll() throws SQLException {
@@ -100,6 +104,7 @@ public class ServerControl extends AbstractServer {
         CachedRowSet cachedMsg = null;
         ResultSet rs;
         int userid = -1;
+        String status = "";
         try {
             rs = dbConn.createStatement().executeQuery(SQL);
             //  rs.next();
@@ -111,6 +116,7 @@ public class ServerControl extends AbstractServer {
             }
 
             userid = rs.getInt("userid");
+            status = rs.getString("status");
             rs.beforeFirst(); //reset rs pointer
             RowSetFactory factory = RowSetProvider.newFactory();
             cachedMsg = factory.createCachedRowSet();
@@ -139,6 +145,7 @@ public class ServerControl extends AbstractServer {
             }
         }
       //  if (userid != -1)
+        if(status.equals("active"))
             connectedClientdIdList.add(userid); //add new user id to the list
         try {
             userLoginData.setCommand("logged in");
@@ -152,23 +159,19 @@ public class ServerControl extends AbstractServer {
 
 
     private void disconnect(Object msg, ConnectionToClient client) {
-        Connection dbConn = SqlConnector.getConnection();
         Message message = (Message) msg;
-        int userid = (int) message.getMsg();
+        int userid = -1;
+        if(message.getMsg()!=null)
+             userid = (int) message.getMsg();
         ServerWindowController.clientDisconected(client); //change status in server window to "disconnected"
-
         for (int i = 0; i < connectedClientdIdList.size(); i++) { //remove user from the list of connected users
             if (connectedClientdIdList.get(i) == userid) {
                 connectedClientdIdList.remove(i);
             }
         }
-//        try {
-//            dbConn.createStatement().executeUpdate("UPDATE login l SET l.isloggedin = " + "\"" + "false" + "\"" + " WHERE l.userid = " + userid + ";");
-//        } catch (SQLException e) {
-//            System.out.println("SQL request from client " + client + " error " + e);
-//        }
         try {
-            client.sendToClient((Object) client + " disconnect accepted");
+            message.setCommand("disconnect accepted");
+            client.sendToClient(message);
         } catch (IOException e) {
             System.out.println("Error sending msg to server");
         }
