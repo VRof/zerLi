@@ -16,7 +16,7 @@
    <children>
       <ImageView fitHeight="50.0" fitWidth="112.0" layoutX="673.0" layoutY="628.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@button_pay.png" />
+            <Image url="@../pictures/button_pay.png" />
          </image>
       </ImageView>
       <CheckBox layoutX="94.0" layoutY="147.0" mnemonicParsing="false" text="Use saved card">
@@ -67,12 +67,12 @@
       <DatePicker layoutX="245.0" layoutY="486.0" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="12.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@pina.png" />
+            <Image url="@../pictures/pina.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="736.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@pina%20-%20Copy.png" />
+            <Image url="@../pictures/pina3.png" />
          </image>
       </ImageView>
       <Label layoutX="339.0" layoutY="635.0" prefHeight="36.0" prefWidth="286.0" text="Order price: 0 NIS" textFill="RED">
@@ -87,7 +87,7 @@
       </Label>
       <ImageView fitHeight="51.0" fitWidth="171.0" layoutX="625.0" layoutY="528.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@button_use-balance.png" />
+            <Image url="@../pictures/button_use-balance.png" />
          </image>
       </ImageView>
       <TextArea layoutX="612.0" layoutY="197.0" prefHeight="249.0" prefWidth="218.0" />
@@ -98,7 +98,7 @@
       </Label>
       <ImageView fitHeight="77.0" fitWidth="95.0" layoutX="49.0" layoutY="615.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@button_back.png" />
+            <Image url="@../pictures/button_back.png" />
          </image>
       </ImageView>
    </children>

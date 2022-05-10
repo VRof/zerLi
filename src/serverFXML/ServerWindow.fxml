@@ -24,7 +24,7 @@
       <Button fx:id="btn_connect" layoutX="55.0" layoutY="474.0" mnemonicParsing="false" onAction="#btnConnectClick" prefWidth="94.0" text="Connect" />
       <Button fx:id="btn_disconnect" layoutX="262.0" layoutY="474.0" mnemonicParsing="false" onAction="#btnDisconnectClick" text="Disconnect" />
       <Button fx:id="btn_exit" layoutX="650.0" layoutY="529.0" mnemonicParsing="false" onAction="#btnExitClick" prefWidth="94.0" text="Exit" />
-      <PasswordField fx:id="txt_password" layoutX="168.0" layoutY="392.0" text="Vetakool1510" />
+      <PasswordField fx:id="txt_password" layoutX="168.0" layoutY="392.0" text="Whyalwaysme11" />
       <Label layoutX="300.0" layoutY="14.0" text="Server control">
          <font>
             <Font name="System Bold" size="30.0" />

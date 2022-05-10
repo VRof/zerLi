@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TableView layoutX="20.0" layoutY="98.0" prefHeight="390.0" prefWidth="756.0">
         <columns>
@@ -19,14 +20,22 @@
             <TableColumn prefWidth="70.0" text="Price" />
         </columns>
       </TableView>
-      <Label layoutX="47.0" layoutY="45.0" text="Hello, Yossi" />
-      <Button layoutX="20.0" layoutY="525.0" mnemonicParsing="false" text="LogOut" />
-      <Button layoutX="647.0" layoutY="525.0" mnemonicParsing="false" text="Confirm delivery" />
-      <Label layoutX="262.0" layoutY="525.0" prefHeight="31.0" prefWidth="272.0" text="error text" />
+      <Label layoutX="50.0" layoutY="45.0" text="Hello, Yossi" />
+      <Label layoutX="262.0" layoutY="525.0" prefHeight="31.0" prefWidth="272.0" text="error text" textFill="RED" />
       <Label layoutX="236.0" layoutY="33.0" text="Choose order to confirm">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
+      <ImageView fitHeight="45.0" fitWidth="166.0" layoutX="39.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_logout.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="576.0" layoutY="517.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_confirm-delivery.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
