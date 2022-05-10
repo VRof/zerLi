@@ -1,6 +1,5 @@
 package client;
 
-import clientClasses.Message;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +27,7 @@ public class NewWindowFrameController extends Application {
         primaryStage.setScene(scene);
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
-                ClientController.getClientController().logout();
+                ClientController.getClientController().disconnect();
                 try {
                     ClientController.getClientController().closeConnection();
                 } catch (IOException e) {
