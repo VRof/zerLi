@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import clientClasses.Message;
 import clientClasses.UserLoginData;
+import clientGUI.LoginGUIController;
+import javafx.stage.Stage;
 import ocsf.client.*;
 
 public class ClientController extends AbstractClient {
@@ -11,6 +13,9 @@ public class ClientController extends AbstractClient {
 	public static boolean awaitResponse = false;
 	public static Message messageFromServer;
 	public static UserLoginData userLoginData;
+
+
+	public static SavedWindows savedWindows = new SavedWindows();
 	public ClientController(String host, int port) throws IOException {
 		super(host, port);
 		openConnection();
@@ -45,14 +50,30 @@ public class ClientController extends AbstractClient {
 	}
 
 
-	public void logout(){
+	public void disconnect(){
 		clientClasses.Message msg = new clientClasses.Message();
 		msg.setCommand("disconnect");
+		if(userLoginData!=null) //if user was connected
+			msg.setMsg((Object)(userLoginData.getUserid()));
+		send(msg);
+	}
+
+	public void logout(Stage stage) {
+		clientClasses.Message msg = new clientClasses.Message();
+		msg.setCommand("logout");
 		msg.setMsg((Object)(userLoginData.getUserid()));
 		send(msg);
+		while(ClientController.awaitResponse);
+		stage.hide();
+		Stage loginStage = savedWindows.getLoginWindow();
+		LoginGUIController.loginController.initialize();
+		loginStage.show();
 	}
 	
 	public static ClientController getClientController() {
 		return clientController;
 	}
+
+
 }
+

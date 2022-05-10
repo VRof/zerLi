@@ -36,16 +36,21 @@ public class LoginGUIController {
     @FXML
     private ImageView btn_exit;
 
-    private ClientController connection = ClientController.getClientController();
+
+    public static LoginGUIController loginController;
+    private ClientController connection;
+
 
     /**
-     * initialize error label to empty string
+     * initialize with empty fields
      */
     @FXML
     public void initialize() {
+        loginController = this;
         lbl_error.setText("");
+        txt_username.setText("");
+        txt_password.setText("");
     }
-
 
     /**
      * clickedExitBtn - method called when clicked on exit button, closes connection and exits app
@@ -54,6 +59,8 @@ public class LoginGUIController {
      */
     @FXML
     void clickedExitBtn(MouseEvent event) throws IOException {
+        ClientController.getClientController().disconnect();
+        while(ClientController.awaitResponse);
         connection.closeConnection();
         System.exit(0);
     }
@@ -66,7 +73,7 @@ public class LoginGUIController {
      */
     @FXML
     void clickedLoginBtn(MouseEvent event) throws Exception {
-        Boolean isnull = true; //flag if no user returned from db (wrong username or password)
+        connection = ClientController.getClientController();
         CachedRowSet cachedMsg = null; //row from db with user login data
         UserLoginData userLoginData = new UserLoginData(); //user login data from server (id,username,password,usertype,status)
         String[] userData = new String[2]; //array which is sent to server (username,password)
@@ -172,7 +179,8 @@ public class LoginGUIController {
         NewWindowFrameController customerWindow = new NewWindowFrameController(windowName);
         customerWindow.start(new Stage());
         Stage stage = (Stage)  lbl_error.getScene().getWindow();
-        stage.close();
+        ClientController.savedWindows.setLoginWindow(stage);
+        stage.hide();
     }
 
 }
