@@ -36,12 +36,9 @@ public class CustomerGUIController {
     }
 
     @FXML
-    void clickedLogoutBtn(MouseEvent event) throws Exception {
-        ClientController.getClientController().logout();
+    void clickedLogoutBtn(MouseEvent event) {
         Stage stage = (Stage)lbl_username.getScene().getWindow();
-        stage.close();
-        LoginWindowFrameController newloginwindow = new LoginWindowFrameController("LoginGUI");
-        newloginwindow.start(new Stage());
+        ClientController.getClientController().logout(stage);
     }
 
     @FXML
