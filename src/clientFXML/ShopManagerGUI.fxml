@@ -10,27 +10,27 @@
       <Label layoutX="135.0" layoutY="147.0" text="Hello, Shop Manager" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@pina.png" />
+            <Image url="@../pictures/pina.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="38.0" fitWidth="200.0" layoutX="51.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@button_logout.png" />
+            <Image url="@../pictures/button_logout.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="42.0" fitWidth="255.0" layoutX="287.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@button_view-reports.png" />
+            <Image url="@../pictures/button_view-reports.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="42.0" fitWidth="224.0" layoutX="288.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@button_view-cancelation-request.png" />
+            <Image url="@../pictures/button_view-cancelation-request.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="55.0" fitWidth="224.0" layoutX="287.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@button_view-orders.png" />
+            <Image url="@../pictures/button_view-orders.png" />
          </image>
       </ImageView>
    </children>
