@@ -144,30 +144,22 @@ public class LoginGUIController {
 
     @FXML
     void enteredExitBtn(MouseEvent event) {
-        ColorAdjust blackout = new ColorAdjust();
-        blackout.setBrightness(-0.2);
-        btn_exit.setEffect(blackout);
+        ClientController.getClientController().enteredButton(btn_exit);
     }
 
     @FXML
     void enteredLoginBtn(MouseEvent event) {
-        ColorAdjust blackout = new ColorAdjust();
-        blackout.setBrightness(-0.2);
-        btn_login.setEffect(blackout);
+        ClientController.getClientController().enteredButton(btn_login);
     }
 
     @FXML
     void leavedExitBtn(MouseEvent event) {
-        ColorAdjust blackout = new ColorAdjust();
-        blackout.setBrightness(0);
-        btn_exit.setEffect(blackout);
+        ClientController.getClientController().leavedButton(btn_exit);
     }
 
     @FXML
-    void leavedLoginBTn(MouseEvent event) {
-        ColorAdjust blackout = new ColorAdjust();
-        blackout.setBrightness(0);
-        btn_login.setEffect(blackout);
+    void leavedLoginBTn(MouseEvent event) {ColorAdjust blackout = new ColorAdjust();
+        ClientController.getClientController().leavedButton(btn_login);
     }
 
     /**

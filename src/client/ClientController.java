@@ -1,12 +1,14 @@
 package client;
 
-import java.io.IOException;
-
 import clientClasses.Message;
 import clientClasses.UserLoginData;
 import clientGUI.LoginGUIController;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import ocsf.client.*;
+import ocsf.client.AbstractClient;
+
+import java.io.IOException;
 
 public class ClientController extends AbstractClient {
 	private static ClientController clientController;
@@ -74,6 +76,17 @@ public class ClientController extends AbstractClient {
 		return clientController;
 	}
 
+	public void enteredButton(ImageView btn){
+		ColorAdjust blackout = new ColorAdjust();
+		blackout.setBrightness(-0.2);
+		btn.setEffect(blackout);
+	}
+
+	public void leavedButton(ImageView btn){
+		ColorAdjust blackout = new ColorAdjust();
+		blackout.setBrightness(0);
+		btn.setEffect(blackout);
+	}
 
 }
 
