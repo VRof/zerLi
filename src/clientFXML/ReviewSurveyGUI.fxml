@@ -8,20 +8,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ReviewSurveyGUIController">
    <children>
-      <Label layoutX="309.0" layoutY="57.0" text="Survey results">
+      <Label layoutX="309.0" layoutY="37.0" text="Survey results">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <TableView layoutX="100.0" layoutY="114.0" prefHeight="373.0" prefWidth="602.0">
+      <TableView fx:id="SurveyContentTable" layoutX="100.0" layoutY="123.0" prefHeight="373.0" prefWidth="602.0">
         <columns>
-          <TableColumn prefWidth="507.0" text="Question" />
-          <TableColumn prefWidth="94.0" text="result" />
+          <TableColumn fx:id="col_surveyNum" prefWidth="102.0" text="Survey Number" />
+          <TableColumn fx:id="col_SurveyInfo" prefWidth="338.0" text="Survey Info" />
+            <TableColumn fx:id="col_linkForSurvey" prefWidth="161.0" text="File Name" />
         </columns>
       </TableView>
-      <ImageView fitHeight="93.0" fitWidth="117.0" layoutX="7.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btn_back" fitHeight="93.0" fitWidth="117.0" layoutX="7.0" layoutY="500.0" onMouseClicked="#clickedBackBtn" onMouseEntered="#enteredBackBtn" onMouseExited="#leavedBackBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/button_back.png" />
          </image>
@@ -36,5 +37,9 @@
             <Image url="@../pictures/pina3.png" />
          </image>
       </ImageView>
+      <Label fx:id="lbl_text" layoutX="100.0" layoutY="98.0" text="Double click on survey number to open file " textFill="#15d798">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
    </children>
 </AnchorPane>

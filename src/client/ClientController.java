@@ -8,7 +8,6 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import ocsf.client.AbstractClient;
-
 import java.io.IOException;
 
 public class ClientController extends AbstractClient {
@@ -35,7 +34,6 @@ public class ClientController extends AbstractClient {
 	
 	
 	public void send(Object msg) {
-
 	       	awaitResponse = true;
 	    	try {
 				sendToServer(msg);
@@ -52,7 +50,6 @@ public class ClientController extends AbstractClient {
 				}
 			}
 	}
-
 
 	public void disconnect(){
 		clientClasses.Message msg = new clientClasses.Message();
@@ -73,7 +70,7 @@ public class ClientController extends AbstractClient {
 		LoginGUIController.loginController.initialize();
 		loginStage.show();
 	}
-	
+
 	public static ClientController getClientController() {
 		return clientController;
 	}
@@ -89,6 +86,5 @@ public class ClientController extends AbstractClient {
 		blackout.setBrightness(0);
 		btn.setEffect(blackout);
 	}
-
 }
 

@@ -1,13 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.MarketingWorkerGUIController">
    <children>
-      <Label layoutX="60.0" layoutY="65.0" text="Hello, Yossi" />
-      <Button layoutX="60.0" layoutY="509.0" mnemonicParsing="false" text="LogOut" />
-      <Button layoutX="319.0" layoutY="222.0" mnemonicParsing="false" text="Upload survey results" />
-      <Button layoutX="339.0" layoutY="313.0" mnemonicParsing="false" text="Update catalog" />
+      <Label fx:id="lbl_userName" layoutX="128.0" layoutY="164.0" prefHeight="25.0" prefWidth="100.0" text="Hello, Yossi">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <ImageView fx:id="btn_UpdateCatalog" fitHeight="50.0" fitWidth="231.0" layoutX="287.0" layoutY="300.0" onMouseClicked="#clickedUpdateCatalogBtn" onMouseEntered="#enteredUpdateCatalogBtn" onMouseExited="#exitedUpdateCatalogBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_update-catalog.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="btn_UploadSurveyResults" fitHeight="64.0" fitWidth="231.0" layoutX="285.0" layoutY="238.0" onMouseClicked="#clickedUploadSurveyResultsBtn" onMouseEntered="#enteredUploadSurveyResultsBtn" onMouseExited="#exitedUploadSurveyResultsBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_upload-survey-results.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="19.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/pina.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="636.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/pina3.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="btn_logout" fitHeight="50.0" fitWidth="179.0" layoutX="56.0" layoutY="509.0" onMouseClicked="#clickedLogoutBtn" onMouseEntered="#enteredLogoutBtn" onMouseExited="#exitedLogoutBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_logout.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="268.0" layoutY="67.0" text="Marketing Worker 3" textFill="#15d798">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

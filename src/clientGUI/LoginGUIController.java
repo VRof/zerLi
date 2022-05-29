@@ -159,7 +159,6 @@ public class LoginGUIController {
         }
     }
 
-
     @FXML
     void enteredExitBtn(MouseEvent event) {
         ClientController.getClientController().enteredButton(btn_exit);
@@ -192,6 +191,9 @@ public class LoginGUIController {
         ClientController.savedWindows.setLoginWindow(stage);
         stage.hide();
     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> habib
 }
