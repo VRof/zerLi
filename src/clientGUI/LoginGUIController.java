@@ -49,13 +49,8 @@ public class LoginGUIController {
     public void initialize() {
         loginController = this;
         lbl_error.setText("");
-<<<<<<< HEAD
        // txt_username.setText("");
        // txt_password.setText("");
-=======
-        txt_username.setText("ceo");
-        txt_password.setText("12345");
->>>>>>> yosif
     }
 
     /**
@@ -198,9 +193,3 @@ public class LoginGUIController {
             stage.hide();
         }
     }
-<<<<<<< HEAD
-}
-=======
-
-
->>>>>>> yosif

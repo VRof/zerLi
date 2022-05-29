@@ -1,33 +1,20 @@
 package server;
 
-<<<<<<< HEAD
-import clientClasses.Message;
-import ocsf.server.AbstractServer;
-import ocsf.server.ConnectionToClient;
-import serverClasses.OrderCancellationData;
-=======
 import client.Quarter;
 import clientClasses.CancellationRequest;
 import clientClasses.Message;
 import clientClasses.WantedReport;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
->>>>>>> yosif
+import serverClasses.OrderCancellationData;
 import serverGUI.ServerWindowController;
-
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetFactory;
 import javax.sql.rowset.RowSetProvider;
 import java.io.IOException;
-<<<<<<< HEAD
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.*;
-=======
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
->>>>>>> yosif
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,13 +22,8 @@ public class ServerControl extends AbstractServer {
     public static List<ConnectionToClient> clientsList = new ArrayList<>(); //list of connected users to server (used in table of connected clients in serverGUI)
     private List<Integer> connectedClientdIdList = new ArrayList<>(); //list of id's of connected users to server to prevent multiply login of the same user
     private static ServerControl sv;
-<<<<<<< HEAD
     private int port;
-=======
     private int userid;
-
->>>>>>> yosif
-
     public ServerControl(int port) {
         super(port);
         this.port = port;
@@ -73,11 +55,7 @@ public class ServerControl extends AbstractServer {
 
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-<<<<<<< HEAD
-=======
-
         Connection dbConn = SqlConnector.getConnection();
->>>>>>> yosif
         Message message = (Message) msg;
         System.out.println("Message received: command: " + message.getCommand() + " data: " + message.getMsg() + " from " + client);
 
@@ -91,7 +69,6 @@ public class ServerControl extends AbstractServer {
             case "logout":
                 logout(msg, client);
                 break;
-<<<<<<< HEAD
             case "getUserData":
                 getUserData(msg, client);
                 break;
@@ -130,6 +107,51 @@ public class ServerControl extends AbstractServer {
                 break;
             case "insertSurveyAnswers":
                 insertSurveyAnswers(msg,client);
+                break;
+            case "reviewCancellation":
+                reviewCancellation(msg,client);
+                break;
+            case "confirmCancellation":
+                confirmCancellation(msg,client);
+                break;
+            case "reviewOrdersToConfirm":
+                reviewOrdersToConfirm(msg,client);
+                break;
+            case "confirmOrder":
+                confirmOrder(msg,client);
+                break;
+            case "viewReports":
+                viewReports(msg,client);
+                break;
+            case "viewSpecificReports":
+                viewSpecificReports(msg,client);
+                break;
+            case "viewComplaint":
+                viewComplaint(msg,client);
+                break;
+            case "viewOverallIncome":
+                viewOverallIncome(msg,client);
+            case "manageCustomers":
+                manageCustomers(msg,client);
+                break;
+            case "confirmFreeze":
+                confirmFreeze(msg,client);
+                break;
+            case "confirmUnfreeze":
+                confirmUnfreeze(msg,client);
+                break;
+            case "manageUsers":
+                manageUsers(msg,client);
+                break;
+            case "approveCustomer":
+                approveCustomer(msg,client);
+                break;
+
+            case "showUsersPermissionsTable":
+                showUsersPermissionsTable(msg,client);
+                break;
+            case "changePermission":
+                changePermission(msg,client);
                 break;
         }
     }
@@ -235,58 +257,9 @@ public class ServerControl extends AbstractServer {
         } catch (Exception e) {
             System.out.println("error getting or sending items from catalog to client " + e);
             e.printStackTrace();
-=======
-            case "reviewCancellation":
-                reviewCancellation(msg,client);
-                break;
-            case "confirmCancellation":
-                confirmCancellation(msg,client);
-                break;
-            case "reviewOrdersToConfirm":
-                reviewOrdersToConfirm(msg,client);
-                break;
-            case "confirmOrder":
-                confirmOrder(msg,client);
-                break;
-            case "viewReports":
-                viewReports(msg,client);
-                break;
-            case "viewSpecificReports":
-                viewSpecificReports(msg,client);
-                break;
-            case "viewComplaint":
-                viewComplaint(msg,client);
-                break;
-            case "viewOverallIncome":
-                viewOverallIncome(msg,client);
-            case "manageCustomers":
-                manageCustomers(msg,client);
-                break;
-            case "confirmFreeze":
-                confirmFreeze(msg,client);
-                break;
-            case "confirmUnfreeze":
-                confirmUnfreeze(msg,client);
-                break;
-            case "manageUsers":
-                manageUsers(msg,client);
-                break;
-            case "approveCustomer":
-                approveCustomer(msg,client);
-                break;
-
-            case "showUsersPermissionsTable":
-                showUsersPermissionsTable(msg,client);
-                break;
-            case "changePermission":
-                changePermission(msg,client);
-                break;
->>>>>>> yosif
         }
 
     }
-
-<<<<<<< HEAD
 
     private void sendItemPicture(Object msg, ConnectionToClient client) {
         Message msgFromClient = (Message) (msg);
@@ -523,7 +496,6 @@ public class ServerControl extends AbstractServer {
     }
 
  /////////////////////////////// End Of Habib Ibrahim
-=======
     private void viewOverallIncome(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         Message m = new Message();
@@ -921,7 +893,6 @@ public class ServerControl extends AbstractServer {
     }
 
 
->>>>>>> yosif
     private void logout(Object msg, ConnectionToClient client) {
         Message message = (Message) msg;
         int userid = -1;
@@ -1000,11 +971,7 @@ public class ServerControl extends AbstractServer {
             }
         }
         //  if (userid != -1)
-<<<<<<< HEAD
         if (status.equals("active"))
-=======
-        if(status.equals("active"))
->>>>>>> yosif
             connectedClientdIdList.add(userid); //add new user id to the list
         try {
             userLoginData.setCommand("logged in");
@@ -1397,11 +1364,7 @@ public class ServerControl extends AbstractServer {
     private void disconnect(Object msg, ConnectionToClient client) {
         Message message = (Message) msg;
         int userid = -1;
-<<<<<<< HEAD
         if (message.getMsg() != null)
-=======
-        if(message.getMsg()!=null)
->>>>>>> yosif
             userid = (int) message.getMsg();
         ServerWindowController.clientDisconected(client); //change status in server window to "disconnected"
         for (int i = 0; i < connectedClientdIdList.size(); i++) { //remove user from the list of connected users

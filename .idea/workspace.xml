@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ae90c0da-2d4b-4397-9cd0-facc2755ab48" name="Changes" comment="Habib#2">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="ae90c0da-2d4b-4397-9cd0-facc2755ab48" name="Changes" comment="habib changes accepted">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/SavedWindows.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/SavedWindows.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientFXML/SpeceficReportGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/SpeceficReportGUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/LoginGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/LoginGUIController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ServerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zerli.iml" beforeDir="false" afterPath="$PROJECT_DIR$/zerli.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,9 +37,9 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/Habeeb Ibrahem/Desktop/OCSF",
+    "last_opened_file_path": "C:/OCSF",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15136719",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
   }
 }]]></component>
