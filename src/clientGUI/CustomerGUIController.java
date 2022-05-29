@@ -1,10 +1,7 @@
 package clientGUI;
 
 import client.ClientController;
-<<<<<<< HEAD
 import client.NewWindowFrameController;
-=======
->>>>>>> habib
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -70,10 +67,7 @@ public class CustomerGUIController {
         thisScene.hide();
     }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> habib
     @FXML
     void enteredLogoutBtn(MouseEvent event) {
         ClientController.getClientController().enteredButton(btn_logout);

@@ -1,51 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ae90c0da-2d4b-4397-9cd0-facc2755ab48" name="Changes" comment="Habib#2">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/MyFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/files/currentSurvey.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/clientClasses/Delivery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/clientClasses/SurveyResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/clientFXML/UpdateCatalogGUI.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/clientFXML/UploadSurveyResultsGUI.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/clientGUI/CustomerServicesGUIController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/clientGUI/DeliveryGuyGUIController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/clientGUI/InsertComplaintGUIController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/clientGUI/MarketingWorkerGUIController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/clientGUI/ReviewSurveyGUIController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/clientGUI/UpdateCatalogGUIController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/clientGUI/UploadSurveyResultsGUIController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pictures/T8.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pictures/T9.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pictures/button_update-catalog.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pictures/button_upload-result.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pictures/button_upload-survey-results.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zerli.eml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" afterPath="$PROJECT_DIR$/.project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/ClientController.java" afterDir="false" />
+    <list default="true" id="ae90c0da-2d4b-4397-9cd0-facc2755ab48" name="Changes" comment="customer user almost finished">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/SavedWindows.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/SavedWindows.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientFXML/CustomerServiceGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/CustomerServiceGUI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientFXML/DeliveryGuyGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/DeliveryGuyGUI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientFXML/InsertComplaintGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/InsertComplaintGUI.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clientFXML/LoginGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/LoginGUI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientFXML/MarketingWorkerGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/MarketingWorkerGUI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientFXML/ReviewSurveyGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/ReviewSurveyGUI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientFXML/SpeceficReportGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/SpeceficReportGUI.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clientGUI/CustomerGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/CustomerGUIController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clientGUI/LoginGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/LoginGUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pictures/button_confirm-delivery.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/pictures/button_confirm-delivery.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pictures/button_insert-complaint.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/pictures/button_insert-complaint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pictures/button_insert.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/pictures/button_insert.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pictures/button_review-survey.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ServerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/serverFXML/ServerWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverFXML/ServerWindow.fxml" afterDir="false" />
     </list>
@@ -66,20 +27,23 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="29pX4FOWGfd5qPKrEOCvPU3J2Cs" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Habeeb Ibrahem/Desktop/OCSF&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/Habeeb Ibrahem/Desktop/OCSF",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.clientUI">
     <configuration name="ServerUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.ServerUI" />
@@ -118,6 +82,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.ServerUI" />
+      <item itemvalue="Application.clientUI" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.clientUI" />

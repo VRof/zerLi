@@ -191,9 +191,4 @@ public class LoginGUIController {
         ClientController.savedWindows.setLoginWindow(stage);
         stage.hide();
     }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> habib
 }
