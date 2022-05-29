@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="757.0" prefWidth="1230.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ViewCatalogGUIController">
+   <children>
+      <ImageView fx:id="btn_back" fitHeight="99.0" fitWidth="74.0" layoutX="43.0" layoutY="663.0" onMouseClicked="#clickedBack" onMouseEntered="#enteredBackBtn" onMouseExited="#leavedBackBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_back.png" />
+         </image>
+      </ImageView>
+      <TabPane layoutX="43.0" layoutY="84.0" prefHeight="575.0" prefWidth="1135.0" side="LEFT" stylesheets="@TabPaneCSS.css" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="   Bundles">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="575.0" prefWidth="1072.0">
+                     <children>
+                        <ScrollPane fx:id="scrollPaneBundles" layoutX="-3.0" prefHeight="574.0" prefWidth="1077.0" />
+                     </children></AnchorPane>
+            </content>
+               <graphic>
+                  <ImageView fitHeight="52.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/bundle.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+          </Tab>
+          <Tab text="  Flowers">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="603.0" prefWidth="967.0">
+                     <children>
+                        <ScrollPane fx:id="scrollPaneItems" layoutX="-3.0" layoutY="47.0" prefHeight="527.0" prefWidth="1077.0" />
+                        <ComboBox fx:id="cBox_price" layoutX="224.0" layoutY="9.0" prefWidth="150.0" />
+                        <Label layoutX="70.0" layoutY="9.0" text="Maximum price:" textFill="#387c00">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="715.0" layoutY="9.0" text="Color:" textFill="#387c00">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cBox_color" layoutX="782.0" layoutY="9.0" prefWidth="150.0" />
+                        <ImageView fx:id="btn_sort" fitHeight="38.0" fitWidth="140.0" layoutX="447.0" layoutY="5.0" onMouseClicked="#clickedBtnSort" onMouseEntered="#enteredBtnSort" onMouseExited="#leavedBtnSort" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../pictures/button_sort.png" />
+                           </image>
+                        </ImageView>
+                     </children></AnchorPane>
+            </content>
+               <graphic>
+                  <ImageView fitHeight="58.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/flower.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Label layoutX="525.0" layoutY="32.0" text="View catalog">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="110.0" fitWidth="81.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/pina.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="131.0" fitWidth="81.0" layoutX="1136.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/pina3.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lbl_loadingMsg" layoutX="495.0" layoutY="687.0" prefHeight="21.0" prefWidth="332.0" text="Loading msg" textFill="RED">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

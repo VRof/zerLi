@@ -3,6 +3,7 @@ package clientGUI;
 import client.ClientController;
 import client.NewWindowFrameController;
 import clientClasses.Message;
+import clientClasses.UserData;
 import clientClasses.UserLoginData;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -38,7 +39,7 @@ public class LoginGUIController {
 
 
     public static LoginGUIController loginController;
-    private ClientController connection;
+    private ClientController  connection = ClientController.getClientController();
 
 
     /**
@@ -48,8 +49,8 @@ public class LoginGUIController {
     public void initialize() {
         loginController = this;
         lbl_error.setText("");
-        txt_username.setText("");
-        txt_password.setText("");
+       // txt_username.setText("");
+       // txt_password.setText("");
     }
 
     /**
@@ -73,7 +74,6 @@ public class LoginGUIController {
      */
     @FXML
     void clickedLoginBtn(MouseEvent event) throws Exception {
-        connection = ClientController.getClientController();
         CachedRowSet cachedMsg = null; //row from db with user login data
         UserLoginData userLoginData = new UserLoginData(); //user login data from server (id,username,password,usertype,status)
         String[] userData = new String[2]; //array which is sent to server (username,password)
@@ -105,7 +105,7 @@ public class LoginGUIController {
 
         cachedMsg = (CachedRowSet) (connection.messageFromServer.getMsg()); //message received from server (row from login table)
 
-        while (cachedMsg.next()) { //get user data
+        while (cachedMsg.next()) { //get user login data
             userLoginData.setUserid(cachedMsg.getInt("userid"));
             userLoginData.setUsername(cachedMsg.getString("username"));
             userLoginData.setPassword(cachedMsg.getString("password"));
@@ -114,6 +114,24 @@ public class LoginGUIController {
         }
 
         connection.userLoginData = userLoginData; //save user login data for future use
+
+//--------------------------------get user data:
+        UserData us = new UserData();
+        msg.setCommand("getUserData");
+        msg.setMsg(userLoginData.getUserid());
+        ClientController.getClientController().send(msg);
+        cachedMsg = (CachedRowSet) (connection.messageFromServer.getMsg());
+
+        while (cachedMsg.next()){
+            us.setUserid(cachedMsg.getInt("userid"));
+            us.setFirstname(cachedMsg.getString("firstname"));
+            us.setLastname(cachedMsg.getString("lastname"));
+            us.setEmail(cachedMsg.getString("email"));
+            us.setPhonenumber(cachedMsg.getString("phonenumber"));
+            us.setBalance(cachedMsg.getDouble("balance"));
+        }
+        ClientController.userData = us; //set user data for future uses
+//----------------------------------------------------------------------------------
 
         if (userLoginData.getStatus().equals("frozen")) { //if account status is frozen
             lbl_error.setText("Account is frozen, contact administrator");
@@ -158,7 +176,7 @@ public class LoginGUIController {
     }
 
     @FXML
-    void leavedLoginBTn(MouseEvent event) {ColorAdjust blackout = new ColorAdjust();
+    void leavedLoginBTn(MouseEvent event) {
         ClientController.getClientController().leavedButton(btn_login);
     }
 
@@ -174,5 +192,6 @@ public class LoginGUIController {
         ClientController.savedWindows.setLoginWindow(stage);
         stage.hide();
     }
+
 
 }

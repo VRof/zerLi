@@ -10,7 +10,7 @@
    <children>
       <Label fx:id="lbl_username" layoutX="39.0" layoutY="182.0" text="Hello, Yossi">
          <font>
-            <Font name="AdobeDevanagari-Regular" size="25.0" />
+            <Font name="System Bold" size="18.0" />
          </font></Label>
       <ImageView fx:id="btn_MyOrders" fitHeight="46.0" fitWidth="233.0" layoutX="285.0" layoutY="173.0" onMouseClicked="#clickedMyOrdersBtn" onMouseEntered="#enteredMyOrdersBtn" onMouseExited="#leavedMyOrdersBtn" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -39,7 +39,12 @@
       </ImageView>
       <Label fx:id="lbl_balance" layoutX="39.0" layoutY="248.0" text="Your balance: 0 NIS">
          <font>
-            <Font name="AdobeDevanagari-Regular" size="25.0" />
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="272.0" layoutY="44.0" text="Customer window">
+         <font>
+            <Font name="System Bold" size="30.0" />
          </font>
       </Label>
    </children>

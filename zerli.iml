@@ -17,6 +17,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="OCSF" exported="" />
+    <orderEntry type="module" module-name="OCSF" />
   </component>
 </module>

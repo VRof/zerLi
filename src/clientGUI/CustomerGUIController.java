@@ -1,14 +1,12 @@
 package clientGUI;
 
 import client.ClientController;
-import client.LoginWindowFrameController;
+import client.NewWindowFrameController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import serverClasses.Message;
 
 public class CustomerGUIController {
 
@@ -32,102 +30,82 @@ public class CustomerGUIController {
 
     @FXML
     public void initialize() {
-        lbl_username.setText("Hello " + ClientController.userLoginData.getUsername());
+        lbl_username.setText("Hello, " + ClientController.userData.getFirstname() + " " + ClientController.userData.getLastname());
+        lbl_balance.setText("Your balance is " + ClientController.userData.getBalance() + " ₪");
     }
 
     @FXML
     void clickedLogoutBtn(MouseEvent event) {
-        Stage stage = (Stage)lbl_username.getScene().getWindow();
+        Stage stage = (Stage) lbl_username.getScene().getWindow();
         ClientController.getClientController().logout(stage);
     }
 
     @FXML
-    void clickedMyOrdersBtn(MouseEvent event) {
-
+    void clickedMyOrdersBtn(MouseEvent event) throws Exception {
+        NewWindowFrameController myordersWindow = new NewWindowFrameController("MyOrdersGUI");
+        myordersWindow.start(new Stage());
+        Stage thisScene = (Stage)btn_logout.getScene().getWindow();
+        ClientController.savedWindows.setClientGUIWindow(thisScene);
+        thisScene.hide();
     }
 
     @FXML
-    void clickedNewOrderBtn(MouseEvent event) {
-
+    void clickedNewOrderBtn(MouseEvent event) throws Exception {
+        NewWindowFrameController newOrderWindow = new NewWindowFrameController("NewOrderGUI");
+        newOrderWindow.start(new Stage());
+        Stage thisScene = (Stage)btn_logout.getScene().getWindow();
+        ClientController.savedWindows.setClientGUIWindow(thisScene);
+        thisScene.hide();
     }
 
     @FXML
-    void clickedViewCatalogBtn(MouseEvent event) {
-
+    void clickedViewCatalogBtn(MouseEvent event) throws Exception {
+        NewWindowFrameController viewCatalogWindow = new NewWindowFrameController("ViewCatalogGUI");
+        viewCatalogWindow.start(new Stage());
+        Stage thisScene = (Stage)btn_logout.getScene().getWindow();
+        ClientController.savedWindows.setClientGUIWindow(thisScene);
+        thisScene.hide();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @FXML
     void enteredLogoutBtn(MouseEvent event) {
-        ColorAdjust blackout = new ColorAdjust();
-        blackout.setBrightness(-0.2);
-        btn_logout.setEffect(blackout);
+        ClientController.getClientController().enteredButton(btn_logout);
     }
 
     @FXML
     void enteredMyOrdersBtn(MouseEvent event) {
-        ColorAdjust blackout = new ColorAdjust();
-        blackout.setBrightness(-0.2);
-        btn_MyOrders.setEffect(blackout);
+        ClientController.getClientController().enteredButton(btn_MyOrders);
     }
 
     @FXML
     void enteredNewOrderBtn(MouseEvent event) {
-        ColorAdjust blackout = new ColorAdjust();
-        blackout.setBrightness(-0.2);
-        btn_NewOrder.setEffect(blackout);
+        ClientController.getClientController().enteredButton(btn_NewOrder);
     }
 
     @FXML
     void enteredViewCatalogBtn(MouseEvent event) {
-        ColorAdjust blackout = new ColorAdjust();
-        blackout.setBrightness(-0.2);
-        btn_ViewCatalog.setEffect(blackout);
+        ClientController.getClientController().enteredButton(btn_ViewCatalog);
     }
 
     @FXML
     void leavedLogoutBtn(MouseEvent event) {
-        ColorAdjust blackout = new ColorAdjust();
-        blackout.setBrightness(0);
-        btn_logout.setEffect(blackout);
+        ClientController.getClientController().leavedButton(btn_logout);
     }
 
     @FXML
     void leavedMyOrdersBtn(MouseEvent event) {
-        ColorAdjust blackout = new ColorAdjust();
-        blackout.setBrightness(0);
-        btn_MyOrders.setEffect(blackout);
+        ClientController.getClientController().leavedButton(btn_MyOrders);
     }
 
     @FXML
     void leavedNewOrderBtn(MouseEvent event) {
-        ColorAdjust blackout = new ColorAdjust();
-        blackout.setBrightness(0);
-        btn_NewOrder.setEffect(blackout);
+        ClientController.getClientController().leavedButton(btn_NewOrder);
     }
 
     @FXML
     void leavedViewCatalogBtn(MouseEvent event) {
-        ColorAdjust blackout = new ColorAdjust();
-        blackout.setBrightness(0);
-        btn_ViewCatalog.setEffect(blackout);
+        ClientController.getClientController().leavedButton(btn_ViewCatalog);
     }
 
 }
