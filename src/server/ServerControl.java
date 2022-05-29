@@ -77,9 +77,31 @@ public class ServerControl extends AbstractServer {
             case "CreateCancellationRequest":
                 CreateCancellationRequest(msg, client);
                 break;
-
+            case "deliveryOrders":
+                deliveryOrders(msg,client);
+                break;
+            case "SurveyResults":
+                surveyResults(msg,client);
+                break;
+            case "confirmDelivery":
+                confirmDelivery(msg,client);
+                break;
+            case "insertComplaint":
+                insertComplaint(msg,client);
+                break;
+            case "getSurveyLink":
+                getSurveyLink(msg,client);
+                break;
+            case "getQuantityRows":
+                getQuantityRows(client);
+                break;
+            case "setSurveyQuestions":
+                setSurveyQuestions(msg,client);
+                break;
+            case "insertSurveyAnswers":
+                insertSurveyAnswers(msg,client);
+                break;
         }
-
     }
 
     private void getUserData(Object msg, ConnectionToClient client) {
