@@ -7,6 +7,27 @@ public class SavedWindows {
     private Stage UserWindow;
     private Stage viewOrdersWindow;
     private Stage clientGUIWindow;
+    private Stage viewReportsWindow;
+    private Stage incomeReportWindow;
+
+    public Stage getIncomeReportWindow() {
+        return incomeReportWindow;
+    }
+
+    public void setIncomeReportWindow(Stage incomeReportWindow) {
+        this.incomeReportWindow = incomeReportWindow;
+    }
+
+
+    public Stage getViewReportsWindow() {
+        return viewReportsWindow;
+    }
+
+    public void setViewReportsWindow(Stage viewReportsWindow) {
+        this.viewReportsWindow = viewReportsWindow;
+    }
+
+
 
     public Stage getClientGUIWindow() {
         return clientGUIWindow;

@@ -2,7 +2,6 @@ package clientGUI;
 
 import client.ClientController;
 import client.LoginWindowFrameController;
-import client.NewWindowFrameController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javax.swing.text.html.ImageView;
 import java.io.IOException;
 
 public class ClientConnectionWindowController {
@@ -19,8 +19,10 @@ public class ClientConnectionWindowController {
 	private Button btn_connect;
 	@FXML
 	private Label label_msg;
-	@FXML
-	private Button btn_exit;
+//	@FXML
+//	private Button btn_exit;
+@FXML
+private ImageView btnExit;
 	@FXML
     private TextField txt_serverPort;
 	

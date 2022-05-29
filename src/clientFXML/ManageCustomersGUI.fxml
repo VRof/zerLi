@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ManageCustomersGUIController">
+   <children>
+      <Label layoutX="259.0" layoutY="46.0" text="Manage customers">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <TableView fx:id="manageCustomers" editable="true" layoutX="38.0" layoutY="119.0" prefHeight="362.0" prefWidth="723.0">
+        <columns>
+          <TableColumn fx:id="userIDCol" prefWidth="84.66665649414062" text="User ID" />
+          <TableColumn fx:id="firstNameCol" prefWidth="100.00003051757812" text="First name" />
+            <TableColumn fx:id="lastNameCol" minWidth="0.0" prefWidth="123.99993896484375" text="Last name" />
+            <TableColumn fx:id="telNumCol" prefWidth="126.39996337890625" text="Telephone number" />
+            <TableColumn fx:id="emailCol" prefWidth="98.4000244140625" text="Email" />
+            <TableColumn fx:id="balanceCol" prefWidth="100.0" text="Balance" />
+            <TableColumn fx:id="statusCol" prefWidth="84.0" text="Status" />
+        </columns>
+      </TableView>
+      <Label fx:id="errorLbl" layoutX="220.0" layoutY="532.0" />
+      <ImageView fx:id="backBtn" fitHeight="83.0" fitWidth="69.0" layoutX="33.0" layoutY="507.0" onMouseClicked="#clickedBackBtn" onMouseEntered="#enteredBackBtn" onMouseExited="#leavedBackBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_back.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="freezeBtn" fitHeight="46.0" fitWidth="147.0" layoutX="452.0" layoutY="520.0" onMouseClicked="#clickedFreezeBtn" onMouseEntered="#enteredFreezeBtn" onMouseExited="#leavedFreezeBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/freeze.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="unfreezeBtn" fitHeight="46.0" fitWidth="147.0" layoutX="583.0" layoutY="520.0" onMouseClicked="#clickedUnfreezeBtn" onMouseEntered="#enteredUnfreezeBtn" onMouseExited="#leavedUnfreezeBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/unfreeze.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

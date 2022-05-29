@@ -4,33 +4,53 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ShopManagerGUIController">
    <children>
-      <Label layoutX="135.0" layoutY="147.0" text="Hello, Shop Manager" />
+      <Label fx:id="lblManager" layoutX="151.0" layoutY="108.0" prefHeight="38.0" prefWidth="541.0" text="Hello, Shop Manager welcome to the main menu ">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/pina.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="200.0" layoutX="51.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="logOutBtn" fitHeight="48.0" fitWidth="113.0" layoutX="51.0" layoutY="528.0" onMouseClicked="#ClickedLogoutBtn" onMouseEntered="#enteredLogoutBtn" onMouseExited="#leavedLogoutBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/button_logout.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="42.0" fitWidth="255.0" layoutX="287.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="viewReportsBtn" fitHeight="42.0" fitWidth="224.0" layoutX="117.0" layoutY="376.0" onMouseClicked="#clickedViewReportsBtn" onMouseEntered="#enteredViewReportsBtn" onMouseExited="#leavedViewReportsBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/button_view-reports.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="42.0" fitWidth="224.0" layoutX="288.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="viewCancellationRequestBtn" fitHeight="42.0" fitWidth="224.0" layoutX="118.0" layoutY="297.0" onMouseClicked="#clickedViewCancellationRequestBtn" onMouseEntered="#enteredViewCancelationRequestBtn" onMouseExited="#leavedViewCancelationRequestBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/button_view-cancelation-request.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="55.0" fitWidth="224.0" layoutX="287.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="viewOrdersBtn" fitHeight="55.0" fitWidth="224.0" layoutX="117.0" layoutY="223.0" onMouseClicked="#clickedViewOrdersBtn" onMouseEntered="#enteredViewOrdersBtn" onMouseExited="#leavedViewOrdersBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/button_view-orders.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="59.0" layoutY="184.0" prefHeight="21.0" prefWidth="197.0" text="Pick what you desier to view:" />
+      <ImageView fx:id="approveCustomersBtn" fitHeight="42.0" fitWidth="224.0" layoutX="498.0" layoutY="223.0" onMouseClicked="#clickedApproveCustomersBtn" onMouseEntered="#enteredApproveCustomersBtn" onMouseExited="#leavedApproveCustomersBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_approve-customers.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="manageCustomersBtn" fitHeight="42.0" fitWidth="207.0" layoutX="498.0" layoutY="376.0" onMouseClicked="#clickedManageCustomersBtn" onMouseEntered="#enteredManageCustomersBtn" onMouseExited="#leavedManageCustomersBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/manageCusBtn.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="managePermissionsBtn" fitHeight="45.0" fitWidth="207.0" layoutX="498.0" layoutY="297.0" onMouseClicked="#clickedManagePermissionsBtn" onMouseEntered="#enteredManagePermissionsBtn" onMouseExited="#leavedManagePermissionsBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_manage-permissions.png" />
          </image>
       </ImageView>
    </children>

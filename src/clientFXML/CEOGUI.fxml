@@ -6,18 +6,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.CeoGUIController">
    <children>
-      <Label layoutX="106.0" layoutY="164.0" prefHeight="39.0" prefWidth="86.0" text="Hello,Yossi">
+      <Label fx:id="welcomeCeoLbl" layoutX="92.0" layoutY="97.0" prefHeight="39.0" prefWidth="631.0">
          <font>
-            <Font size="17.0" />
+            <Font name="System Bold" size="20.0" />
          </font></Label>
-      <ImageView fitHeight="50.0" fitWidth="125.0" layoutX="14.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="logoutBtn" fitHeight="50.0" fitWidth="125.0" layoutX="14.0" layoutY="534.0" onMouseClicked="#clickedLogoutBtn" onMouseEntered="#enteredLogoutBtn" onMouseExited="#leavedLogoutBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/button_logout.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="60.0" fitWidth="294.0" layoutX="253.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="viewAnnualReport" fitHeight="60.0" fitWidth="294.0" layoutX="253.0" layoutY="341.0" onMouseClicked="#clickedViewAnnualReport" onMouseEntered="#enteredViewAnnualReport" onMouseExited="#leavedViewAnnualReport" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/button_view-annual-report.png" />
          </image>
@@ -27,7 +27,7 @@
             <Image url="@../pictures/pina.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="98.0" fitWidth="294.0" layoutX="253.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="viewSpecificShopReportBtn" fitHeight="98.0" fitWidth="294.0" layoutX="253.0" layoutY="229.0" onMouseClicked="#clickedViewSpecificShopReportBtn" onMouseEntered="#enteredViewSpecificShopReportBtn" onMouseExited="#leavedViewSpecificShopReportBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/button_view-specific-shop-reports.png" />
          </image>
