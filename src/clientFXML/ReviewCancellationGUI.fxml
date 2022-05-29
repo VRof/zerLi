@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ReviewCancellationGUIController">
+   <children>
+      <Label layoutX="259.0" layoutY="46.0" text="Cancellation requests">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <TableView fx:id="cancellationRequests" editable="true" layoutX="33.0" layoutY="119.0" prefHeight="362.0" prefWidth="739.0">
+        <columns>
+          <TableColumn fx:id="orderIDcol" prefWidth="110.0" text="Order ID" />
+          <TableColumn fx:id="firstNamecol" prefWidth="113.0" text="First name" />
+            <TableColumn fx:id="lastNamecol" minWidth="0.0" prefWidth="121.0" text="Last name" />
+            <TableColumn fx:id="statuscol" prefWidth="88.0" text="Status" />
+            <TableColumn fx:id="pricecol" prefWidth="84.0" text="Price" />
+            <TableColumn fx:id="DeliveryDateCol" prefWidth="115.0" text="Delivery date" />
+            <TableColumn fx:id="requestDateCol" prefWidth="107.0" text="Request date" />
+        </columns>
+      </TableView>
+      <Label fx:id="errorLbl" layoutX="137.0" layoutY="531.0" text="Error message" />
+      <ImageView fx:id="backBtn" fitHeight="83.0" fitWidth="69.0" layoutX="33.0" layoutY="507.0" onMouseClicked="#clickedBackBtn" onMouseEntered="#enteredBackBtn" onMouseExited="#leavedBackBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_back.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="confirmCancellationBtn" fitHeight="150.0" fitWidth="200.0" layoutX="562.0" layoutY="521.0" onMouseClicked="#clickedConfirmCancellationBtn" onMouseEntered="#enteredConfirmCancellationBtn" onMouseExited="#leavedConfirmCancellationBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_confirm-cancelation.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="overAllRefund" layoutX="384.0" layoutY="524.0" prefHeight="35.0" prefWidth="172.0" textFill="RED">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

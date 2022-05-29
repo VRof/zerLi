@@ -48,8 +48,8 @@ public class LoginGUIController {
     public void initialize() {
         loginController = this;
         lbl_error.setText("");
-        txt_username.setText("");
-        txt_password.setText("");
+        txt_username.setText("ceo");
+        txt_password.setText("12345");
     }
 
     /**
@@ -123,7 +123,7 @@ public class LoginGUIController {
                     newWindow("CustomerGUI");
                     break;
                 case "manager":
-                    newWindow("ManagerGUI");
+                    newWindow("ShopManagerGUI");
                     break;
                 case "ceo":
                     newWindow("CEOGUI");
@@ -168,11 +168,13 @@ public class LoginGUIController {
      * @throws Exception - if error while creating new window
      */
     private void newWindow(String windowName) throws Exception {
-        NewWindowFrameController customerWindow = new NewWindowFrameController(windowName);
-        customerWindow.start(new Stage());
-        Stage stage = (Stage)  lbl_error.getScene().getWindow();
-        ClientController.savedWindows.setLoginWindow(stage);
-        stage.hide();
+
+            NewWindowFrameController customerWindow = new NewWindowFrameController(windowName);
+            customerWindow.start(new Stage());
+            Stage stage = (Stage) lbl_error.getScene().getWindow();
+            ClientController.savedWindows.setLoginWindow(stage);
+            stage.hide();
+        }
     }
 
-}
+

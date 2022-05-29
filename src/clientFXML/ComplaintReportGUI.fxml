@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ComplaintReportGUIController">
+   <children>
+      <AnchorPane layoutX="-48.0" layoutY="-42.0" prefHeight="657.0" prefWidth="855.0" style="-fx-background-color: #f7e7ce;">
+         <children>
+            <AnchorPane layoutX="-124.0" layoutY="-158.0" prefHeight="200.0" prefWidth="200.0" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="43.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/pina.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="705.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/pina3.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="backBtn" fitHeight="91.0" fitWidth="84.0" layoutX="61.0" layoutY="556.0" onMouseClicked="#clickedBackBtn" onMouseEntered="#enteredBackBtn" onMouseExited="#leavedBackBtn" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/button_back.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="134.0" layoutY="209.0" text="Diagram:" />
+            <Label layoutX="315.0" layoutY="139.0" text="Quarter:" />
+            <ImageView fx:id="showBtn" fitHeight="150.0" fitWidth="200.0" layoutX="342.0" layoutY="559.0" onMouseClicked="#clickedShowBtn" onMouseEntered="#enteredShowBtn" onMouseExited="#leavedShowBtn" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/button_show.png" />
+               </image>
+            </ImageView>
+            <ChoiceBox fx:id="selectQuarter" layoutX="376.0" layoutY="134.0" prefWidth="150.0" />
+            <Label layoutX="358.0" layoutY="81.0" text="Complaint Report">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Label>
+            <BarChart fx:id="ComplaintDiagram" categoryGap="30.0" layoutX="164.0" layoutY="231.0" prefHeight="321.0" prefWidth="500.0">
+              <xAxis>
+                <CategoryAxis fx:id="monthsInQuarter" endMargin="3.0" label="Months" side="BOTTOM" startMargin="1.0" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="numberOfComplaints" label="No of complaints" side="LEFT" />
+              </yAxis>
+            </BarChart>
+            <Label layoutX="326.0" layoutY="175.0" text="Year:" />
+            <ChoiceBox fx:id="selectYear" layoutX="376.0" layoutY="170.0" prefWidth="150.0" />
+            <Label fx:id="diagramDetails" layoutX="310.0" layoutY="209.0" prefHeight="21.0" prefWidth="235.0" />
+            <Label fx:id="errorLbl" layoutX="542.0" layoutY="155.0" prefHeight="21.0" prefWidth="216.0" textFill="RED" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

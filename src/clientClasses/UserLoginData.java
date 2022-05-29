@@ -7,7 +7,7 @@ public class UserLoginData {
     private String usertype;
     private String status;
 
-    public int getUserid() {
+    public  int getUserid() {
         return userid;
     }
 

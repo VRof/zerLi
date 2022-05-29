@@ -11,5 +11,6 @@ public class clientUI extends Application {
     public void start(Stage primaryStage) throws Exception {
         ClientConnectionWindowFrameController startwindow = new ClientConnectionWindowFrameController();
         startwindow.start(primaryStage);
+
     }
 }
