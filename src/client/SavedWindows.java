@@ -4,9 +4,11 @@ import javafx.stage.Stage;
 
 public class SavedWindows {
     private Stage loginWindow;
+<<<<<<< HEAD
     private Stage UserWindow;
     private Stage viewOrdersWindow;
     private Stage clientGUIWindow;
+=======
     private Stage viewReportsWindow;
     private Stage incomeReportWindow;
 
@@ -28,6 +30,7 @@ public class SavedWindows {
     }
 
 
+>>>>>>> yosif
 
     public Stage getClientGUIWindow() {
         return clientGUIWindow;
