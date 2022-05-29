@@ -1,6 +1,7 @@
 package client;
 
 import clientClasses.Message;
+import clientClasses.UserData;
 import clientClasses.UserLoginData;
 import clientGUI.LoginGUIController;
 import javafx.scene.effect.ColorAdjust;
@@ -15,6 +16,7 @@ public class ClientController extends AbstractClient {
 	public static boolean awaitResponse = false;
 	public static Message messageFromServer;
 	public static UserLoginData userLoginData;
+	public static UserData userData;
 
 
 	public static SavedWindows savedWindows = new SavedWindows();
