@@ -1,35 +1,20 @@
 package server;
 
-<<<<<<< HEAD
-import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.Socket;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.sql.*;
-=======
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
->>>>>>> habib
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.sql.rowset.CachedRowSet;
-import javax.sql.rowset.RowSetFactory;
-import javax.sql.rowset.RowSetProvider;
-
 import clientClasses.Message;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 import serverClasses.OrderCancellationData;
 import serverGUI.ServerWindowController;
+
+import javax.sql.rowset.CachedRowSet;
+import javax.sql.rowset.RowSetFactory;
+import javax.sql.rowset.RowSetProvider;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServerControl extends AbstractServer {
     public static List<ConnectionToClient> clientsList = new ArrayList<>(); //list of connected users to server (used in table of connected clients in serverGUI)
@@ -66,12 +51,8 @@ public class ServerControl extends AbstractServer {
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
         Message message = (Message) msg;
         System.out.println("Message received: command: " + message.getCommand() + " data: " + message.getMsg() + " from " + client);
-<<<<<<< HEAD
 
         switch (message.getCommand()) {
-=======
-        switch (message.getCommand()){
->>>>>>> habib
             case "login":
                 login(msg, client);
                 break;
@@ -81,7 +62,6 @@ public class ServerControl extends AbstractServer {
             case "logout":
                 logout(msg, client);
                 break;
-<<<<<<< HEAD
             case "getUserData":
                 getUserData(msg, client);
                 break;
@@ -240,38 +220,7 @@ public class ServerControl extends AbstractServer {
         } catch (Exception e) {
             System.out.println("error getting or sending items from catalog to client " + e);
             e.printStackTrace();
-=======
-            /**
-             * start Habib
-             */
-            case "deliveryOrders":
-                deliveryOrders(msg,client);
-                break;
-            case "SurveyResults":
-                surveyResults(msg,client);
-                break;
-            case "confirmDelivery":
-                confirmDelivery(msg,client);
-                break;
-            case "insertComplaint":
-                insertComplaint(msg,client);
-                break;
-            case "getSurveyLink":
-                getSurveyLink(msg,client);
-                break;
-            case "getQuantityRows":
-                getQuantityRows(client);
-                break;
-            case "setSurveyQuestions":
-                setSurveyQuestions(msg,client);
-                break;
-            case "insertSurveyAnswers":
-                insertSurveyAnswers(msg,client);
-                break;
-            /**
-             * end Habib
-             */
->>>>>>> habib
+
         }
     }
 
@@ -517,12 +466,7 @@ public class ServerControl extends AbstractServer {
         try {
             rs = dbConn.createStatement().executeQuery(SQL);
             //  rs.next();
-<<<<<<< HEAD
-
             if (rs.next() == false) {
-=======
-            if(rs.next() == false){
->>>>>>> habib
                 userLoginData.setCommand("wrong");
                 client.sendToClient(userLoginData);
                 return;

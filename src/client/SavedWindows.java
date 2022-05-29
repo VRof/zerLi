@@ -4,7 +4,7 @@ import javafx.stage.Stage;
 
 public class SavedWindows {
     private Stage loginWindow;
-<<<<<<< HEAD
+    private Stage UserWindow;
     private Stage viewOrdersWindow;
     private Stage clientGUIWindow;
 
@@ -24,11 +24,8 @@ public class SavedWindows {
     public void setViewOrdersWindow(Stage viewOrdersWindow) {
         this.viewOrdersWindow = viewOrdersWindow;
     }
-=======
-    private Stage UserWindow;
->>>>>>> habib
 
-    ///
+
     public Stage getUserWindow() {
         return UserWindow;
     }
@@ -36,7 +33,6 @@ public class SavedWindows {
     public void setUserWindow(Stage userWindow) {
         UserWindow = userWindow;
     }
-    ///
     public Stage getLoginWindow() {
         return loginWindow;
     }

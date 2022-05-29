@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../../../../OCSF/OCSF.iml" filepath="$PROJECT_DIR$/../../../../OCSF/OCSF.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../../../OCSF/untitled/untitled.iml" filepath="$PROJECT_DIR$/../../../../OCSF/untitled/untitled.iml" />
       <module fileurl="file://$PROJECT_DIR$/zerli.iml" filepath="$PROJECT_DIR$/zerli.iml" />
     </modules>
   </component>
