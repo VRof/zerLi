@@ -25,9 +25,9 @@
             <Image url="@../pictures/button_back.png" />
          </image>
       </ImageView>
-      <TextArea Editable="false" editable="false" layoutX="202.0" layoutY="218.0" prefHeight="84.0" prefWidth="294.0" promptText="Report Details" />
+      <TextArea editable="false" layoutX="202.0" layoutY="218.0" prefHeight="84.0" prefWidth="294.0" promptText="Report Details" />
       <Label layoutX="156.0" layoutY="225.0" text="Details:" />
       <Label layoutX="161.0" layoutY="171.0" text="Type:" />
-      <TextArea Editable="false" editable="false" layoutX="202.0" layoutY="160.0" prefHeight="17.0" prefWidth="118.0" promptText="Report Type" />
+      <TextArea editable="false" layoutX="202.0" layoutY="160.0" prefHeight="17.0" prefWidth="118.0" promptText="Report Type" />
    </children>
 </AnchorPane>

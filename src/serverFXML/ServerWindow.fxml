@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="serverGUI.ServerWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="serverGUI.ServerWindowController">
    <children>
       <Label layoutX="55.0" layoutY="182.0" text="IP" />
       <TextField fx:id="txt_ip" editable="false" layoutX="168.0" layoutY="177.0" />
       <Label layoutX="55.0" layoutY="234.0" text="PORT" />
       <TextField fx:id="txt_port" layoutX="168.0" layoutY="229.0" text="5555" />
-      <TextField fx:id="txt_dbPath" layoutX="168.0" layoutY="284.0" text="localhost/prototype" />
+      <TextField fx:id="txt_dbPath" layoutX="168.0" layoutY="284.0" text="localhost/zerlidb" />
       <Label layoutX="55.0" layoutY="289.0" text="DB PATH" />
       <Label layoutX="55.0" layoutY="343.0" text="DB USERNAME" />
       <TextField fx:id="txt_username" layoutX="168.0" layoutY="338.0" text="root" />
@@ -24,7 +18,7 @@
       <Button fx:id="btn_connect" layoutX="55.0" layoutY="474.0" mnemonicParsing="false" onAction="#btnConnectClick" prefWidth="94.0" text="Connect" />
       <Button fx:id="btn_disconnect" layoutX="262.0" layoutY="474.0" mnemonicParsing="false" onAction="#btnDisconnectClick" text="Disconnect" />
       <Button fx:id="btn_exit" layoutX="650.0" layoutY="529.0" mnemonicParsing="false" onAction="#btnExitClick" prefWidth="94.0" text="Exit" />
-      <PasswordField fx:id="txt_password" layoutX="168.0" layoutY="392.0" text="Whyalwaysme11" />
+      <PasswordField fx:id="txt_password" layoutX="168.0" layoutY="392.0" text="Habeeb303" />
       <Label layoutX="300.0" layoutY="14.0" text="Server control">
          <font>
             <Font name="System Bold" size="30.0" />

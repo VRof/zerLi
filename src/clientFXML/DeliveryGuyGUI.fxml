@@ -8,34 +8,42 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TableView layoutX="20.0" layoutY="98.0" prefHeight="390.0" prefWidth="756.0">
-        <columns>
-          <TableColumn prefWidth="90.0" text="Order ID" />
-            <TableColumn prefWidth="173.0" text="Customer name" />
-            <TableColumn prefWidth="181.0" text="Address" />
-            <TableColumn prefWidth="115.0" text="Delivery date" />
-            <TableColumn prefWidth="126.0" text="Phone" />
-            <TableColumn prefWidth="70.0" text="Price" />
-        </columns>
-      </TableView>
-      <Label layoutX="50.0" layoutY="45.0" text="Hello, Yossi" />
-      <Label layoutX="262.0" layoutY="525.0" prefHeight="31.0" prefWidth="272.0" text="error text" textFill="RED" />
-      <Label layoutX="236.0" layoutY="33.0" text="Choose order to confirm">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.DeliveryGuyGUIController">
+    <children>
+        <TableView fx:id="DeliveryMenuTable" layoutX="20.0" layoutY="117.0" prefHeight="390.0" prefWidth="756.0">
+            <columns>
+                <TableColumn fx:id="col_orderID" prefWidth="90.0" text="Order ID" />
+                <TableColumn fx:id="col_customerName" prefWidth="121.0" text="Customer name" />
+                <TableColumn fx:id="col_address" prefWidth="158.0" text="Address" />
+                <TableColumn fx:id="col_deliveryDate" prefWidth="190.0" text="Delivery date" />
+                <TableColumn fx:id="col_phone" prefWidth="121.0" text="Phone" />
+                <TableColumn fx:id="col_price" prefWidth="75.0" text="Price" />
+            </columns>
+        </TableView>
+        <Label fx:id="lbl_userName" layoutX="53.0" layoutY="47.0" text="Hello, User">
          <font>
-            <Font size="30.0" />
+            <Font size="15.0" />
+         </font></Label>
+        <Label fx:id="lbl_errorMSG" layoutX="361.0" layoutY="548.0" prefHeight="31.0" prefWidth="200.0" text="error text" textFill="RED" />
+        <Label fx:id="lbl_intro" layoutX="296.0" layoutY="25.0" text="Delivery Guy 3" textFill="#15d798">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Label>
+        <ImageView fx:id="btn_logout" fitHeight="45.0" fitWidth="166.0" layoutX="34.0" layoutY="526.0" onMouseClicked="#clickedLogoutBtn" onMouseEntered="#enteredLogoutBtn" onMouseExited="#leavedLogoutBtn" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../pictures/button_logout.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="btn_confirmDelivery" fitHeight="150.0" fitWidth="200.0" layoutX="576.0" layoutY="524.0" onMouseClicked="#clickedConfirmDeliveryBtn" onMouseEntered="#enteredConfirmDeliveryBtn" onMouseExited="#leavedConfirmDeliveryBtn" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../pictures/button_confirm-delivery.png" />
+            </image>
+        </ImageView>
+      <Label layoutX="296.0" layoutY="85.0" prefHeight="21.0" prefWidth="208.0" text="Please select order to confirm" textFill="#15d798">
+         <font>
+            <Font size="15.0" />
          </font>
       </Label>
-      <ImageView fitHeight="45.0" fitWidth="166.0" layoutX="39.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pictures/button_logout.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="576.0" layoutY="517.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pictures/button_confirm-delivery.png" />
-         </image>
-      </ImageView>
-   </children>
+    </children>
 </AnchorPane>
