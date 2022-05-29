@@ -1,14 +1,12 @@
 package clientGUI;
 
 import client.ClientController;
-import client.LoginWindowFrameController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import serverClasses.Message;
 
 public class CustomerGUIController {
 
@@ -55,24 +53,6 @@ public class CustomerGUIController {
     void clickedViewCatalogBtn(MouseEvent event) {
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @FXML
     void enteredLogoutBtn(MouseEvent event) {
