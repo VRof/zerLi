@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ae90c0da-2d4b-4397-9cd0-facc2755ab48" name="Changes" comment="habib changes accepted">
+    <list default="true" id="74f3abaa-5d2f-4d4f-9b3f-2acbcd8b6569" name="Changes" comment="frozen account fix">
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/SavedWindows.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/SavedWindows.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientFXML/SpeceficReportGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/SpeceficReportGUI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientGUI/LoginGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/LoginGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientFXML/ApproveCustomersGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/ApproveCustomersGUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientFXML/CEOGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/CEOGUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientFXML/ManageCustomersGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/ManageCustomersGUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientFXML/ManagePermissionsGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/ManagePermissionsGUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientFXML/ReviewCancellationGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/ReviewCancellationGUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientFXML/ReviewOrdersGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/ReviewOrdersGUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientFXML/ShopManagerGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/ShopManagerGUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientFXML/ViewReportsGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/ViewReportsGUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ApproveCustomersGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ApproveCustomersGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/CeoGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/CeoGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ManageCustomersGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ManageCustomersGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ManagePermissionsGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ManagePermissionsGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ReviewCancellationGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ReviewCancellationGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ReviewOrdersGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ReviewOrdersGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ShopManagerGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ShopManagerGUIController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ServerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerControl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +35,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/clientGUI/LoginGUIController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/server/ServerControl.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -33,17 +50,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/OCSF",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/boroa/Downloads/תרגיל 5 (2)/Exercise_05-Client-Server/OCSF&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Application.clientUI">
+}</component>
+  <component name="RunManager" selected="Application.client.clientUI">
     <configuration name="ServerUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.ServerUI" />
       <module name="zerli" />
@@ -57,7 +74,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="clientUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="client.clientUI" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.clientUI" />
       <module name="zerli" />
       <extension name="coverage">
@@ -83,11 +100,11 @@
     </configuration>
     <list>
       <item itemvalue="Application.ServerUI" />
-      <item itemvalue="Application.clientUI" />
+      <item itemvalue="Application.client.clientUI" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.clientUI" />
+        <item itemvalue="Application.client.clientUI" />
         <item itemvalue="Application.ServerUI" />
       </list>
     </recent_temporary>
@@ -95,7 +112,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ae90c0da-2d4b-4397-9cd0-facc2755ab48" name="Changes" comment="" />
+      <changelist id="74f3abaa-5d2f-4d4f-9b3f-2acbcd8b6569" name="Changes" comment="frozen account fix" />
       <created>1653810808237</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />

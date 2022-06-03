@@ -3,13 +3,27 @@ package clientGUI;
 
 import client.ClientController;
 import client.NewWindowFrameController;
+import clientClasses.CancellationRequest;
+import clientClasses.Message;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import javax.sql.rowset.CachedRowSet;
+import java.sql.SQLException;
 
+/**
+ * ShopManagerGUIController class is responsible for the main GUI of each shop manager, it
+ * allows them to pick one of six desired actions that are made for shop managers to manage
+ * customers, workers and viewing reports.
+ *
+ * <p> Project Name: Zer-Li (Flowers store in Java) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
 public class ShopManagerGUIController {
     @FXML
     private ImageView manageCustomersBtn;
@@ -36,9 +50,32 @@ public class ShopManagerGUIController {
 
     public ClientController cc =ClientController.getClientController();
 
+    /**
+     * initialize method sends userid that we saved from login window to the server
+     * for the goal of getting the firs and last name of the user in order to show as a welcome message
+     */
     @FXML
     public void initialize() {
-        lblManager.setText("Hello " + ClientController.userLoginData.getUsername());
+        CachedRowSet cachedMsg;
+        String first="",last="";
+        //*********
+        //1.send msg to server
+        Message msg = new Message(); //msg to be sent to server
+        msg.setCommand("getName");
+        msg.setMsg(ClientController.userLoginData.getUserid());
+        cc.send(msg);
+        //2.receive from server
+        while (cc.awaitResponse) ; //wait for data from server
+        cachedMsg = (CachedRowSet) (cc.messageFromServer.getMsg());
+        try {
+            while (cachedMsg.next()){
+               first = cachedMsg.getString("firstname");
+               last =  cachedMsg.getString("lastname");
+            }
+        }
+        catch(SQLException e){}
+
+        lblManager.setText("Hello " +first+" "+last);
     }
 
     @FXML

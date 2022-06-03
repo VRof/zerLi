@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ReviewOrdersGUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ReviewOrdersGUIController">
    <children>
-      <Label layoutX="355.0" layoutY="48.0" text="Orders">
+      <Label layoutX="355.0" layoutY="33.0" text="Orders">
          <font>
-            <Font size="30.0" />
+            <Font name="System Bold" size="30.0" />
          </font>
       </Label>
       <TableView fx:id="ordersTable" layoutX="24.0" layoutY="106.0" prefHeight="404.0" prefWidth="753.0">
@@ -46,5 +46,10 @@
             <Image url="@../pictures/button_confirm-order.png" />
          </image>
       </ImageView>
+      <Label layoutX="46.0" layoutY="78.0" text="- Here you can select order and then confirm it">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

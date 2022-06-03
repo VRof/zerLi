@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ManagePermissionsGUIController">
    <children>
-      <Label layoutX="302.0" layoutY="43.0" text="Manage permissions">
+      <Label layoutX="255.0" layoutY="35.0" text="Manage permissions">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -32,9 +32,9 @@
             <Image url="@../pictures/button_confirm-changes.png" />
          </image>
       </ImageView>
-      <Label layoutX="50.0" layoutY="88.0" text="- Here you can edit the Type of each user" underline="true">
+      <Label layoutX="50.0" layoutY="88.0" text="- Here you can edit the Type of each user">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font size="14.0" />
          </font>
       </Label>
    </children>

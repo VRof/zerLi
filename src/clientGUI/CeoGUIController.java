@@ -2,6 +2,7 @@ package clientGUI;
 
 import client.ClientController;
 import client.NewWindowFrameController;
+import clientClasses.Message;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -9,9 +10,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import javax.sql.rowset.CachedRowSet;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
-
+/**
+ * CeoGUIController class is responsible for allowing the CEO pick a desired action
+ * by clicking a button, either viewing specific shop reports or viewing annual report,
+ * both of the buttons will direct the CEO to new GUI.
+ * <p> Project Name: Zer-Li (Flowers store in Java) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
 public class CeoGUIController implements Initializable {
 
     @FXML
@@ -27,6 +38,29 @@ public class CeoGUIController implements Initializable {
     private ImageView viewSpecificShopReportBtn;
     public ClientController cc =ClientController.getClientController();
 
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        CachedRowSet cachedMsg;
+        String first="",last="";
+        //*********
+        //1.send msg to server
+        Message msg = new Message(); //msg to be sent to server
+        msg.setCommand("getName");
+        msg.setMsg(ClientController.userLoginData.getUserid());
+        cc.send(msg);
+        //2.receive from server
+        while (cc.awaitResponse) ; //wait for data from server
+        cachedMsg = (CachedRowSet) (cc.messageFromServer.getMsg());
+        try {
+            while (cachedMsg.next()){
+                first = cachedMsg.getString("firstname");
+                last =  cachedMsg.getString("lastname");
+            }
+        }
+        catch(SQLException e){}
+        welcomeCeoLbl.setText("Hello"+" "+first+" "+last);
+    }
 
     @FXML
     void clickedLogoutBtn(MouseEvent event) {
@@ -85,9 +119,5 @@ public class CeoGUIController implements Initializable {
         cc.leavedButton(viewSpecificShopReportBtn);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //we can add and option to get the name of the ceo
-        welcomeCeoLbl.setText("Welcome here you can chose your desired reports");
-    }
+
 }

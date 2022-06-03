@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ApproveCustomersGUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ApproveCustomersGUIController">
    <children>
-      <Label layoutX="302.0" layoutY="43.0" text="Approve customers">
+      <Label layoutX="263.0" layoutY="31.0" text="Approve customers">
          <font>
-            <Font size="30.0" />
+            <Font name="System Bold" size="30.0" />
          </font>
       </Label>
       <TableView fx:id="manageUsers" editable="true" layoutX="38.0" layoutY="119.0" prefHeight="362.0" prefWidth="723.0">
@@ -27,7 +27,6 @@
             <TableColumn fx:id="typeCol" minWidth="0.0" prefWidth="56.00002034505212" text="Type" />
         </columns>
       </TableView>
-      <Label fx:id="errorLbl" layoutX="220.0" layoutY="532.0" />
       <ImageView fx:id="backBtn" fitHeight="83.0" fitWidth="69.0" layoutX="33.0" layoutY="507.0" onMouseClicked="#clickedBackBtn" onMouseEntered="#enteredBackBtn" onMouseExited="#leavedBackBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/button_back.png" />
@@ -37,5 +36,11 @@
             <Image url="@../pictures/aprroveCustomerBtn.png" />
          </image>
       </ImageView>
+      <Label layoutX="38.0" layoutY="88.0" text="- Here you can give Username and Password to the customer you want to approve">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="errorLbl" layoutX="219.0" layoutY="508.0" prefHeight="17.0" prefWidth="147.0" textFill="RED" />
    </children>
 </AnchorPane>

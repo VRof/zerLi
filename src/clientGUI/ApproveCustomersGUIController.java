@@ -22,7 +22,16 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
-
+/**
+ * ApproveCustomersGUIController class is responsible for allowing each shop manager to approve customers,
+ *  by giving them username and password, and clicking approve customer button they will be recognized in
+ *  the system and login to their accounts.
+ *
+ * <p> Project Name: Zer-Li (Flowers store in Java) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
 public class ApproveCustomersGUIController implements Initializable {
     public ClientController cc = ClientController.getClientController();
 
@@ -54,12 +63,22 @@ public class ApproveCustomersGUIController implements Initializable {
 
     @FXML
     private TableColumn<RegistrationTable, String> typeCol;
-
     @FXML
     private TableColumn<RegistrationTable, Integer> userIDCol;
     private ObservableList<RegistrationTable> UsersList;
 
-
+    /**
+     * initialize method sets the columns in the TableView
+     * so that the manager can give a username and password
+     * for customer and approve him.
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         userIDCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
@@ -76,15 +95,11 @@ public class ApproveCustomersGUIController implements Initializable {
         //1.send msg to server
         Message msg = new Message(); //msg to be sent to server
         msg.setCommand("manageUsers");
-        msg.setMsg("aa");
+        msg.setMsg("");
         cc.send(msg);
-
         //2.receive from server
-
-
         while (cc.awaitResponse) ; //wait for data from server
         cachedMsg = (CachedRowSet) (cc.messageFromServer.getMsg()); //message received from server
-
         //3. organize the msg from server in order to show it
         try {
             while (cachedMsg.next()) { //get user data
@@ -122,10 +137,15 @@ public class ApproveCustomersGUIController implements Initializable {
         );
     }
 
+    /**
+     * clickedApproveCustomerBtn method approves the customer when clicking Approve customer button,
+     * and sends the selected customer data (new username password) to the server
+     * in order to save them in DB
+     * @param event
+     */
     @FXML
     void clickedApproveCustomerBtn(MouseEvent event) {
         Message m = new Message();
-        //RegistrationTable r=new RegistrationTable();
         String savedUsername="",savedPassword="";
         int savedUserID = 0;
         try {
@@ -153,6 +173,10 @@ public class ApproveCustomersGUIController implements Initializable {
         while (cc.awaitResponse) ; //wait for data from server
         refresh();
     }
+
+    /**
+     * refresh method is responsible for refreshing the TableView after clicking approve customer button
+     */
         public void refresh(){
             ObservableList<RegistrationTable>  selected,allTable;
             allTable = manageUsers.getItems();
@@ -162,7 +186,11 @@ public class ApproveCustomersGUIController implements Initializable {
             }catch(NoSuchElementException e){
             }
         }
-
+    /**
+     * clickedBackBtn method directs the user to the previous GUI - ShopManagerGUI - when clicking back
+     * @param event
+     * @throws Exception
+     */
     @FXML
     void clickedBackBtn(MouseEvent event) throws Exception {
         new NewWindowFrameController("ShopManagerGUI").start(new Stage());
@@ -179,9 +207,4 @@ public class ApproveCustomersGUIController implements Initializable {
     @FXML
     void leavedApproveCustomerBtn(MouseEvent event) {cc.leavedButton(approveCustomerBtn);}
 
-
-//
-//    public void editType(TableColumn.CellEditEvent<RegistrationTable, String> registrationTableStringCellEditEvent) {
-//
-//    }
 }

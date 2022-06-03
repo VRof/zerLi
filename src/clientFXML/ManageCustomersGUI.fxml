@@ -10,9 +10,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ManageCustomersGUIController">
    <children>
-      <Label layoutX="259.0" layoutY="46.0" text="Manage customers">
+      <Label layoutX="273.0" layoutY="31.0" text="Manage customers">
          <font>
-            <Font size="30.0" />
+            <Font name="System Bold" size="30.0" />
          </font>
       </Label>
       <TableView fx:id="manageCustomers" editable="true" layoutX="38.0" layoutY="119.0" prefHeight="362.0" prefWidth="723.0">
@@ -42,5 +42,10 @@
             <Image url="@../pictures/unfreeze.png" />
          </image>
       </ImageView>
+      <Label layoutX="50.0" layoutY="83.0" text="- Here you can select a customer to freeze/unfreeze him">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

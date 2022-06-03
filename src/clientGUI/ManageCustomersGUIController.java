@@ -22,7 +22,17 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
-
+/**
+ * ManageCustomersGUIController class is responsible for allowing the shop manager to manage the customers
+ * belongs to his own shop by either freeze or unfreeze them, and this affects their login permission
+ * (frozen accounts can not log in while unfrozen - active - ones can), the shop manager can do the written
+ * above by selecting the customer and right after then choosing freeze/unfreeze button.
+ *
+ * <p> Project Name: Zer-Li (Flowers store in Java) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
 public class ManageCustomersGUIController implements Initializable {
     public ClientController cc = ClientController.getClientController();
     @FXML
@@ -61,8 +71,20 @@ public class ManageCustomersGUIController implements Initializable {
     private TableColumn<Customer, Integer> userIDCol;
 
     private ObservableList<Customer> customersList;
+    //
 
-
+    /**
+     * initialize method sets all the columns we need to show in the TableView,
+     * and shows the desired data from the database by connection to server,
+     * in order to select which customer to freeze/unfreeze
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         userIDCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
@@ -73,21 +95,16 @@ public class ManageCustomersGUIController implements Initializable {
         balanceCol.setCellValueFactory(new PropertyValueFactory<>("balance"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
         customersList = FXCollections.observableArrayList();
-        CachedRowSet cachedMsg = null;
-
+        CachedRowSet cachedMsg;
         //***
         //1.send msg to server
-
         Message msg = new Message(); //msg to be sent to server
         msg.setCommand("manageCustomers");
         msg.setMsg("aa");
         cc.send(msg);
-
         //2.receive from server
-
-
         while (cc.awaitResponse) ; //wait for data from server
-        cachedMsg = (CachedRowSet) (cc.messageFromServer.getMsg()); //message received from server (row from cancellationrequests table)
+        cachedMsg = (CachedRowSet) (cc.messageFromServer.getMsg()); //message received from server
 
         //3. organize the msg from server in order to show it
         try {
@@ -115,9 +132,11 @@ public class ManageCustomersGUIController implements Initializable {
     }
 
 
-
-
-
+    /**
+     * clickedBackBtn method directs the user to the previous GUI when clicking back
+     * @param event
+     * @throws Exception
+     */
     @FXML
     void clickedBackBtn(MouseEvent event) throws Exception {
         new NewWindowFrameController("ShopManagerGUI").start(new Stage());
@@ -125,6 +144,10 @@ public class ManageCustomersGUIController implements Initializable {
         stage.hide();
     }
 
+    /**
+     * clickedFreezeBtn method freezes the selected customer when clicking Freeze button
+     * @param event
+     */
     @FXML
     void clickedFreezeBtn(MouseEvent event) {
         Message m = new Message();
@@ -150,7 +173,10 @@ public class ManageCustomersGUIController implements Initializable {
         this.initialize(null,null);
         }
 
-
+    /**
+     * clickedUnfreezeBtn method unfreezes the selected customer when clicking UnFreeze button
+     * @param event
+     */
     @FXML
     void clickedUnfreezeBtn(MouseEvent event) {
         Message m = new Message();

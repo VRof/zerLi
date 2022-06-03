@@ -21,7 +21,17 @@ import javax.sql.rowset.CachedRowSet;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
+/**
+ * ManagePermissionsGUIController class is responsible for allowing the shop manager to
+ * manage the permissions of each worker in the system - worker: any user that is not customer
+ * or CEO or shop manager - changing the permission means changing their position or job
+ *  by editing type field in the table and right after then clicking confirm changes button.
+ *
+ * <p> Project Name: Zer-Li (Flowers store in Java) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+*/
 public class ManagePermissionsGUIController implements Initializable {
     public ClientController cc = ClientController.getClientController();
 
@@ -42,7 +52,17 @@ public class ManagePermissionsGUIController implements Initializable {
     private TableColumn<RegistrationTable, String> usernameCol;
     private ObservableList<RegistrationTable> UsersList;
 
-
+    /**
+     * initialize method shows the manager a table with workers = { users \ customers+managers+ceo } data,
+     * so he can select one and change his permission by editing the Type.
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         userIDCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
@@ -54,7 +74,7 @@ public class ManagePermissionsGUIController implements Initializable {
         //1.send msg to server
         Message msg = new Message(); //msg to be sent to server
         msg.setCommand("showUsersPermissionsTable");
-        msg.setMsg("aa");
+        msg.setMsg("");
         cc.send(msg);
         //2.receive from server
 
@@ -77,7 +97,7 @@ public class ManagePermissionsGUIController implements Initializable {
         manageUsers.setItems(UsersList);
         // *** EDIT ***
         typeCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        typeCol.setOnEditCommit(
+        typeCol.setOnEditCommit( // edit the Type field
                 (TableColumn.CellEditEvent<RegistrationTable, String> t) ->
                         (t.getTableView().getItems().get(
                                 t.getTablePosition().getRow())
@@ -85,6 +105,11 @@ public class ManagePermissionsGUIController implements Initializable {
         );
     }
 
+    /**
+     * clickedConfirmChangesBtn method sends the server
+     * the userid that the manager selected and the new type (permission)
+     * @param event
+     */
     @FXML
     void clickedConfirmChangesBtn(MouseEvent event) {
         Message m = new Message();
@@ -112,6 +137,11 @@ public class ManagePermissionsGUIController implements Initializable {
 
         while (cc.awaitResponse) ; //wait for data from server
     }
+    /**
+     * clickedBackBtn method directs the user to the previous GUI - ShopManagerGUI - when clicking back
+     * @param event
+     * @throws Exception
+     */
     @FXML
     void clickedBackBtn(MouseEvent event) throws Exception {
         new NewWindowFrameController("ShopManagerGUI").start(new Stage());

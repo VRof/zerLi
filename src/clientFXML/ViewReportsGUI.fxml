@@ -6,8 +6,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="466.0" prefWidth="632.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ViewReportsGUIController">
+<AnchorPane prefHeight="466.0" prefWidth="632.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ViewReportsGUIController">
    <children>
       <AnchorPane layoutX="-124.0" layoutY="-158.0" prefHeight="200.0" prefWidth="200.0" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
@@ -36,9 +37,17 @@
             <Image url="@../pictures/button_back.png" />
          </image>
       </ImageView>
-      <Label fx:id="titleLbl" layoutX="207.0" layoutY="89.0" prefHeight="21.0" prefWidth="219.0" text="Fill the desired report details" />
+      <Label fx:id="titleLbl" layoutX="76.0" layoutY="103.0" prefHeight="21.0" prefWidth="429.0" text="- Here you are asked to fill the fields to see the desired report details">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
       <Label layoutX="146.0" layoutY="302.0" prefHeight="21.0" prefWidth="82.0" text="To date:" />
       <DatePicker fx:id="toDate" layoutX="241.0" layoutY="297.0" prefHeight="25.0" prefWidth="150.0" promptText="Date" />
       <Label fx:id="errorLbl" layoutX="221.0" layoutY="400.0" prefHeight="21.0" prefWidth="190.0" />
+      <Label layoutX="261.0" layoutY="42.0" text="Reports">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
