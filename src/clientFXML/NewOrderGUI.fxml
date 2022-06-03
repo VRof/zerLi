@@ -172,7 +172,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Label fx:id="lbl_msgDiscount" layoutX="581.0" layoutY="655.0" text="Label" textFill="#15d798" />
+      <Label fx:id="lbl_msgDiscount" layoutX="579.0" layoutY="667.0" text="Label" textFill="#15d798" />
       <Label fx:id="lbl_firstOrder" layoutX="1165.0" layoutY="646.0" text="Price after first order 20% discount:" textFill="#09b500">
          <font>
             <Font name="System Bold" size="15.0" />

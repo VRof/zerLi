@@ -165,7 +165,7 @@ public class ItemInNewOrder {
     }
 
     public boolean isBundle() {
-        return isBundle.equals("true");
+        return isBundle.equals("TRUE");
     }
 
     public VBox getItemInNewOrderVBoxVBox() {

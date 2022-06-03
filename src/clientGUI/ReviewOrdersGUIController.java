@@ -1,9 +1,11 @@
 package clientGUI;
 
 import client.ClientController;
+import client.NewPopUpWindowFrameController;
 import client.NewWindowFrameController;
 import clientClasses.OrderToConfirm;
 import commonClasses.Message;
+import commonClasses.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -64,8 +66,15 @@ public class ReviewOrdersGUIController implements Initializable {
     @FXML
     private ImageView confirmBtn;
 
+    @FXML
+    private ImageView btn_orderDetails;
+
+    OrderToConfirm selectedOrder;
+    Order orderWithDetais;
+
 
     private ObservableList<OrderToConfirm> ordersToConfirmList;
+    public static ReviewOrdersGUIController controller;
 
     /**
      * initialize method shows the manager orders that he needs to confirm
@@ -79,6 +88,7 @@ public class ReviewOrdersGUIController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        controller = this;
         errorLbl.setText("");
         orderIDCol.setCellValueFactory(new PropertyValueFactory<>("orderID"));
         firstNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -113,7 +123,6 @@ public class ReviewOrdersGUIController implements Initializable {
             }
             ordersTable.setItems(ordersToConfirmList);
         }
-
 
     }
 
@@ -197,6 +206,37 @@ public class ReviewOrdersGUIController implements Initializable {
     }
 
     @FXML
+    void clickedOrderDetails(MouseEvent event) throws Exception {
+        errorLbl.setText("");
+        selectedOrder = ordersTable.getSelectionModel().getSelectedItem();
+        Message msg = new Message();
+        if (selectedOrder == null) //if no order selected
+            errorLbl.setText("Please select order by clicking on its row in the table");
+        else { //create popup
+            msg.setCommand("getOrderDetails");
+            msg.setMsg(selectedOrder.getOrderID());
+            ClientController.getClientController().send(msg);
+            CachedRowSet cachedMsg = (CachedRowSet) ClientController.messageFromServer.getMsg();
+            while (cachedMsg.next()){
+                Order o = new Order();
+                o.setDetails(cachedMsg.getString("dOrder"));
+                orderWithDetais = o;
+            }
+            NewPopUpWindowFrameController orderDetailsPopUp = new NewPopUpWindowFrameController("ReviewOrdersOrderDetailsPOPUP");
+            orderDetailsPopUp.start(new Stage());
+        }
+    }
+
+    public Order getSelectedOrder(){
+        return orderWithDetais;
+    }
+
+    @FXML
+    void enterOrderDetails(MouseEvent event) {
+        cc.enteredButton(btn_orderDetails);
+    }
+
+    @FXML
     void enteredBackBtn(MouseEvent event) {
         cc.enteredButton(backBtn);
     }
@@ -205,6 +245,7 @@ public class ReviewOrdersGUIController implements Initializable {
     void enteredConfirmBtn(MouseEvent event) {
         cc.enteredButton(confirmBtn);
     }
+
 
     @FXML
     void leavedBackBtn(MouseEvent event) {
@@ -216,5 +257,8 @@ public class ReviewOrdersGUIController implements Initializable {
      cc.leavedButton(confirmBtn);
     }
 
-
+    @FXML
+    void leavedOrderDetails(MouseEvent event) {
+        cc.leavedButton(btn_orderDetails);
+    }
 }

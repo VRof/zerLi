@@ -43,7 +43,11 @@ public class CustomerGUIController {
         else
             lbl_discount.setText("");
         lbl_username.setText("Hello, " + ClientController.userData.getFirstname() + " " + ClientController.userData.getLastname());
-        lbl_balance.setText("Your balance is " + ClientController.userData.getBalance() + " ₪");
+        double balance = ClientController.userData.getBalance();
+        balance = balance*100;
+        balance = Math.round(balance);
+        balance = balance /100;
+        lbl_balance.setText("Your balance is " + balance + " ₪");
     }
 
     private boolean ifFirstOrder(){

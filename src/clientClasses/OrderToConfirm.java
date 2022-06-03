@@ -10,6 +10,7 @@ public class OrderToConfirm {
     private Timestamp deliveryDate;
     private String phone;
     private double price;
+    private String orderDetails;
 
     public OrderToConfirm(int orderID, String firstName, String lastName, Timestamp deliveyDate, String phone, double price) {
         this.orderID = orderID;
@@ -22,6 +23,14 @@ public class OrderToConfirm {
 
     public OrderToConfirm() {
 
+    }
+
+    public String getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(String orderDetails) {
+        this.orderDetails = orderDetails;
     }
 
     public int getOrderID() {

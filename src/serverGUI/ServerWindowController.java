@@ -102,11 +102,19 @@ public class ServerWindowController {
 		String SQLloginManagers = "load data local infile 'src\\\\external\\\\loginmanagers.csv' into table login fields terminated by ','" +
 				"enclosed by '\"'\r\n" +
 				"lines terminated by '\r\n'";
+		String SQLCatalog = "load data local infile 'src\\\\external\\\\catalog.csv' into table catalog fields terminated by ','" +
+				"enclosed by '\"'\r\n" +
+				"lines terminated by '\r\n'";
+		String SQLUsers = "load data local infile 'src\\\\external\\\\users.csv' into table users fields terminated by ','" +
+				"enclosed by '\"'\r\n" +
+				"lines terminated by '\r\n'";
 
 		try{
 			dbConn.createStatement().executeUpdate(SQLregistration);
 			dbConn.createStatement().executeUpdate(SQLshopmanager);
 			dbConn.createStatement().executeUpdate(SQLloginManagers);
+			dbConn.createStatement().executeUpdate(SQLCatalog);
+			dbConn.createStatement().executeUpdate(SQLUsers);
 			importBtn.setDisable(true);
 		}catch(SQLException e){
 			System.out.println("ERROR IMPORTING DATA :" + e);

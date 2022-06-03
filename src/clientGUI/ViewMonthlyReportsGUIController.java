@@ -2,7 +2,7 @@ package clientGUI;
 
 import client.ClientController;
 import client.MonthlyReport;
-import clientClasses.Message;
+import commonClasses.Message;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;

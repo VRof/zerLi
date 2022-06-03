@@ -47,7 +47,7 @@ public class ItemInCatalog {
     }
 
     public boolean isBundle() {
-        return isBundle.equals("true");
+        return isBundle.equals("TRUE");
     }
 
     public VBox getItemInCatalogVBox() {

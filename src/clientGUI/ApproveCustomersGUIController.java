@@ -152,6 +152,10 @@ public class ApproveCustomersGUIController implements Initializable {
             savedUserID = manageUsers.getSelectionModel().getSelectedItem().getUserId();
             savedUsername = manageUsers.getSelectionModel().getSelectedItem().getUsername();
             savedPassword = manageUsers.getSelectionModel().getSelectedItem().getPassword();
+            if(savedUsername == null || savedPassword==null || savedUsername.equals("") || savedPassword.equals("")){
+                errorLbl.setText("Fields username or password is empty");
+                return;
+            }
         } catch (Exception e) {
             System.out.println("null row selected");
         }

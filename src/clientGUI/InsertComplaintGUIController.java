@@ -10,6 +10,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import javax.sql.rowset.CachedRowSet;
+
+import java.sql.SQLException;
+
 import static client.ClientController.savedWindows;
 
 public class InsertComplaintGUIController {
@@ -33,9 +37,15 @@ public class InsertComplaintGUIController {
     /**
      * Gui init
      */
-    public void initialize() {
-        dr_shop.getItems().add("Zer from yosi");
-        dr_shop.getItems().add("Prahim Special");
+    public void initialize() throws SQLException {
+        lbl_error.setText("");
+        Message msg = new Message();
+        msg.setCommand("getAllTheShops");
+        ClientController.getClientController().send(msg);
+        CachedRowSet cachedMsg = (CachedRowSet) ClientController.messageFromServer.getMsg();
+        while(cachedMsg.next()){
+            dr_shop.getItems().add(cachedMsg.getString("shop"));
+        }
     }
 
     /**

@@ -17,6 +17,9 @@ public class Order implements Serializable {
     String status;
     String confirmed;
 
+    public Order(){
+
+    }
     public Order(int orderNumber, double price, String bless, String details, String shop, Timestamp orderDate, Timestamp deliveryDate, String status, String confirmed) {
         this.orderNumber = orderNumber;
         this.price = price;

@@ -105,13 +105,7 @@ public class NewOrderGUIController {
     @FXML
     private Label lbl_msgDiscount;
 
-    private ObservableList<ItemInNewOrder> itemsListInOurItemsTab;
-    private ObservableList<ItemInNewOrder> itemsListInCustomTab;
-    private List<NewOrder> itemsInNewOrderList = new ArrayList<>();
-    public static NewOrderGUIController controller;
-    private String fullOrder;
-    private float fullPrice;
-    private String customRequest;
+    @FXML
     private Label lbl_firstOrder;
 
     @FXML

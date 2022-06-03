@@ -16,11 +16,11 @@ import javafx.stage.Stage;
 import javax.sql.rowset.CachedRowSet;
 import java.io.IOException;
 
-
+/**
+ * LoginGUIController - controller class for login window
+ */
 public class LoginGUIController {
-    /**
-     * LoginGUIController - controller class for login window
-     */
+
     @FXML
     private TextField txt_username;
 
@@ -48,8 +48,8 @@ public class LoginGUIController {
     public void initialize() {
         loginController = this;
         lbl_error.setText("");
-       // txt_username.setText("");
-       // txt_password.setText("");
+        txt_username.setText("");
+        txt_password.setText("");
     }
 
     /**

@@ -113,7 +113,7 @@ public class MyOrdersGUIController {
     /**
      *
      * @param event mouse click on "Order details" button, shows order details in popup window
-     * @throws Exception javafx exception when creates new window OrderDetailsPOPUP.fxml
+     * @throws Exception javafx exception when creates new window MyOrdersOrderDetailsPOPUP.fxml
      */
     @FXML
     void clickedOrderDetailsBtn(MouseEvent event) throws Exception {
@@ -122,7 +122,7 @@ public class MyOrdersGUIController {
         if (selectedOrder == null) //if no order selected
             lbl_cancelation.setText("Please select order by clicking on its row in the table");
         else { //create popup
-            NewPopUpWindowFrameController orderDetailsPopUp = new NewPopUpWindowFrameController("OrderDetailsPOPUP");
+            NewPopUpWindowFrameController orderDetailsPopUp = new NewPopUpWindowFrameController("MyOrdersOrderDetailsPOPUP");
             orderDetailsPopUp.start(new Stage());
         }
     }

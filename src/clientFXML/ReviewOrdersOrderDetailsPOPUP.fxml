@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="729.0" prefWidth="474.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.OrderDetailsPOPUPController">
+<AnchorPane prefHeight="729.0" prefWidth="474.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ReviewOrdersOrderDetailsPOPUPController">
    <children>
       <ImageView fx:id="btn_back" fitHeight="71.0" fitWidth="80.0" layoutX="202.0" layoutY="651.0" onMouseClicked="#clickedBackBtn" onMouseEntered="#enteredBackBtn" onMouseExited="#leavedBackBtn" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -18,11 +18,6 @@
       <Label layoutX="164.0" layoutY="14.0" text="Order details">
          <font>
             <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <Label fx:id="lbl_orderNumber" layoutX="143.0" layoutY="58.0" prefHeight="27.0" prefWidth="188.0" text="Order number">
-         <font>
-            <Font size="18.0" />
          </font>
       </Label>
    </children>

@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class OrderDetailsPOPUPController {
+public class MyOrdersOrderDetailsPOPUPController {
 
     @FXML
     private ImageView btn_back;

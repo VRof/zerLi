@@ -3,8 +3,7 @@ package clientGUI;
 
 import client.ClientController;
 import client.NewWindowFrameController;
-import clientClasses.CancellationRequest;
-import clientClasses.Message;
+import commonClasses.Message;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;

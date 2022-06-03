@@ -1,10 +1,12 @@
 package server;
 
+import client.MonthlyReport;
 import commonClasses.*;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 import serverClasses.OrderCancellationData;
 import serverGUI.ServerWindowController;
+
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetFactory;
 import javax.sql.rowset.RowSetProvider;
@@ -18,10 +20,11 @@ import java.util.List;
 public class ServerControl extends AbstractServer {
     public static List<ConnectionToClient> clientsList = new ArrayList<>(); //list of connected users to server (used in table of connected clients in serverGUI)
     private List<Integer> connectedClientdIdList = new ArrayList<>(); //list of id's of connected users to server to prevent multiply login of the same user
-   // private List<ConnectedClient> idAndConnectionList = new ArrayList<>();
+    // private List<ConnectedClient> idAndConnectionList = new ArrayList<>();
     private static ServerControl sv;
     private int port;
     private int userid;
+
     public ServerControl(int port) {
         super(port);
         this.port = port;
@@ -81,79 +84,79 @@ public class ServerControl extends AbstractServer {
                 CreateCancellationRequest(msg, client);
                 break;
             case "deliveryOrders":
-                deliveryOrders(msg,client);
+                deliveryOrders(msg, client);
                 break;
             case "SurveyResults":
-                surveyResults(msg,client);
+                surveyResults(msg, client);
                 break;
             case "confirmDelivery":
-                confirmDelivery(msg,client);
+                confirmDelivery(msg, client);
                 break;
             case "insertComplaint":
-                insertComplaint(msg,client);
+                insertComplaint(msg, client);
                 break;
             case "getSurveyLink":
-                getSurveyLink(msg,client);
+                getSurveyLink(msg, client);
                 break;
             case "getQuantityRows":
                 getQuantityRows(client);
                 break;
             case "setSurveyQuestions":
-                setSurveyQuestions(msg,client);
+                setSurveyQuestions(msg, client);
                 break;
             case "insertSurveyAnswers":
-                insertSurveyAnswers(msg,client);
+                insertSurveyAnswers(msg, client);
                 break;
             case "reviewCancellation":
-                reviewCancellation(msg,client);
+                reviewCancellation(msg, client);
                 break;
             case "confirmCancellation":
-                confirmCancellation(msg,client);
+                confirmCancellation(msg, client);
                 break;
             case "reviewOrdersToConfirm":
-                reviewOrdersToConfirm(msg,client);
+                reviewOrdersToConfirm(msg, client);
                 break;
             case "confirmOrder":
-                confirmOrder(msg,client);
+                confirmOrder(msg, client);
                 break;
             case "viewReports":
-                viewReports(msg,client);
+                viewReports(msg, client);
                 break;
             case "viewSpecificReports":
-                viewSpecificReports(msg,client);
+                viewSpecificReports(msg, client);
                 break;
             case "viewComplaint":
-                viewComplaint(msg,client);
+                viewComplaint(msg, client);
                 break;
             case "viewOverallIncome":
-                viewOverallIncome(msg,client);
+                viewOverallIncome(msg, client);
                 break;
             case "manageCustomers":
-                manageCustomers(msg,client);
+                manageCustomers(msg, client);
                 break;
             case "confirmFreeze":
-                confirmFreeze(msg,client);
+                confirmFreeze(msg, client);
                 break;
             case "confirmUnfreeze":
-                confirmUnfreeze(msg,client);
+                confirmUnfreeze(msg, client);
                 break;
             case "manageUsers":
-                manageUsers(msg,client);
+                manageUsers(msg, client);
                 break;
             case "approveCustomer":
-                approveCustomer(msg,client);
+                approveCustomer(msg, client);
                 break;
             case "showUsersPermissionsTable":
-                showUsersPermissionsTable(msg,client);
+                showUsersPermissionsTable(msg, client);
                 break;
             case "changePermission":
-                changePermission(msg,client);
+                changePermission(msg, client);
                 break;
             case "getName":
-                getName(msg,client);
+                getName(msg, client);
                 break;
             case "activeDiscount":
-                activeDiscount(msg,client);
+                activeDiscount(msg, client);
                 break;
             case "ifDiscount":
                 ifDiscount(client);
@@ -162,34 +165,73 @@ public class ServerControl extends AbstractServer {
                 DistinctiveDiscount(client);
                 break;
             case "viewMonthlyReport":
-                viewMonthlyReport(msg,client);
+                viewMonthlyReport(msg, client);
                 break;
             case "getInfo":
-                getInfo(msg,client);
+                getInfo(msg, client);
                 break;
+            case "isFirstOrder":
+                isFirstOrder(msg, client);
+                break;
+            case "addNewOrder":
+                addNewOrder(msg,client);
+                break;
+            case "getCreditCardData":
+                getCreditCardData(msg, client);
+                break;
+            case "getAllTheShops":
+                getAllTheShops(msg,client);
+                break;
+            case "getOrderDetails":
+                getOrderDetails(msg,client);
+                break;
+
         }
+    }
+
+    private void getOrderDetails(Object msg, ConnectionToClient client){
+        Connection dbConn = SqlConnector.getConnection();
+        CachedRowSet rowSet;
+        int orderid = (int) ((Message) msg).getMsg();
+        String SQL = "SELECT o.dOrder FROM orders o WHERE o.orderNumber =" + orderid+  ";";
+        try {
+            ResultSet rs = dbConn.createStatement().executeQuery(SQL);
+            RowSetFactory factory = RowSetProvider.newFactory();
+            rowSet = factory.createCachedRowSet();
+            rowSet.populate(rs);
+
+            Message msgToClient = new Message();
+            msgToClient.setCommand("orders data");
+            msgToClient.setMsg((Object) rowSet);
+            client.sendToClient(msgToClient);
+        } catch (Exception e) {
+            System.out.println("error getting or sending order details from catalog to client " + e);
+            e.printStackTrace();
+        }
+
     }
 
     /**
      * Method(getInfo) extracts the phone number and email from DB
+     *
      * @param msg
      * @param client
      */
     private void getInfo(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         int orderId = (int) ((Message) msg).getMsg();
-        int customerID=0;
-        String SQL1 = "SELECT userid FROM userorders uo WHERE uo.orderid = "+orderId+";";//return userid of user
+        int customerID = 0;
+        String SQL1 = "SELECT userid FROM userorders uo WHERE uo.orderid = " + orderId + ";";//return userid of user
         try {
             ResultSet rs = dbConn.createStatement().executeQuery(SQL1);
             rs.first();
             customerID = (rs.getInt("userid"));//get customer id
-        }catch(SQLException e){
-            System.out.println("sql ERROR :"+e);
+        } catch (SQLException e) {
+            System.out.println("sql ERROR :" + e);
         }
-        String SQL = "SELECT email ,phonenumber FROM users WHERE userid = "+customerID+";";
+        String SQL = "SELECT email ,phonenumber FROM users WHERE userid = " + customerID + ";";
         CachedRowSet rowSet;
-        try{
+        try {
             ResultSet rs = dbConn.createStatement().executeQuery(SQL);
             RowSetFactory factory = RowSetProvider.newFactory();
             rowSet = factory.createCachedRowSet();
@@ -198,8 +240,8 @@ public class ServerControl extends AbstractServer {
             msgToClient.setCommand("user info");
             msgToClient.setMsg((Object) rowSet);
             client.sendToClient(msgToClient);
-        }catch(SQLException e){
-            System.out.println("sql ERROR :"+e);
+        } catch (SQLException e) {
+            System.out.println("sql ERROR :" + e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -207,14 +249,15 @@ public class ServerControl extends AbstractServer {
 
     /**
      * Method(viewMonthlyReport) extract already made monthly reports details from DB
-     * @param msg -  receives message from client connection
+     *
+     * @param msg    -  receives message from client connection
      * @param client - receives specific client connection
      */
     private void viewMonthlyReport(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         CachedRowSet rowSet;
-        MonthlyReport mr = (MonthlyReport)((Message) msg).getMsg();
-        String SQL = "SELECT reportdetails FROM reports WHERE  month(month) = " + mr.getMonth() + " AND shop = '" +mr.getShop() + "' AND type = '"+mr.getType()+"' ;";
+        MonthlyReport mr = (MonthlyReport) ((Message) msg).getMsg();
+        String SQL = "SELECT reportdetails FROM reports WHERE  month(month) = " + mr.getMonth() + " AND shop = '" + mr.getShop() + "' AND type = '" + mr.getType() + "' ;";
         try {
             ResultSet rs = dbConn.createStatement().executeQuery(SQL);
             RowSetFactory factory = RowSetProvider.newFactory();
@@ -226,30 +269,38 @@ public class ServerControl extends AbstractServer {
             msgToClient.setMsg((Object) rowSet);
             client.sendToClient(msgToClient);
         } catch (Exception e) {
+            Message msgError = new Message();
+            msgError.setCommand("error");
+            ((Message) msg).setCommand("error");
+            try {
+                client.sendToClient(msgError);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
             System.out.println("error getting user data " + e);
             e.printStackTrace();
         }
     }
 
     private void addNewOrder(Object msg, ConnectionToClient client) {
-        Order order = (Order) ((Message)msg).getMsg();
+        Order order = (Order) ((Message) msg).getMsg();
         Connection dbConn = SqlConnector.getConnection();
         String SQL = "INSERT INTO orders(price,greetingCard,dOrder,shop,deliveryDate,orderDate,status,confirmed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps;
         try {
             ps = dbConn.prepareStatement(SQL);
-            ps.setDouble(1,order.getPrice());
-            ps.setString(2,order.getBless());
-            ps.setString(3,order.getDetails());
-            ps.setString(4,order.getShop());
+            ps.setDouble(1, order.getPrice());
+            ps.setString(2, order.getBless());
+            ps.setString(3, order.getDetails());
+            ps.setString(4, order.getShop());
             ps.setTimestamp(5, order.getDeliveryDate());
-            ps.setTimestamp(6,order.getOrderDate());
-            ps.setString(7,order.getStatus());
+            ps.setTimestamp(6, order.getOrderDate());
+            ps.setString(7, order.getStatus());
             ps.setString(8, order.getConfirmed());
             ps.executeUpdate();
-            SQL = "INSERT INTO userorders (userid) VALUES (" + order.getCustomerid() +");";
+            SQL = "INSERT INTO userorders (userid) VALUES (" + order.getCustomerid() + ");";
             dbConn.createStatement().executeUpdate(SQL);
-            SQL = "UPDATE balance SET balance = " + order.getNewBalance() +  "WHERE userid = " + order.getCustomerid() + ";";
+            SQL = "UPDATE balance SET balance = " + order.getNewBalance() + "WHERE userid = " + order.getCustomerid() + ";";
             dbConn.createStatement().executeUpdate(SQL);
             Message msgToClient = new Message();
             msgToClient.setCommand("order created");
@@ -298,7 +349,7 @@ public class ServerControl extends AbstractServer {
         Connection dbConn = SqlConnector.getConnection();
         CachedRowSet rowSet;
         int userid = (int) ((Message) msg).getMsg();
-        String SQL = "SELECT * FROM creditcards WHERE userid = "+ userid + ";";
+        String SQL = "SELECT * FROM creditcards WHERE userid = " + userid + ";";
         try {
             ResultSet rs = dbConn.createStatement().executeQuery(SQL);
             RowSetFactory factory = RowSetProvider.newFactory();
@@ -327,7 +378,7 @@ public class ServerControl extends AbstractServer {
         String SQL = "SELECT * from userorders WHERE userid = " + userid + ";";
         try {
             ResultSet rs = dbConn.createStatement().executeQuery(SQL);
-            if(!rs.next())
+            if (!rs.next())
                 res = true;
             Message msgToClient = new Message();
             msgToClient.setCommand("isFirstOrder result");
@@ -343,7 +394,7 @@ public class ServerControl extends AbstractServer {
         }
     }
 
-    private void getUserData(Object msg, ConnectionToClient client){
+    private void getUserData(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         CachedRowSet rowSet;
         int userid = (int) ((Message) msg).getMsg();
@@ -399,14 +450,14 @@ public class ServerControl extends AbstractServer {
             //----------create new row in cancellationrequest table:
             SQL = "INSERT INTO cancellationrequests(orderID,firstname,lastname,status,price,deliveryDate,requestDate,shop) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = dbConn.prepareStatement(SQL);
-            ps.setInt(1,orderId);
-            ps.setString(2,orderData.getFirstname());
-            ps.setString(3,orderData.getLastname());
-            ps.setString(4,orderData.getStatus());
-            ps.setDouble(5,orderData.getPrice());
-            ps.setTimestamp(7,timeNow);
-            ps.setTimestamp(6,orderData.getOrderDate());
-            ps.setString(8,orderData.getShop());
+            ps.setInt(1, orderId);
+            ps.setString(2, orderData.getFirstname());
+            ps.setString(3, orderData.getLastname());
+            ps.setString(4, orderData.getStatus());
+            ps.setDouble(5, orderData.getPrice());
+            ps.setTimestamp(7, timeNow);
+            ps.setTimestamp(6, orderData.getOrderDate());
+            ps.setString(8, orderData.getShop());
             ps.executeUpdate();
             //-----------------------------------------------------------------------
             //-------------------------update orders table
@@ -491,6 +542,7 @@ public class ServerControl extends AbstractServer {
 
     /**
      * DistinctiveDiscount - ends the discount, return origin price to catalog, update all filed as in origin
+     *
      * @param client - receives specific client connection
      */
     private void DistinctiveDiscount(ConnectionToClient client) {
@@ -499,18 +551,29 @@ public class ServerControl extends AbstractServer {
         String SQL = "Update catalog SET price = priceorigin";
         String SQL1 = "Update catalog SET discount = 0";
         String SQL2 = "Update catalog SET priceorigin = 0";
-        try { dbConn.createStatement().executeUpdate(SQL); dbConn.createStatement().executeUpdate(SQL1); dbConn.createStatement().executeUpdate(SQL2);}
-        catch (SQLException e) { System.out.println("Error Activating Discount : " + SQL + " " + e);
-            try { client.sendToClient("Activating failed"); }
-            catch (IOException e1) { System.out.println("sending data to client " + client + " error " + e1); }
+        try {
+            dbConn.createStatement().executeUpdate(SQL);
+            dbConn.createStatement().executeUpdate(SQL1);
+            dbConn.createStatement().executeUpdate(SQL2);
+        } catch (SQLException e) {
+            System.out.println("Error Activating Discount : " + SQL + " " + e);
+            try {
+                client.sendToClient("Activating failed");
+            } catch (IOException e1) {
+                System.out.println("sending data to client " + client + " error " + e1);
+            }
         }
         try {
-            message.setCommand("Discount Dis Activated"); client.sendToClient(message); }
-        catch (IOException e) { System.out.println("sending data to client " + client + " error " + e); }
+            message.setCommand("Discount Dis Activated");
+            client.sendToClient(message);
+        } catch (IOException e) {
+            System.out.println("sending data to client " + client + " error " + e);
+        }
     }
 
     /**
      * ifDiscount - checks if discount is available in catalog, or there is no discount.
+     *
      * @param client - receives specific client connection
      */
     private void ifDiscount(ConnectionToClient client) {
@@ -524,87 +587,124 @@ public class ServerControl extends AbstractServer {
             CachedRowSet cachedMsg = factory.createCachedRowSet();
             cachedMsg.populate(rs);
             rs.close();
-            try { while (cachedMsg.next()) { num = cachedMsg.getFloat("discount"); }}
-            catch (SQLException e) { System.out.println("Error read data from server " + e); }
+            try {
+                while (cachedMsg.next()) {
+                    num = cachedMsg.getFloat("discount");
+                }
+            } catch (SQLException e) {
+                System.out.println("Error read data from server " + e);
+            }
             message.setMsg(num);
             message.setCommand("");
             client.sendToClient(message);
-        }
-        catch (SQLException | IOException e) { System.out.println("SQL request from client " + client + " error " + e);
-            try { client.sendToClient("error in sql request or server"); }
-            catch (IOException e1) { System.out.println("sending data to client " + client + " error " + e1); }
+        } catch (SQLException | IOException e) {
+            System.out.println("SQL request from client " + client + " error " + e);
+            try {
+                client.sendToClient("error in sql request or server");
+            } catch (IOException e1) {
+                System.out.println("sending data to client " + client + " error " + e1);
+            }
         }
     }
 
     /**
      * activeDiscount - activating discount for catalog, change prices, save origin price and save the amount of discount
-     * @param msg -  receives message from client connection
+     *
+     * @param msg    -  receives message from client connection
      * @param client - receives specific client connection
      */
     private void activeDiscount(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         Message message = (Message) msg;
-        String SQL = "Update catalog SET discount = '"+ (float)message.getMsg()/100+"'";
+        String SQL = "Update catalog SET discount = '" + (float) message.getMsg() / 100 + "'";
         String SQL1 = "Update catalog SET priceorigin = price";
-        String SQL2 = "Update catalog SET price = '"+ (100 -(float)message.getMsg())/100 +"' * price ";
-        try { dbConn.createStatement().executeUpdate(SQL); dbConn.createStatement().executeUpdate(SQL1); dbConn.createStatement().executeUpdate(SQL2);}
-        catch (SQLException e) { System.out.println("Error Activating Discount : " + SQL + " " + e);
-            try { client.sendToClient("Activating failed"); }
-            catch (IOException e1) { System.out.println("sending data to client " + client + " error " + e1); }
+        String SQL2 = "Update catalog SET price = '" + (100 - (float) message.getMsg()) / 100 + "' * price ";
+        try {
+            dbConn.createStatement().executeUpdate(SQL);
+            dbConn.createStatement().executeUpdate(SQL1);
+            dbConn.createStatement().executeUpdate(SQL2);
+        } catch (SQLException e) {
+            System.out.println("Error Activating Discount : " + SQL + " " + e);
+            try {
+                client.sendToClient("Activating failed");
+            } catch (IOException e1) {
+                System.out.println("sending data to client " + client + " error " + e1);
+            }
         }
-        try { message.setCommand("Discount activated"); client.sendToClient(message); }
-        catch (IOException e) { System.out.println("sending data to client " + client + " error " + e); }
+        try {
+            message.setCommand("Discount activated");
+            client.sendToClient(message);
+        } catch (IOException e) {
+            System.out.println("sending data to client " + client + " error " + e);
+        }
     }
 
     /**
      * insertSurveyAnswers - insert survey answers for specific client into Data Base
-     * @param msg -  receives message from client connection
+     *
+     * @param msg    -  receives message from client connection
      * @param client - receives specific client connection
      */
     private void insertSurveyAnswers(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
-        Object data[] = (Object[])((Message) msg).getMsg();
+        Object data[] = (Object[]) ((Message) msg).getMsg();
         Message message = new Message();
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         int datanum[] = (int[]) data[0];
-        String SQL = "INSERT INTO surveyanswers (idsurvey,a1,a2,a3,a4,a5,a6,surveydate) VALUES ('"+ datanum[0] + "','" + datanum[1] + "','" + datanum[2] + "','" + datanum[3] + "','"
-                                                                                        + datanum[4] +"','" + datanum[5] + "','" + datanum[6] +"','"+ timestamp +"')";
-        try { dbConn.createStatement().executeUpdate(SQL); }
-        catch (SQLException e) { System.out.println("Error insert survey result to table : " + SQL + " " + e);
-            try { client.sendToClient("inserting failed"); }
-            catch (IOException e1) { System.out.println("sending data to client " + client + " error " + e1); }
+        String SQL = "INSERT INTO surveyanswers (idsurvey,a1,a2,a3,a4,a5,a6,surveydate) VALUES ('" + datanum[0] + "','" + datanum[1] + "','" + datanum[2] + "','" + datanum[3] + "','"
+                + datanum[4] + "','" + datanum[5] + "','" + datanum[6] + "','" + timestamp + "')";
+        try {
+            dbConn.createStatement().executeUpdate(SQL);
+        } catch (SQLException e) {
+            System.out.println("Error insert survey result to table : " + SQL + " " + e);
+            try {
+                client.sendToClient("inserting failed");
+            } catch (IOException e1) {
+                System.out.println("sending data to client " + client + " error " + e1);
+            }
         }
-        try { message.setCommand("Answer Inserted"); client.sendToClient(message); }
-        catch (IOException e) { System.out.println("sending data to client " + client + " error " + e); }
+        try {
+            message.setCommand("Answer Inserted");
+            client.sendToClient(message);
+        } catch (IOException e) {
+            System.out.println("sending data to client " + client + " error " + e);
+        }
     }
 
     /**
      * setSurveyQuestions - collect the survey question and return it asa CachedRowSet message to client
-     * @param msg -  receives message from client connection
+     *
+     * @param msg    -  receives message from client connection
      * @param client - receives specific client connection
      */
     private void setSurveyQuestions(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
-        Message message = (Message)msg, newMSG = new Message();
+        Message message = (Message) msg, newMSG = new Message();
         String SQL = "SELECT q1,q2,q3,q4,q5,q6 FROM surveyinfo WHERE surveyid = '" + message.getMsg() + "';";
         CachedRowSet cachedMsg;
         ResultSet rs;
         try {
             rs = dbConn.createStatement().executeQuery(SQL);
             RowSetFactory factory = RowSetProvider.newFactory();
-            cachedMsg = factory.createCachedRowSet(); cachedMsg.populate(rs);
+            cachedMsg = factory.createCachedRowSet();
+            cachedMsg.populate(rs);
             rs.close();
-            newMSG.setCommand(""); newMSG.setMsg(cachedMsg);
+            newMSG.setCommand("");
+            newMSG.setMsg(cachedMsg);
             client.sendToClient(newMSG);
-        }
-        catch (SQLException | IOException e) { System.out.println("SQL request from client " + client + " error " + e);
-            try { client.sendToClient("error in sql request or server"); }
-            catch (IOException e1) { System.out.println("sending data to client " + client + " error " + e1); }
+        } catch (SQLException | IOException e) {
+            System.out.println("SQL request from client " + client + " error " + e);
+            try {
+                client.sendToClient("error in sql request or server");
+            } catch (IOException e1) {
+                System.out.println("sending data to client " + client + " error " + e1);
+            }
         }
     }
 
     /**
      * getQuantityRows - calculate amount of rows in Data Base and return the value to client
+     *
      * @param client - receives specific client connection
      */
     private void getQuantityRows(ConnectionToClient client) {
@@ -617,28 +717,39 @@ public class ServerControl extends AbstractServer {
         try {
             rs = dbConn.createStatement().executeQuery(SQL);
             RowSetFactory factory = RowSetProvider.newFactory();
-            cachedMsg = factory.createCachedRowSet(); cachedMsg.populate(rs);
+            cachedMsg = factory.createCachedRowSet();
+            cachedMsg.populate(rs);
             rs.close();
-            try { while (cachedMsg.next()) { num = cachedMsg.getInt("count"); }}
-            catch (SQLException e) { System.out.println("Error read data from server " + e); }
-            newMSG.setCommand(""); newMSG.setMsg(num);
+            try {
+                while (cachedMsg.next()) {
+                    num = cachedMsg.getInt("count");
+                }
+            } catch (SQLException e) {
+                System.out.println("Error read data from server " + e);
+            }
+            newMSG.setCommand("");
+            newMSG.setMsg(num);
             client.sendToClient(newMSG);
-        }
-        catch (SQLException | IOException e) { System.out.println("SQL request from client " + client + " error " + e);
-            try { client.sendToClient("error in sql request or server"); }
-            catch (IOException e1) { System.out.println("sending data to client " + client + " error " + e1); }
+        } catch (SQLException | IOException e) {
+            System.out.println("SQL request from client " + client + " error " + e);
+            try {
+                client.sendToClient("error in sql request or server");
+            } catch (IOException e1) {
+                System.out.println("sending data to client " + client + " error " + e1);
+            }
         }
     }
 
     /**
      * getSurveyLink - client asks for specific survey , server send survey file as byte array.
-     * @param msg -  receives message from client connection
+     *
+     * @param msg    -  receives message from client connection
      * @param client - receives specific client connection
      */
     private void getSurveyLink(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         Message message = (Message) msg;
-        int[] surveyData = {((int[]) message.getMsg())[0], ((int[])message.getMsg())[1]};
+        int[] surveyData = {((int[]) message.getMsg())[0], ((int[]) message.getMsg())[1]};
         Message newMessage = (Message) msg;
         String SQL = "SELECT link FROM surveyresults WHERE surveyid = '" + surveyData[1] + "';";
         CachedRowSet cachedMsg;
@@ -646,24 +757,35 @@ public class ServerControl extends AbstractServer {
         try {
             rs = dbConn.createStatement().executeQuery(SQL);
             RowSetFactory factory = RowSetProvider.newFactory();
-            cachedMsg = factory.createCachedRowSet(); cachedMsg.populate(rs);
+            cachedMsg = factory.createCachedRowSet();
+            cachedMsg.populate(rs);
             rs.close();
             String survey = null;
-            try { while (cachedMsg.next()) { survey = cachedMsg.getString("link"); }}
-            catch (SQLException e) { System.out.println("Error read data from server " + e); }
-            SQL = "src\\pictures\\" + survey;
-            byte[] pdf = Files.readAllBytes(Path.of(SQL));
-            newMessage.setCommand(""); newMessage.setMsg(pdf);
+            try {
+                while (cachedMsg.next()) {
+                    survey = cachedMsg.getString("link");
+                }
+            } catch (SQLException e) {
+                System.out.println("Error read data from server " + e);
+            }
+            byte[] pdf = Files.readAllBytes(Path.of(survey));
+            newMessage.setCommand("");
+            newMessage.setMsg(pdf);
             client.sendToClient(newMessage);
+        } catch (SQLException | IOException e) {
+            System.out.println("SQL request from client " + client + " error " + e);
+            try {
+                client.sendToClient("error in sql request or server");
+            } catch (IOException e1) {
+                System.out.println("sending data to client " + client + " error " + e1);
+            }
         }
-        catch (SQLException | IOException e) { System.out.println("SQL request from client " + client + " error " + e);
-            try { client.sendToClient("error in sql request or server"); }
-            catch (IOException e1) { System.out.println("sending data to client " + client + " error " + e1); } }
     }
 
     /**
      * surveyResults - this function made to collect data from server for Customer Services GUI TableView
-     * @param msg - receives message from client connection
+     *
+     * @param msg    - receives message from client connection
      * @param client - receives specific client connection
      */
     private void surveyResults(Object msg, ConnectionToClient client) {
@@ -676,20 +798,26 @@ public class ServerControl extends AbstractServer {
         try {
             rs = dbConn.createStatement().executeQuery(SQL);
             RowSetFactory factory = RowSetProvider.newFactory();
-            cachedMsg = factory.createCachedRowSet(); cachedMsg.populate(rs);
+            cachedMsg = factory.createCachedRowSet();
+            cachedMsg.populate(rs);
             rs.close();
-            newMSG.setCommand(""); newMSG.setMsg(cachedMsg);
+            newMSG.setCommand("");
+            newMSG.setMsg(cachedMsg);
             client.sendToClient(newMSG);
-        }
-        catch (SQLException | IOException e) { System.out.println("SQL request from client " + client + " error " + e);
-            try { client.sendToClient("error in sql request or server"); }
-            catch (IOException e1) { System.out.println("sending data to client " + client + " error " + e1); }
+        } catch (SQLException | IOException e) {
+            System.out.println("SQL request from client " + client + " error " + e);
+            try {
+                client.sendToClient("error in sql request or server");
+            } catch (IOException e1) {
+                System.out.println("sending data to client " + client + " error " + e1);
+            }
         }
     }
 
     /**
      * deliveryOrders - this function made to collect data from server for DeliveryGuy GUI TableView
-     * @param msg - receives message from client connection
+     *
+     * @param msg    - receives message from client connection
      * @param client - receives specific client connection
      */
     private void deliveryOrders(Object msg, ConnectionToClient client) {
@@ -702,20 +830,26 @@ public class ServerControl extends AbstractServer {
         try {
             rs = dbConn.createStatement().executeQuery(SQL2);
             RowSetFactory factory = RowSetProvider.newFactory();
-            cachedMsg = factory.createCachedRowSet(); cachedMsg.populate(rs);
+            cachedMsg = factory.createCachedRowSet();
+            cachedMsg.populate(rs);
             rs.close();
-            newMSG.setCommand(""); newMSG.setMsg(cachedMsg);
+            newMSG.setCommand("");
+            newMSG.setMsg(cachedMsg);
             client.sendToClient(newMSG);
-        }
-        catch (SQLException | IOException e) { System.out.println("SQL request from client " + client + " error " + e);
-            try { client.sendToClient("error in sql request or server"); }
-            catch (IOException e1) { System.out.println("sending data to client " + client + " error " + e1);}
+        } catch (SQLException | IOException e) {
+            System.out.println("SQL request from client " + client + " error " + e);
+            try {
+                client.sendToClient("error in sql request or server");
+            } catch (IOException e1) {
+                System.out.println("sending data to client " + client + " error " + e1);
+            }
         }
     }
 
     /**
      * confirmDelivery - server receives message from client about confirming specific deliver order
-     * @param msg - receives message from client connection
+     *
+     * @param msg    - receives message from client connection
      * @param client - receives specific client connection
      */
     private void confirmDelivery(Object msg, ConnectionToClient client) {
@@ -724,60 +858,90 @@ public class ServerControl extends AbstractServer {
         Message message = (Message) msg;
         ResultSet rs;
         RowSetFactory factory;
-        int[] orderData = {((int[]) message.getMsg())[0], ((int[])message.getMsg())[1]};
+        int[] orderData = {((int[]) message.getMsg())[0], ((int[]) message.getMsg())[1]};
         int customerID = 0;
         float price = 0;
         String SQL = "Update delivery SET confirmed = 'yes' WHERE deliveryGuyId = '" + orderData[0] + "' AND orderNumber = '" + orderData[1] + "'";
         String SQL1 = "Update orders SET status = 'delivered' WHERE orderNumber = '" + orderData[1] + "' AND status = 'pending for delivery' ";
-        String SQL2 ="SELECT confirmDate FROM orders WHERE orderNumber ='"+orderData[1]+"'";
-        Timestamp time = null,TimeNow;
-        try { dbConn.createStatement().executeUpdate(SQL); dbConn.createStatement().executeUpdate(SQL1);
+        String SQL2 = "SELECT confirmDate FROM orders WHERE orderNumber ='" + orderData[1] + "'";
+        Timestamp time = null, TimeNow;
+        try {
+            dbConn.createStatement().executeUpdate(SQL);
+            dbConn.createStatement().executeUpdate(SQL1);
             rs = dbConn.createStatement().executeQuery(SQL2);
-            factory= RowSetProvider.newFactory();
-            cachedMsg = factory.createCachedRowSet(); cachedMsg.populate(rs);
+            factory = RowSetProvider.newFactory();
+            cachedMsg = factory.createCachedRowSet();
+            cachedMsg.populate(rs);
             rs.close();
-            try { while (cachedMsg.next()) { time = cachedMsg.getTimestamp("confirmDate"); }}
-            catch (SQLException e) { System.out.println("Error read data from server " + e); }
+            try {
+                while (cachedMsg.next()) {
+                    time = cachedMsg.getTimestamp("confirmDate");
+                }
+            } catch (SQLException e) {
+                System.out.println("Error read data from server " + e);
+            }
             TimeNow = new Timestamp(System.currentTimeMillis());
             long diff = TimeNow.getTime() - time.getTime();
-            if ((diff/1000)/3600 > 3){
+            if ((diff / 1000) / 3600 > 3) {
                 message.setCommand("yes");
-                try{
-                    SQL2 ="SELECT price FROM orders WHERE orderNumber ='"+orderData[1]+"'";
+                try {
+                    SQL2 = "SELECT price FROM orders WHERE orderNumber ='" + orderData[1] + "'";
                     rs = dbConn.createStatement().executeQuery(SQL2);
                     factory = RowSetProvider.newFactory();
-                    cachedMsg = factory.createCachedRowSet(); cachedMsg.populate(rs);
+                    cachedMsg = factory.createCachedRowSet();
+                    cachedMsg.populate(rs);
                     rs.close();
                     try {
-                        while (cachedMsg.next()) { price = cachedMsg.getFloat("price");}
-                        updateBalance(orderData[1],price);}
-                    catch (SQLException e) { System.out.println("Error read data from server " + e); }
-                } catch (Exception e) { System.out.println("Error read data from server " + e); }
+                        while (cachedMsg.next()) {
+                            price = cachedMsg.getFloat("price");
+                        }
+                        updateBalance(orderData[1], price);
+                    } catch (SQLException e) {
+                        System.out.println("Error read data from server " + e);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error read data from server " + e);
+                }
+            } else message.setCommand("no");
+        } catch (SQLException e) {
+            System.out.println("Error update delivery table : " + SQL + " " + e);
+            try {
+                client.sendToClient("confirm failed");
+            } catch (IOException e1) {
+                System.out.println("sending data to client " + client + " error " + e1);
             }
-            else message.setCommand("no");
-        }
-        catch (SQLException e) { System.out.println("Error update delivery table : " + SQL + " " + e);
-            try { client.sendToClient("confirm failed"); }
-            catch (IOException e1) { System.out.println("sending data to client " + client + " error " + e1); }
         }
         try {
-            SQL1 = "SELECT userid FROM userorders uo WHERE uo.orderid = "+orderData[1]+";";
-            try { rs = dbConn.createStatement().executeQuery(SQL1); rs.first(); customerID = (rs.getInt("userid"));
-            }catch(SQLException e){ System.out.println("sql ERROR :"+e); }
-            SQL1 = "SELECT * FROM users WHERE userid = "+customerID+";";
+            SQL1 = "SELECT userid FROM userorders uo WHERE uo.orderid = " + orderData[1] + ";";
+            try {
+                rs = dbConn.createStatement().executeQuery(SQL1);
+                rs.first();
+                customerID = (rs.getInt("userid"));
+            } catch (SQLException e) {
+                System.out.println("sql ERROR :" + e);
+            }
+            SQL1 = "SELECT * FROM users WHERE userid = " + customerID + ";";
             try {
                 rs = dbConn.createStatement().executeQuery(SQL1);
                 factory = RowSetProvider.newFactory();
-                cachedMsg = factory.createCachedRowSet(); cachedMsg.populate(rs);
+                cachedMsg = factory.createCachedRowSet();
+                cachedMsg.populate(rs);
                 rs.close();
-                message.setCommand(""); message.setMsg(cachedMsg);
-            }catch(SQLException e){ System.out.println("sql ERROR :"+e); } client.sendToClient(message); }
-        catch (IOException e) { System.out.println("sending data to client " + client + " error " + e); }
+                message.setCommand("");
+                message.setMsg(cachedMsg);
+            } catch (SQLException e) {
+                System.out.println("sql ERROR :" + e);
+            }
+            client.sendToClient(message);
+        } catch (IOException e) {
+            System.out.println("sending data to client " + client + " error " + e);
+        }
     }
 
     /**
      * insertComplaint - inserting complaint to DataBase from Customer service
-     * @param msg - receives message from client connection
+     *
+     * @param msg    - receives message from client connection
      * @param client - receives specific client connection
      */
     private void insertComplaint(Object msg, ConnectionToClient client) {
@@ -785,22 +949,32 @@ public class ServerControl extends AbstractServer {
         Message message = (Message) msg;
         Long datetime = System.currentTimeMillis();
         Timestamp timestamp = new Timestamp(datetime);
-        String[] orderData = {((String[]) message.getMsg())[0],((String[])message.getMsg())[1],((String[])message.getMsg())[2]};
-        String SQL = "INSERT INTO complaints (complaintText,csid,shop,date) VALUES ('" + orderData[1] + "','" + orderData[0] + "','"+ orderData[2]+"','"+timestamp+"')";
-        try { dbConn.createStatement().executeUpdate(SQL); }
-        catch (SQLException e) { System.out.println("Error insert complaint table : " + SQL + " " + e);
-            try { client.sendToClient("inserting failed"); }
-            catch (IOException e1) { System.out.println("sending data to client " + client + " error " + e1); }
+        String[] orderData = {((String[]) message.getMsg())[0], ((String[]) message.getMsg())[1], ((String[]) message.getMsg())[2]};
+        String SQL = "INSERT INTO complaints (complaintText,csid,shop,date) VALUES ('" + orderData[1] + "','" + orderData[0] + "','" + orderData[2] + "','" + timestamp + "')";
+        try {
+            dbConn.createStatement().executeUpdate(SQL);
+        } catch (SQLException e) {
+            System.out.println("Error insert complaint table : " + SQL + " " + e);
+            try {
+                client.sendToClient("inserting failed");
+            } catch (IOException e1) {
+                System.out.println("sending data to client " + client + " error " + e1);
+            }
         }
-        try { message.setCommand("Complaint Inserted"); client.sendToClient( message); }
-        catch (IOException e) { System.out.println("sending data to client " + client + " error " + e); }
+        try {
+            message.setCommand("Complaint Inserted");
+            client.sendToClient(message);
+        } catch (IOException e) {
+            System.out.println("sending data to client " + client + " error " + e);
+        }
     }
 
- /////////////////////////////// End Of Habib Ibrahim
+    /////////////////////////////// End Of Habib Ibrahim
 
     /**
-     *Method(viewOverallIncome) that extract overall income from DB depends on the requested quarter and shop
-     * @param msg -  receives message from client connection
+     * Method(viewOverallIncome) that extract overall income from DB depends on the requested quarter and shop
+     *
+     * @param msg     -  receives message from client connection
      * @param client- receives specific client connection
      */
     private void viewOverallIncome(Object msg, ConnectionToClient client) {
@@ -809,7 +983,7 @@ public class ServerControl extends AbstractServer {
         Message message = (Message) msg;
         Quarter quarter = (Quarter) message.getMsg();
         Quarter qr = new Quarter();
-        double m1=0,m2=0,m3=0;
+        double m1 = 0, m2 = 0, m3 = 0;
         //switch case for each quarter that is requested by the user
         //set it up on quarter that contains months and values and send to client
         switch (quarter.getQuarter()) {
@@ -824,27 +998,27 @@ public class ServerControl extends AbstractServer {
                     rs.beforeFirst();
                     while (rs.next()) {
                         if (rs.getInt("date") == 1) {
-                            m1=m1+rs.getDouble("price");
+                            m1 = m1 + rs.getDouble("price");
                         } else {
                             if (rs.getInt("date") == 2) {
-                                m2=m2+rs.getDouble("price");
+                                m2 = m2 + rs.getDouble("price");
                             } else {
                                 if (rs.getInt("date") == 3)
-                                    m3=m3+rs.getDouble("price");
+                                    m3 = m3 + rs.getDouble("price");
                             }
                         }
                     }
 
-                }catch(SQLException e){
+                } catch (SQLException e) {
                 }
                 qr.setResult1(m1);
                 qr.setResult2(m2);
                 qr.setResult3(m3);
-                try{
+                try {
                     m.setCommand("income");
                     m.setMsg(qr);
                     client.sendToClient(m);
-                }catch(IOException e){
+                } catch (IOException e) {
 
                 }
 
@@ -859,27 +1033,27 @@ public class ServerControl extends AbstractServer {
                     rs.beforeFirst();
                     while (rs.next()) {
                         if (rs.getInt("date") == 4) {
-                            m1=m1+rs.getDouble("price");
+                            m1 = m1 + rs.getDouble("price");
                         } else {
                             if (rs.getInt("date") == 5) {
-                                m2=m2+rs.getDouble("price");
+                                m2 = m2 + rs.getDouble("price");
                             } else {
                                 if (rs.getInt("date") == 6)
-                                    m3=m3+rs.getDouble("price");
+                                    m3 = m3 + rs.getDouble("price");
                             }
                         }
                     }
 
-                }catch(SQLException e){
+                } catch (SQLException e) {
                 }
                 qr.setResult1(m1);
                 qr.setResult2(m2);
                 qr.setResult3(m3);
-                try{
+                try {
                     m.setCommand("income");
                     m.setMsg(qr);
                     client.sendToClient(m);
-                }catch(IOException e){
+                } catch (IOException e) {
 
                 }
 
@@ -894,27 +1068,27 @@ public class ServerControl extends AbstractServer {
                     rs.beforeFirst();
                     while (rs.next()) {
                         if (rs.getInt("date") == 7) {
-                            m1=m1+rs.getDouble("price");
+                            m1 = m1 + rs.getDouble("price");
                         } else {
                             if (rs.getInt("date") == 8) {
-                                m2=m2+rs.getDouble("price");
+                                m2 = m2 + rs.getDouble("price");
                             } else {
                                 if (rs.getInt("date") == 9)
-                                    m3=m3+rs.getDouble("price");
+                                    m3 = m3 + rs.getDouble("price");
                             }
                         }
                     }
 
-                }catch(SQLException e){
+                } catch (SQLException e) {
                 }
                 qr.setResult1(m1);
                 qr.setResult2(m2);
                 qr.setResult3(m3);
-                try{
+                try {
                     m.setCommand("income");
                     m.setMsg(qr);
                     client.sendToClient(m);
-                }catch(IOException e){
+                } catch (IOException e) {
 
                 }
 
@@ -929,34 +1103,35 @@ public class ServerControl extends AbstractServer {
                     rs.beforeFirst();
                     while (rs.next()) {
                         if (rs.getInt("date") == 10) {
-                            m1=m1+rs.getDouble("price");
+                            m1 = m1 + rs.getDouble("price");
                         } else {
                             if (rs.getInt("date") == 11) {
-                                m2=m2+rs.getDouble("price");
+                                m2 = m2 + rs.getDouble("price");
                             } else {
                                 if (rs.getInt("date") == 12)
-                                    m3=m3+rs.getDouble("price");
+                                    m3 = m3 + rs.getDouble("price");
                             }
                         }
                     }
-                }catch(SQLException e){
+                } catch (SQLException e) {
                 }
                 qr.setResult1(m1);
                 qr.setResult2(m2);
                 qr.setResult3(m3);
-                try{
+                try {
                     m.setCommand("income");
                     m.setMsg(qr);
                     client.sendToClient(m);
-                }catch(IOException e){
+                } catch (IOException e) {
                 }
                 break;
         }
     }
 
     /**
-     *Method(viewComplaint) that extract number of complaints  from DB depends on the requested quarter and shop
-     * @param msg -  receives message from client connection
+     * Method(viewComplaint) that extract number of complaints  from DB depends on the requested quarter and shop
+     *
+     * @param msg     -  receives message from client connection
      * @param client- receives specific client connection
      */
     private void viewComplaint(Object msg, ConnectionToClient client) {
@@ -965,10 +1140,10 @@ public class ServerControl extends AbstractServer {
         Message message = (Message) msg;
         Quarter quarter = (Quarter) message.getMsg();
         Quarter qr = new Quarter();
-        double m1=0,m2=0,m3=0;
+        double m1 = 0, m2 = 0, m3 = 0;
 
-/*switch case for each quarter + setup all months and number of complaints and send to client*/
-    switch (quarter.getQuarter()) {
+        /*switch case for each quarter + setup all months and number of complaints and send to client*/
+        switch (quarter.getQuarter()) {
             case 1:
                 qr.setMonth1("Jan");
                 qr.setMonth2("Feb");
@@ -976,7 +1151,7 @@ public class ServerControl extends AbstractServer {
                 try {
                     String SQL1 = "SELECT MONTH(date) as date FROM complaints WHERE shop = '" + quarter.getShop() + "' AND date between '" + quarter.getYear() + "/01/01' and '" + quarter.getYear() + "/03/31' AND complaintDone = 'done';";
                     ResultSet rs = dbConn.createStatement().executeQuery(SQL1);
-                        rs.beforeFirst();
+                    rs.beforeFirst();
                     while (rs.next()) {
                         if (rs.getInt("date") == 1) {
                             m1++;
@@ -990,16 +1165,16 @@ public class ServerControl extends AbstractServer {
                         }
                     }
 
-                }catch(SQLException e){
+                } catch (SQLException e) {
                 }
                 qr.setResult1(m1);
                 qr.setResult2(m2);
                 qr.setResult3(m3);
-                try{
+                try {
                     m.setCommand("quarter1");
                     m.setMsg(qr);
                     client.sendToClient(m);
-                }catch(IOException e){
+                } catch (IOException e) {
 
                 }
 
@@ -1025,16 +1200,16 @@ public class ServerControl extends AbstractServer {
                         }
                     }
 
-                }catch(SQLException e){
+                } catch (SQLException e) {
                 }
                 qr.setResult1(m1);
                 qr.setResult2(m2);
                 qr.setResult3(m3);
-                try{
+                try {
                     m.setCommand("quarter1");
                     m.setMsg(qr);
                     client.sendToClient(m);
-                }catch(IOException e){
+                } catch (IOException e) {
 
                 }
 
@@ -1060,16 +1235,16 @@ public class ServerControl extends AbstractServer {
                         }
                     }
 
-                }catch(SQLException e){
+                } catch (SQLException e) {
                 }
                 qr.setResult1(m1);
                 qr.setResult2(m2);
                 qr.setResult3(m3);
-                try{
+                try {
                     m.setCommand("quarter1");
                     m.setMsg(qr);
                     client.sendToClient(m);
-                }catch(IOException e){
+                } catch (IOException e) {
 
                 }
 
@@ -1094,16 +1269,16 @@ public class ServerControl extends AbstractServer {
                             }
                         }
                     }
-                }catch(SQLException e){
+                } catch (SQLException e) {
                 }
                 qr.setResult1(m1);
                 qr.setResult2(m2);
                 qr.setResult3(m3);
-                try{
+                try {
                     m.setCommand("quarter1");
                     m.setMsg(qr);
                     client.sendToClient(m);
-                }catch(IOException e){
+                } catch (IOException e) {
                 }
                 break;
         }
@@ -1111,22 +1286,22 @@ public class ServerControl extends AbstractServer {
 
     /**
      * Method(viewSpecificReports) that extract report details from DB depends on the requested type , shop and dates .
-     * @param msg -  receives message from client connection
-     * @param client- receives specific client connection
      *
+     * @param msg     -  receives message from client connection
+     * @param client- receives specific client connection
      */
     private void viewSpecificReports(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         Message m = new Message();
         Message message = (Message) msg;
-        WantedReport wr ;
-        wr = (WantedReport)message.getMsg();
+        WantedReport wr;
+        wr = (WantedReport) message.getMsg();
         CachedRowSet cachedMsg = null;
         /*switch case for each type of reports that extracts and sends the details of them to the client */
-                switch (wr.getReportType()) {
+        switch (wr.getReportType()) {
             case "Orders report":
                 try {
-                    String SQL = "SELECT orderNumber,price,dOrder,deliveryDate,orderDate,status,confirmed FROM orders o WHERE o.shop= " + '"' + wr.getShopName() + '"' +"AND orderDate between '"+wr.getFrom()+"' and '"+wr.getTo()+"';";
+                    String SQL = "SELECT orderNumber,price,dOrder,deliveryDate,orderDate,status,confirmed FROM orders o WHERE o.shop= " + '"' + wr.getShopName() + '"' + "AND orderDate between '" + wr.getFrom() + "' and '" + wr.getTo() + "';";
                     ResultSet rs = dbConn.createStatement().executeQuery(SQL);
                     RowSetFactory factory = RowSetProvider.newFactory();
                     cachedMsg = factory.createCachedRowSet();
@@ -1136,13 +1311,13 @@ public class ServerControl extends AbstractServer {
                     m.setCommand("orders report");
                     m.setMsg(cachedMsg);
                     client.sendToClient(m);
-                }catch(SQLException | IOException e){
-                    System.out.println("Erorr "+e);
+                } catch (SQLException | IOException e) {
+                    System.out.println("Erorr " + e);
                 }
                 break;
             case "Income report":
-                String SQL1 = "SELECT orderNumber,price FROM orders o WHERE o.shop= " + '"' + wr.getShopName() + '"' +"AND orderDate between '"+wr.getFrom()+"' and '"+wr.getTo()+"'"+
-                        "And o.confirmed = 'yes' and o.status != 'cancelled'"+";";
+                String SQL1 = "SELECT orderNumber,price FROM orders o WHERE o.shop= " + '"' + wr.getShopName() + '"' + "AND orderDate between '" + wr.getFrom() + "' and '" + wr.getTo() + "'" +
+                        "And o.confirmed = 'yes' and o.status != 'cancelled'" + ";";
                 try {
                     ResultSet rs = dbConn.createStatement().executeQuery(SQL1);
                     RowSetFactory factory = RowSetProvider.newFactory();
@@ -1153,43 +1328,42 @@ public class ServerControl extends AbstractServer {
                     m.setCommand("income report");
                     m.setMsg(cachedMsg);
                     client.sendToClient(m);
-                }catch(SQLException | IOException e){
-                    System.out.println("Erorr "+e);
+                } catch (SQLException | IOException e) {
+                    System.out.println("Erorr " + e);
                 }
                 break;
         }
 
 
-
     }
 
     /**
-     *Method(viewReports) that extracts the relevant shops to show for users depends on the id and on his type
+     * Method(viewReports) that extracts the relevant shops to show for users depends on the id and on his type
      * if shop manager only his shop , if ceo shows all shops
-     * @param msg -  receives message from client connection// not used in this method potential name change
-     * @param client- receives specific client connection
      *
+     * @param msg     -  receives message from client connection// not used in this method potential name change
+     * @param client- receives specific client connection
      */
     private void viewReports(Object msg, ConnectionToClient client) {
 
         Connection dbConn = SqlConnector.getConnection();
         Message m = new Message();
-        String SQL = "SELECT usertype FROM login s WHERE s.userid="+userid+";";
+        String SQL = "SELECT usertype FROM login s WHERE s.userid=" + userid + ";";
         String userType = "";
         CachedRowSet cachedMsg = null;
         /*find the user type depends on the userid that we got from handel message from client method */
-        try{
+        try {
             ResultSet rs = dbConn.createStatement().executeQuery(SQL);
             rs.first();
             userType = rs.getString("usertype");
 
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println("sql error" + e);
         }
         /*lookup and extact relevant information about shops fromm DB*/
-        if(userType.equals("ceo")){
-            String SQL1 ="SELECT shop FROM shopmanager;";
-            try{
+        if (userType.equals("ceo")) {
+            String SQL1 = "SELECT shop FROM shopmanager;";
+            try {
                 ResultSet rs = dbConn.createStatement().executeQuery(SQL1);
                 RowSetFactory factory = RowSetProvider.newFactory();
                 cachedMsg = factory.createCachedRowSet();
@@ -1199,14 +1373,13 @@ public class ServerControl extends AbstractServer {
                 m.setMsg(cachedMsg);
                 client.sendToClient(m);
 
-            }catch(SQLException | IOException e){
+            } catch (SQLException | IOException e) {
                 System.out.println("sql error" + e);
             }
 
-        }
-        else{
-            String SQL2 ="SELECT shop FROM shopmanager s WHERE s.userid="+userid+";";
-            try{
+        } else {
+            String SQL2 = "SELECT shop FROM shopmanager s WHERE s.userid=" + userid + ";";
+            try {
                 ResultSet rs = dbConn.createStatement().executeQuery(SQL2);
                 RowSetFactory factory = RowSetProvider.newFactory();
                 cachedMsg = factory.createCachedRowSet();
@@ -1217,15 +1390,15 @@ public class ServerControl extends AbstractServer {
                 client.sendToClient(m);
 
 
-            }catch(SQLException | IOException e){
+            } catch (SQLException | IOException e) {
                 System.out.println("sql error" + e);
             }
         }
     }
 
-    private void getAllTheShops(Object msg, ConnectionToClient client){
+    private void getAllTheShops(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
-        String SQL ="SELECT shop FROM shopmanager;";
+        String SQL = "SELECT shop FROM shopmanager;";
         ResultSet rs = null;
         CachedRowSet cachedMsg;
         Message m = new Message();
@@ -1333,7 +1506,7 @@ public class ServerControl extends AbstractServer {
             connectedClientdIdList.add(userid); //add new user id to the list
         try {
             //ConnectedClient newclient = new ConnectedClient(userid,client);
- //           idAndConnectionList.add(newclient);
+            //           idAndConnectionList.add(newclient);
             userLoginData.setCommand("logged in");
             userLoginData.setMsg(cachedMsg);
             client.sendToClient(userLoginData); //send login data to client
@@ -1345,28 +1518,28 @@ public class ServerControl extends AbstractServer {
 
     /**
      * Method(reviewCancellation) to extract the cancellation requests from the DB depends on the manager shop
-     * @param msg -  receives message from client connection
-     * @param client- receives specific client connection
      *
+     * @param msg     -  receives message from client connection
+     * @param client- receives specific client connection
      */
 
     private void reviewCancellation(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         CancellationRequest cnlRequest = new CancellationRequest();
-        String shop="";
+        String shop = "";
         Message m = new Message();
         String cancelled = "cancelled";
-        String SQL1 = "SELECT shop FROM shopmanager s WHERE s.userid="+userid+";";//returns the shop of the manager
+        String SQL1 = "SELECT shop FROM shopmanager s WHERE s.userid=" + userid + ";";//returns the shop of the manager
 
         CachedRowSet cachedMsg = null;
         try {
             ResultSet rs = dbConn.createStatement().executeQuery(SQL1);
             rs.first();
             shop = (rs.getString("shop"));
-        }catch(SQLException e){
-            System.out.println("sql ERROR :"+e);
+        } catch (SQLException e) {
+            System.out.println("sql ERROR :" + e);
         }
-        String SQL = "SELECT * FROM cancellationrequests c WHERE c.status != "+'"' + cancelled + '"'+ "AND c.shop= "+'"' + shop + '"'+";";
+        String SQL = "SELECT * FROM cancellationrequests c WHERE c.status != " + '"' + cancelled + '"' + "AND c.shop= " + '"' + shop + '"' + ";";
         try {
             ResultSet rs = dbConn.createStatement().executeQuery(SQL);
             RowSetFactory factory = RowSetProvider.newFactory();
@@ -1391,24 +1564,24 @@ public class ServerControl extends AbstractServer {
     }
 
     /**
-     *Method(confirmCancellation) updates the status of the order in relevant tables in DB to cancelled
-     * @param msg -  receives message from client connection that contains order id
-     * @param client- receives specific client connection
+     * Method(confirmCancellation) updates the status of the order in relevant tables in DB to cancelled
      *
+     * @param msg     -  receives message from client connection that contains order id
+     * @param client- receives specific client connection
      */
     private void confirmCancellation(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
 
-        Message msgToClient=new Message();
-        Message m=(Message) msg;
-        int key=(int)m.getMsg();
-        String SQL = "UPDATE cancellationrequests SET status = 'cancelled' WHERE (`orderID` = "+key +");";//update cancellationrequests table
-        String SQL1 = "UPDATE orders SET status = 'cancelled' WHERE (`orderNumber` = "+key +");";//updates orders table
+        Message msgToClient = new Message();
+        Message m = (Message) msg;
+        int key = (int) m.getMsg();
+        String SQL = "UPDATE cancellationrequests SET status = 'cancelled' WHERE (`orderID` = " + key + ");";//update cancellationrequests table
+        String SQL1 = "UPDATE orders SET status = 'cancelled' WHERE (`orderNumber` = " + key + ");";//updates orders table
         try {
             //ResultSet rs =
             dbConn.createStatement().executeUpdate(SQL);
             dbConn.createStatement().executeUpdate(SQL1);
-            calculateRefund(key,client);
+            calculateRefund(key, client);
         } catch (SQLException | IOException e) {
             System.out.println("SQL request from client " + client + " error " + e);
             try {
@@ -1422,19 +1595,18 @@ public class ServerControl extends AbstractServer {
 
     /**
      * @param orderID - order id that we want to calculate the refund for after cancellation
-     * @param client - receives specific client connection
+     * @param client  - receives specific client connection
      * @throws IOException
-     * @throws SQLException
-     * Method(calculateRefund) calculates the time difference between delivery date and cancellation request date
-     * depends on that calculates the relevant refund for customer .
+     * @throws SQLException Method(calculateRefund) calculates the time difference between delivery date and cancellation request date
+     *                      depends on that calculates the relevant refund for customer .
      */
-    private void calculateRefund(int orderID,ConnectionToClient client) throws IOException, SQLException {
+    private void calculateRefund(int orderID, ConnectionToClient client) throws IOException, SQLException {
         double timeDiff = 0.0;
-        double price =0.0;
-        Message msgToClient=new Message();
+        double price = 0.0;
+        Message msgToClient = new Message();
         Connection dbConn = SqlConnector.getConnection();
 
-        String SQL = "SELECT TIMESTAMPDIFF(SECOND,deliveryDate, requestDate) diff,price FROM cancellationrequests c WHERE c.orderID="+orderID+";";
+        String SQL = "SELECT TIMESTAMPDIFF(SECOND,requestDate, deliveryDate) diff,price FROM cancellationrequests c WHERE c.orderID=" + orderID + ";";
         try {
             ResultSet rs = dbConn.createStatement().executeQuery(SQL);
             rs.first();
@@ -1442,92 +1614,93 @@ public class ServerControl extends AbstractServer {
             rs.findColumn("price");
             price = rs.getDouble("price");
 
-        }catch(SQLException e){
-            System.out.println("sql ERROR :"+e);
+        } catch (SQLException e) {
+            System.out.println("sql ERROR :" + e);
         }
         //if the time difference is more than 3 hours
-        if(timeDiff>=10800) {
+        if (timeDiff >= 10800) {
             msgToClient.setCommand("refund");
             msgToClient.setMsg(price);
             client.sendToClient(msgToClient);
-        //if the time difference is less than 1 hour
-        }else if((0<=timeDiff)&&(timeDiff<=3600)){
+            //if the time difference is less than 1 hour
+        } else if ((0 <= timeDiff) && (timeDiff <= 3600)) {
             msgToClient.setCommand("refund");
             msgToClient.setMsg(0.0);
             client.sendToClient(msgToClient);
-        //if the time difference is between 1 and 3 hours
-        }else {
-            if(timeDiff<0){
+            //if the time difference is between 1 and 3 hours
+        } else {
+            if (timeDiff < 0) {
                 msgToClient.setCommand("refund");
                 msgToClient.setMsg(0.0);
                 client.sendToClient(msgToClient);
             }
             msgToClient.setCommand("refund");
-            msgToClient.setMsg(price/2);
+            msgToClient.setMsg(price / 2);
             client.sendToClient(msgToClient);
         }
         //call Method updateBalance to update the balance
-        updateBalance( orderID,(double)msgToClient.getMsg());
+        updateBalance(orderID, (double) msgToClient.getMsg());
     }
 
     /**
-     *Method(updateBalance) lookup the relevant user that cancelled the order and update his balance depends on
-     *the refund .
+     * Method(updateBalance) lookup the relevant user that cancelled the order and update his balance depends on
+     * the refund .
+     *
      * @param orderID - order id that we cancelled
-     * @param refund - the total amount of refund
-     * .
+     * @param refund  - the total amount of refund
+     *                .
      */
-    private void updateBalance  (int orderID,double refund){
-        int customerIDForRefund=0;
+    private void updateBalance(int orderID, double refund) {
+        int customerIDForRefund = 0;
         double balance = 0;
         Connection dbConn = SqlConnector.getConnection();
-        String SQL1 = "SELECT userid FROM userorders uo WHERE uo.orderid = "+orderID+";";//return userid of user to be refunded
+        String SQL1 = "SELECT userid FROM userorders uo WHERE uo.orderid = " + orderID + ";";//return userid of user to be refunded
         try {
             ResultSet rs = dbConn.createStatement().executeQuery(SQL1);
             rs.first();
             customerIDForRefund = (rs.getInt("userid"));//get customer id that we wish to refund
-        }catch(SQLException e){
-            System.out.println("sql ERROR :"+e);
+        } catch (SQLException e) {
+            System.out.println("sql ERROR :" + e);
         }
-        String SQL2 = "SELECT balance FROM balance b WHERE b.userid = "+customerIDForRefund+";";
+        String SQL2 = "SELECT balance FROM balance b WHERE b.userid = " + customerIDForRefund + ";";
         try {
             ResultSet rs = dbConn.createStatement().executeQuery(SQL2);
             rs.first();
             balance = (rs.getDouble("balance"));//get the balance before updating
-        }catch(SQLException e){
-            System.out.println("sql ERROR :"+e);
+        } catch (SQLException e) {
+            System.out.println("sql ERROR :" + e);
         }
-        balance = balance+refund;
-        String SQL3 = "UPDATE balance SET `balance` = "+balance+" WHERE (`userid` ="+customerIDForRefund+");";//update the balance in DB
+        balance = balance + refund;
+        String SQL3 = "UPDATE balance SET `balance` = " + balance + " WHERE (`userid` =" + customerIDForRefund + ");";//update the balance in DB
         try {
             dbConn.createStatement().executeUpdate(SQL3);
-        }catch(SQLException e){
-            System.out.println("sql ERROR :"+e);
+        } catch (SQLException e) {
+            System.out.println("sql ERROR :" + e);
         }
     }
 
     /**
-     *  Method(reviewOrdersToConfirm) extracts from DB the relevant orders that are waiting for manager
-     *  to confirm
-     * @param msg -  receives message from client connection
-     * @param client - receives specific client connection
+     * Method(reviewOrdersToConfirm) extracts from DB the relevant orders that are waiting for manager
+     * to confirm
      *
+     * @param msg    -  receives message from client connection
+     * @param client - receives specific client connection
      */
     private void reviewOrdersToConfirm(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         Message m = new Message();
         CachedRowSet cachedMsg = null;
-        String shopName="";
-        String SQL3 = "select shop FROM shopmanager WHERE userid = "+userid+";";
-        try{
+        String shopName = "";
+        String SQL3 = "select shop FROM shopmanager WHERE userid = " + userid + ";";
+        try {
             ResultSet rs = dbConn.createStatement().executeQuery(SQL3);
             rs.first();
-             shopName = rs.getString("shop");
-        }catch(SQLException e){
-            System.out.println("error"+ e);
+            shopName = rs.getString("shop");
+        } catch (SQLException e) {
+            System.out.println("error" + e);
         }
         //extract relevant details from DB for use on table review orders to cofirm in GUI
-        String SQL = "SELECT o.orderNumber, u.firstname, u.lastname, o.deliveryDate, u.phonenumber, o.price FROM orders o, users u, userorders uo  WHERE o.orderNumber=uo.orderid AND o.shop = '"+shopName+"' AND uo.userid=u.userid AND o.confirmed ="+'"' + "no" + '"'+";";
+        String SQL = "SELECT o.orderNumber, u.firstname, u.lastname, o.deliveryDate, u.phonenumber, o.price FROM orders o, users u, userorders uo  WHERE o.orderNumber=uo.orderid AND o.shop = '" + shopName + "' AND uo.userid=u.userid AND o.confirmed =" + '"' + "no" + '"' + ";";
         try {
             ResultSet rs = dbConn.createStatement().executeQuery(SQL);
             RowSetFactory factory = RowSetProvider.newFactory();
@@ -1537,8 +1710,7 @@ public class ServerControl extends AbstractServer {
             m.setCommand("tableForOrdersToConfirm");
             m.setMsg(cachedMsg);
             client.sendToClient(m);
-        }
-        catch (SQLException | IOException e) {
+        } catch (SQLException | IOException e) {
             System.out.println("SQL request from client " + client + " error " + e);
             try {
                 client.sendToClient("error in sql request or server");
@@ -1550,23 +1722,24 @@ public class ServerControl extends AbstractServer {
 
     /**
      * Method(confirmOrder) updates the order in DB to confirm
-     * @param msg -  receives message from client connection contains order Number
+     *
+     * @param msg    -  receives message from client connection contains order Number
      * @param client - receives specific client connection
      */
     private void confirmOrder(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
-        Message msgToClient=new Message();
-        Message m=(Message) msg;
-        int key=(int)m.getMsg();
-        String SQL = "UPDATE orders SET confirmed = 'yes' WHERE (`orderNumber` = "+key +");";
-        String SQL1 ="UPDATE orders SET confirmDate = now() where orderNUmber = "+key+";";
+        Message msgToClient = new Message();
+        Message m = (Message) msg;
+        int key = (int) m.getMsg();
+        String SQL = "UPDATE orders SET confirmed = 'yes' WHERE (`orderNumber` = " + key + ");";
+        String SQL1 = "UPDATE orders SET confirmDate = now() where orderNUmber = " + key + ";";
         try {
             dbConn.createStatement().executeUpdate(SQL);
             dbConn.createStatement().executeUpdate(SQL1);
             msgToClient.setCommand("confirmed");
             msgToClient.setMsg("");
             client.sendToClient(msgToClient);
-        } catch (SQLException | IOException e ) {
+        } catch (SQLException | IOException e) {
             System.out.println("SQL request from client " + client + " error " + e);
             try {
                 client.sendToClient("error in sql request or server");
@@ -1579,6 +1752,7 @@ public class ServerControl extends AbstractServer {
 
     /**
      * manageCustomers method gets an information from 2 tables DB and sends it to the client who asked for it.
+     *
      * @param msg
      * @param client
      */
@@ -1587,7 +1761,7 @@ public class ServerControl extends AbstractServer {
         Connection dbConn = SqlConnector.getConnection();
         Message m = new Message();
 
-        String SQL1 = "SELECT u.userid,u.firstname,u.lastname,u.phonenumber,u.email,b.balance,l.status FROM users u,login l,balance b WHERE b.userid=u.userid AND u.userid=l.userid AND l.usertype="+'"' + "customer" + '"'+";";
+        String SQL1 = "SELECT u.userid,u.firstname,u.lastname,u.phonenumber,u.email,b.balance,l.status FROM users u,login l,balance b WHERE b.userid=u.userid AND u.userid=l.userid AND l.usertype=" + '"' + "customer" + '"' + ";";
         CachedRowSet cachedMsg = null;
         try {
             ResultSet rs = dbConn.createStatement().executeQuery(SQL1);
@@ -1613,21 +1787,22 @@ public class ServerControl extends AbstractServer {
 
     /**
      * confirmFreeze method updates the login status field in the DB to 'frozen' for userid sent by client.
+     *
      * @param msg
      * @param client
      */
     private void confirmFreeze(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
-        Message msgToClient=new Message();
-        Message m=(Message) msg;
-        int key=(int)m.getMsg();// the key is userid
-        String SQL = "UPDATE login SET status = 'frozen' WHERE (`userid` = "+key +");";
+        Message msgToClient = new Message();
+        Message m = (Message) msg;
+        int key = (int) m.getMsg();// the key is userid
+        String SQL = "UPDATE login SET status = 'frozen' WHERE (`userid` = " + key + ");";
         try {
             dbConn.createStatement().executeUpdate(SQL);
             msgToClient.setCommand("frozen");
             msgToClient.setMsg("");
             client.sendToClient(msgToClient);
-        } catch (SQLException | IOException e ) {
+        } catch (SQLException | IOException e) {
             System.out.println("SQL request from client " + client + " error " + e);
             try {
                 client.sendToClient("error in sql request or server");
@@ -1636,23 +1811,25 @@ public class ServerControl extends AbstractServer {
             }
         }
     }
+
     /**
      * confirmUnfreeze method updates the login status field in the DB to 'active' for userid sent by client.
+     *
      * @param msg
      * @param client
      */
     private void confirmUnfreeze(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
-        Message msgToClient=new Message();
-        Message m=(Message) msg;
-        int key=(int)m.getMsg();// the key is userid
-        String SQL = "UPDATE login SET status = 'active' WHERE (`userid` = "+key +");";
+        Message msgToClient = new Message();
+        Message m = (Message) msg;
+        int key = (int) m.getMsg();// the key is userid
+        String SQL = "UPDATE login SET status = 'active' WHERE (`userid` = " + key + ");";
         try {
             dbConn.createStatement().executeUpdate(SQL);
             msgToClient.setCommand("unfrozen");
             msgToClient.setMsg("");
             client.sendToClient(msgToClient);
-        } catch (SQLException | IOException e ) {
+        } catch (SQLException | IOException e) {
             System.out.println("SQL request from client " + client + " error " + e);
             try {
                 client.sendToClient("error in sql request or server");
@@ -1667,6 +1844,7 @@ public class ServerControl extends AbstractServer {
      * manageUsers method is responsible for accessing the DB
      * and sending the information regarding the customers in registration
      * table to the client who asked for it
+     *
      * @param msg
      * @param client
      */
@@ -1701,30 +1879,34 @@ public class ServerControl extends AbstractServer {
      * approveCustomer method gets the customer's details from the client,
      * inserts the customer to users list (users list is for customers),
      * then it inserts the user to login table and removes it from registration table because it's already approved.
+     *
      * @param msg
      * @param client
      */
     private void approveCustomer(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
-        Message m=(Message) msg;
-        Object[] o= (Object[]) m.getMsg();
-        int key=(int)o[0];
-        String savedUsername="'"+(String) o[1]+"'", savedPassword="'"+(String) o[2]+"'";
+        Message m = (Message) msg;
+        Object[] o = (Object[]) m.getMsg();
+        int key = (int) o[0];
+        String savedUsername = "'" + (String) o[1] + "'", savedPassword = "'" + (String) o[2] + "'";
 
-        String SQL_InsertToUsers= "INSERT INTO users (userid, firstname, lastname, email,phonenumber,creditcardnumber,creditcardcvv,creditcardexpiredate)" +
-                " SELECT r.userid,r.firstname,r.lastname,r.email,r.telephoneNumber,r.creditCardNumber,r.creditCardCVV,r.creditCardExpiryDate FROM registration r WHERE r.userid="+key+";";
+        String SQL_InsertToUsers = "INSERT INTO users (userid, firstname, lastname, email,phonenumber)" +
+                " SELECT r.userid,r.firstname,r.lastname,r.email,r.telephoneNumber FROM registration r WHERE r.userid=" + key + ";";
 
-        String SQL_InsertToLogin ="INSERT INTO login (userid, username, password, usertype,status)" +
-                " SELECT r.userid,"+savedUsername+","+savedPassword+",r.type,+"+"'active'"+" FROM registration r WHERE r.userid="+key+";";
+        String SQL_InsertToLogin = "INSERT INTO login (userid, username, password, usertype,status)" +
+                " SELECT r.userid," + savedUsername + "," + savedPassword + ",r.type,+" + "'active'" + " FROM registration r WHERE r.userid=" + key + ";";
 
-        String SQL_DeleteFromRegistration ="DELETE FROM registration WHERE userid="+key+";";
-        String SQL_AddBalance="INSERT INTO balance (userid) VALUES ("+key+")";
+        String SQL_InsertToCreditcards = "INSERT INTO creditcards (userid,creditcardnumber,creditcardcvv,creditcardexpirydate)" +
+                " SELECT r.userid,r.creditcardnumber,r.creditcardcvv,r.creditcardexpirydate FROM registration r WHERE r.userid=" + key + ";";
+        String SQL_DeleteFromRegistration = "DELETE FROM registration WHERE userid=" + key + ";";
+        String SQL_AddBalance = "INSERT INTO balance (userid) VALUES (" + key + ")";
 
         try {
             dbConn.createStatement().execute(SQL_InsertToUsers);
             dbConn.createStatement().execute(SQL_InsertToLogin);
-            dbConn.createStatement().execute(SQL_DeleteFromRegistration);
             dbConn.createStatement().execute(SQL_AddBalance);
+            dbConn.createStatement().execute(SQL_InsertToCreditcards);
+            dbConn.createStatement().execute(SQL_DeleteFromRegistration);
 
             m.setCommand("approved");
             m.setMsg("");
@@ -1776,17 +1958,18 @@ public class ServerControl extends AbstractServer {
     /**
      * changePermission method changes the permission of user according to what it got from client,
      * it does so by accessing the DB - login table - and changing the usertype field in it.
+     *
      * @param msg
      * @param client
      */
     private void changePermission(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
-        Message m=(Message) msg;
-        Object[] o= (Object[]) m.getMsg();
-        int key=(int)o[0];
-        String savedType="'"+(String) o[1]+"'";
+        Message m = (Message) msg;
+        Object[] o = (Object[]) m.getMsg();
+        int key = (int) o[0];
+        String savedType = "'" + (String) o[1] + "'";
 
-        String SQL_UpdateLogin= "UPDATE login SET usertype = "+savedType+" WHERE (`userid` = "+key +");";
+        String SQL_UpdateLogin = "UPDATE login SET usertype = " + savedType + " WHERE (`userid` = " + key + ");";
 
         try {
             dbConn.createStatement().executeUpdate(SQL_UpdateLogin);
@@ -1805,26 +1988,27 @@ public class ServerControl extends AbstractServer {
 
     /**
      * getName method gets an userid and sends the first and last name that belongs to that userid to the client asked for it.
+     *
      * @param msg
      * @param client
      */
     private void getName(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
-        Message msgToClient=new Message();
-        Message m=(Message) msg;
-        int key=(int)m.getMsg();// the key is userid
-        String SQL = "SELECT u.firstname, u.lastname FROM users u WHERE (`userid` = "+key +");";
+        Message msgToClient = new Message();
+        Message m = (Message) msg;
+        int key = (int) m.getMsg();// the key is userid
+        String SQL = "SELECT u.firstname, u.lastname FROM users u WHERE (`userid` = " + key + ");";
         CachedRowSet cachedMsg;
         try {
             ResultSet rs = dbConn.createStatement().executeQuery(SQL);
             RowSetFactory factory = RowSetProvider.newFactory();
-             cachedMsg = factory.createCachedRowSet();
+            cachedMsg = factory.createCachedRowSet();
             cachedMsg.populate(rs);
             rs.close();
             msgToClient.setCommand("firstname+lastname");
             msgToClient.setMsg(cachedMsg);
             client.sendToClient(msgToClient);
-        } catch (SQLException | IOException e ) {
+        } catch (SQLException | IOException e) {
             System.out.println("SQL request from client " + client + " error " + e);
             try {
                 client.sendToClient("error in sql request or server");
@@ -1857,6 +2041,7 @@ public class ServerControl extends AbstractServer {
             System.out.println("Error sending msg to server");
         }
     }
+
     public static void setConnection(ServerControl svconn) {
         sv = svconn;
     }

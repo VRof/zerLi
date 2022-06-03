@@ -1,7 +1,7 @@
 package clientGUI;
 
 import client.ClientController;
-import clientClasses.Message;
+import commonClasses.Message;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -74,6 +74,10 @@ public class UpdateCatalogGUIController {
         else {
         lbl_error.setText("Activating Discount ..");
         float dis = Float.parseFloat(txt_p.getText());
+        if(dis > 100 || dis<0){
+            lbl_error.setText("Incorrect discount percent");
+            return;
+        }
         msg.setCommand("activeDiscount");
         msg.setMsg(dis);
         conn.send(msg);

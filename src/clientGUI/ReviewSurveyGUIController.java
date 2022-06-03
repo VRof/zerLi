@@ -124,7 +124,8 @@ public class ReviewSurveyGUIController {
         while(conn.awaitResponse);
         msgFromServer = (CachedRowSet) ClientController.messageFromServer.getMsg();
         try {
-            while (msgFromServer.next()) { SurveyResult survey = new SurveyResult(
+            while (msgFromServer.next()) {
+                   SurveyResult survey = new SurveyResult(
                     msgFromServer.getInt("surveyid"),
                     msgFromServer.getString("surveyinfo"),
                     msgFromServer.getString("link"));
