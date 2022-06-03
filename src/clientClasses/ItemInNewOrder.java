@@ -11,27 +11,29 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ItemInNewOrder {
     private VBox itemInNewOrderVBox;
     private int id;
     private String isBundle;
     private String itemColor;
     private String itemName;
-    private float itemPrice;
+    private double itemPrice;
     private Integer quantity = 0;
     private Label lbl_quantity;
+    private ImageView itemImage;
     private boolean itemInCustom;
 
-    public ItemInNewOrder(int id, ImageView itemImage, String itemName, float itemPrice, String itemColor, String isBundle, boolean itemInCustom) {
+    public ItemInNewOrder(int id, ImageView itemImage, String itemName, double itemPrice, String itemColor, String isBundle, boolean itemInCustom) {
         this.id = id;
         this.isBundle = isBundle;
+        itemPrice = itemPrice*100;
+        itemPrice = Math.round(itemPrice);
+        itemPrice = itemPrice /100;
         this.itemPrice = itemPrice;
         this.itemColor = itemColor;
         this.itemName = itemName;
         this.itemInCustom = itemInCustom;
+        this.itemImage = itemImage;
         Text lbl_itemName = new Text(itemName);
         lbl_itemName.setStyle("-fx-font-size: 15");
         Text lbl_itemPrice = new Text(itemPrice + " ₪");
@@ -110,6 +112,7 @@ public class ItemInNewOrder {
         itemInNewOrderVBox.setStyle("-fx-background-color:  #b6f2e0");
     }
 
+
     private void updateOrderFromCatalog() {
         for (NewOrder catalogItemInOrder : NewOrderGUIController.controller.getItemsInNewOrderList()) {
             if (!catalogItemInOrder.isCustom() && catalogItemInOrder.getCatalogItem() == this) {
@@ -128,16 +131,16 @@ public class ItemInNewOrder {
     }
 
     @Override
-    public boolean equals(Object other){
-    return ((ItemInNewOrder)other).id == this.id;
+    public boolean equals(Object other) {
+        return ((ItemInNewOrder) other).id == this.id;
     }
 
     private void updateCustomOrder() {
         for (NewOrder customBuildInOrder : NewOrderGUIController.controller.getItemsInNewOrderList()) {
-            if(customBuildInOrder.isCustom() && customBuildInOrder.getCustomBuildRequest().equals(NewOrderGUIController.controller.getCustomRequest())){
-                if(!customBuildInOrder.getItemsInCustomBuild().contains(this) && quantity>0)
+            if (customBuildInOrder.isCustom() && customBuildInOrder.getCustomBuildRequest().equals(NewOrderGUIController.controller.getCustomRequest())) {
+                if (!customBuildInOrder.getItemsInCustomBuild().contains(this) && quantity > 0)
                     customBuildInOrder.getItemsInCustomBuild().add(this);
-                else if(customBuildInOrder.getItemsInCustomBuild().contains(this) && quantity==0)
+                else if (customBuildInOrder.getItemsInCustomBuild().contains(this) && quantity == 0)
                     customBuildInOrder.getItemsInCustomBuild().remove(this);
                 NewOrderGUIController.controller.printFullOrder();
                 return;
@@ -145,12 +148,16 @@ public class ItemInNewOrder {
         }
     }
 
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
     public String getItemColor() {
         return itemColor;
     }
 
-    public float getItemPrice() {
-        return itemPrice * quantity;
+    public double getItemPrice() {
+        return itemPrice;
     }
 
     public int getId() {
@@ -163,6 +170,26 @@ public class ItemInNewOrder {
 
     public VBox getItemInNewOrderVBoxVBox() {
         return itemInNewOrderVBox;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public ImageView getItemImage() {
+        return itemImage;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public String getIsBundle() {
+        return isBundle;
+    }
+
+    public boolean isItemInCustom() {
+        return itemInCustom;
     }
 
     @Override

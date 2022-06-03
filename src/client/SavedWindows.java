@@ -9,6 +9,9 @@ public class SavedWindows {
     private Stage clientGUIWindow;
     private Stage viewReportsWindow;
     private Stage incomeReportWindow;
+    private Stage orderDetailsWindow;
+    private Stage newOrderWindow;
+    private Stage paymentWindow;
 
     public Stage getIncomeReportWindow() {
         return incomeReportWindow;
@@ -58,5 +61,29 @@ public class SavedWindows {
 
     public void setLoginWindow(Stage loginWindow) {
         this.loginWindow = loginWindow;
+    }
+
+    public Stage getOrderDetailsWindow() {
+        return orderDetailsWindow;
+    }
+
+    public void setOrderDetailsWindow(Stage orderDetailsWindow) {
+        this.orderDetailsWindow = orderDetailsWindow;
+    }
+
+    public Stage getNewOrderWindow() {
+        return newOrderWindow;
+    }
+
+    public void setNewOrderWindow(Stage newOrderWindow) {
+        this.newOrderWindow = newOrderWindow;
+    }
+
+    public Stage getPaymentWindow() {
+        return paymentWindow;
+    }
+
+    public void setPaymentWindow(Stage paymentWindow) {
+        this.paymentWindow = paymentWindow;
     }
 }

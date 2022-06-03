@@ -1,9 +1,9 @@
 package clientGUI;
 
 import client.ClientController;
-import client.Quarter;
-import clientClasses.Message;
 import clientClasses.WantedReport;
+import commonClasses.Message;
+import commonClasses.Quarter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

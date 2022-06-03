@@ -2,8 +2,8 @@ package clientGUI;
 
 import client.ClientController;
 import client.NewWindowFrameController;
-import clientClasses.Message;
 import clientClasses.WantedReport;
+import commonClasses.Message;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;

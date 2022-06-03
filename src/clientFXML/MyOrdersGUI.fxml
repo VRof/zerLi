@@ -15,9 +15,9 @@
             <Image url="@../pictures/button_back.png" />
          </image>
       </ImageView>
-      <Label layoutX="433.0" layoutY="30.0" text="My orders">
+      <Label layoutX="429.0" layoutY="24.0" text="My orders">
          <font>
-            <Font size="30.0" />
+            <Font name="System Bold" size="30.0" />
          </font>
       </Label>
       <TableView fx:id="tbl_orders" layoutX="44.0" layoutY="90.0" prefHeight="360.0" prefWidth="913.0">
@@ -25,9 +25,10 @@
           <TableColumn fx:id="col_id" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="col_price" prefWidth="89.0" text="price" />
             <TableColumn fx:id="col_shop" prefWidth="152.0" text="shop" />
-            <TableColumn fx:id="col_orderDate" prefWidth="143.0" text="order date" />
-            <TableColumn fx:id="col_deliveryDate" prefWidth="158.0" text="delivery date" />
-            <TableColumn fx:id="col_status" prefWidth="295.0" text="status" />
+            <TableColumn fx:id="col_orderDate" prefWidth="141.0" text="order date" />
+            <TableColumn fx:id="col_deliveryDate" prefWidth="143.0" text="delivery date" />
+            <TableColumn fx:id="col_status" prefWidth="228.0" text="status" />
+            <TableColumn fx:id="col_confirmed" prefWidth="83.0" text="confirmed" />
         </columns>
       </TableView>
       <ImageView fx:id="btn_cancelOrder" fitHeight="69.0" fitWidth="175.0" layoutX="782.0" layoutY="520.0" onMouseClicked="#clickedCancelOrder" onMouseEntered="#enteredCancelOrderBtn" onMouseExited="#leavedCancelOrderBtn" pickOnBounds="true" preserveRatio="true">
@@ -35,7 +36,7 @@
             <Image url="@../pictures/button_cancel-order.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="btn_orderDetails" fitHeight="60.0" fitWidth="175.0" layoutX="206.0" layoutY="520.0" onMouseClicked="#clickedOrderDetailsBtn" onMouseEntered="#enteredOrderDetailsBtn" onMouseExited="#leavedOrderDetailsBtn" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="btn_orderDetails" fitHeight="60.0" fitWidth="175.0" layoutX="398.0" layoutY="520.0" onMouseClicked="#clickedOrderDetailsBtn" onMouseEntered="#enteredOrderDetailsBtn" onMouseExited="#leavedOrderDetailsBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/button_order-details.png" />
          </image>
@@ -50,15 +51,10 @@
             <Image url="@../pictures/pina.png" />
          </image>
       </ImageView>
-      <Label fx:id="lbl_cancelation" layoutX="302.0" layoutY="476.0" prefHeight="27.0" prefWidth="493.0" text="cancelation msg" textFill="RED">
+      <Label fx:id="lbl_cancelation" layoutX="154.0" layoutY="476.0" prefHeight="27.0" prefWidth="755.0" text="cancelation msg" textFill="RED">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <ImageView fx:id="btn_confirmDelivery" fitHeight="50.0" fitWidth="199.0" layoutX="450.0" layoutY="520.0" onMouseClicked="#clickedConfirmDeliveryBtn" onMouseEntered="#enteredConfirmDeliveryBtn" onMouseExited="#leavedConfirmDeliveryBtn" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pictures/button_confirm-delivery.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

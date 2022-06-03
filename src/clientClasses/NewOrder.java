@@ -1,5 +1,7 @@
 package clientClasses;
 
+import javafx.scene.layout.GridPane;
+
 import java.util.List;
 
 public class NewOrder {
@@ -8,13 +10,14 @@ public class NewOrder {
     private String customBuildRequest;
     private ItemInNewOrder catalogItem;
     private List<ItemInNewOrder> itemsInCustomBuild;
-
+    private GridPane itemsGrid;
 
     public NewOrder(ItemInNewOrder catalogItem){
         this.catalogItem = catalogItem;
         this.isCustom = false;
     }
-    public NewOrder(String customBuildRequest,List<ItemInNewOrder> itemsInCustomBuild){
+    public NewOrder(GridPane itemsGrid, String customBuildRequest,List<ItemInNewOrder> itemsInCustomBuild){
+        this.itemsGrid = itemsGrid;
         this.customBuildRequest = customBuildRequest;
         this.itemsInCustomBuild = itemsInCustomBuild;
         this.isCustom = true;
@@ -50,13 +53,17 @@ public class NewOrder {
         this.itemsInCustomBuild = itemsInCustomBuild;
     }
 
-    public float getPrice(){
+    public GridPane getItemsGrid() {
+        return itemsGrid;
+    }
+
+    public double getPrice(){
         float totalPrice = 0;
         if(!isCustom)
-            return catalogItem.getItemPrice();
+            return catalogItem.getItemPrice() * catalogItem.getQuantity();
         else{
             for(ItemInNewOrder item : itemsInCustomBuild)
-                totalPrice += item.getItemPrice();
+                totalPrice += item.getItemPrice()* item.getQuantity();
         }
         return totalPrice;
     }

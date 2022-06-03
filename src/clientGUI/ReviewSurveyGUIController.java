@@ -1,7 +1,7 @@
 package clientGUI;
 import client.ClientController;
-import clientClasses.Message;
 import clientClasses.SurveyResult;
+import commonClasses.Message;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

@@ -1,9 +1,9 @@
-package clientClasses;
+package commonClasses;
 
 import java.io.Serializable;
 
 public class Message implements Serializable {
-    private String command;
+    private String command = "";
     private Object msg;
 
     public String getCommand() {

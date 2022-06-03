@@ -1,7 +1,7 @@
 package clientGUI;
 
 import client.ClientController;
-import clientClasses.Message;
+import commonClasses.Message;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;

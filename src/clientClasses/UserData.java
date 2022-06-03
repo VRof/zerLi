@@ -7,6 +7,11 @@ public class UserData {
     private String email;
     private String phonenumber;
     private double balance;
+    private boolean isFirstOrder;
+
+    public boolean isFirstOrder() {return isFirstOrder;}
+
+    public void setFirstOrder(boolean firstOrder) {isFirstOrder = firstOrder;}
 
     public int getUserid() {
         return userid;
@@ -55,4 +60,5 @@ public class UserData {
     public void setBalance(double balance) {
         this.balance = balance;
     }
+
 }

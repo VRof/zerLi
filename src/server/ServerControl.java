@@ -1,9 +1,6 @@
 package server;
 
-import client.Quarter;
-import clientClasses.CancellationRequest;
-import clientClasses.Message;
-import clientClasses.WantedReport;
+import commonClasses.*;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 import serverClasses.OrderCancellationData;
@@ -21,6 +18,7 @@ import java.util.List;
 public class ServerControl extends AbstractServer {
     public static List<ConnectionToClient> clientsList = new ArrayList<>(); //list of connected users to server (used in table of connected clients in serverGUI)
     private List<Integer> connectedClientdIdList = new ArrayList<>(); //list of id's of connected users to server to prevent multiply login of the same user
+   // private List<ConnectedClient> idAndConnectionList = new ArrayList<>();
     private static ServerControl sv;
     private int port;
     private int userid;
@@ -43,8 +41,6 @@ public class ServerControl extends AbstractServer {
     protected void serverStarted() {
         AutoGenerateMonthlyReports monthlyOrders = new AutoGenerateMonthlyReports();
         monthlyOrders.run();
-//        Timer orderTimer = new Timer();
-//        orderTimer.scheduleAtFixedRate(monthlyOrders, 0, 60 * 1000*60*24*30);
         System.out.println("Server listening for connections on port " + sv.getPort());
     }
 
@@ -131,6 +127,7 @@ public class ServerControl extends AbstractServer {
                 break;
             case "viewOverallIncome":
                 viewOverallIncome(msg,client);
+                break;
             case "manageCustomers":
                 manageCustomers(msg,client);
                 break;
@@ -146,17 +143,143 @@ public class ServerControl extends AbstractServer {
             case "approveCustomer":
                 approveCustomer(msg,client);
                 break;
-
             case "showUsersPermissionsTable":
                 showUsersPermissionsTable(msg,client);
                 break;
             case "changePermission":
                 changePermission(msg,client);
                 break;
+            case "isFirstOrder":
+                isFirstOrder(msg,client);
+                break;
+            case "getAllTheShops":
+                getAllTheShops(msg,client);
+                break;
+            case "getCreditCardData":
+                getCreditCardData(msg,client);
+                break;
+            case "addNewOrder":
+                addNewOrder(msg,client);
+                break;
+//            case "sendMessageToClient":
+//                sendMessageToClient(msg,client);
+//                break;
         }
     }
 
-    private void getUserData(Object msg, ConnectionToClient client) {
+    private void addNewOrder(Object msg, ConnectionToClient client) {
+        Order order = (Order) ((Message)msg).getMsg();
+        Connection dbConn = SqlConnector.getConnection();
+        String SQL = "INSERT INTO orders(price,greetingCard,dOrder,shop,deliveryDate,orderDate,status,confirmed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps;
+        try {
+            ps = dbConn.prepareStatement(SQL);
+            ps.setDouble(1,order.getPrice());
+            ps.setString(2,order.getBless());
+            ps.setString(3,order.getDetails());
+            ps.setString(4,order.getShop());
+            ps.setTimestamp(5, order.getDeliveryDate());
+            ps.setTimestamp(6,order.getOrderDate());
+            ps.setString(7,order.getStatus());
+            ps.setString(8, order.getConfirmed());
+            ps.executeUpdate();
+            SQL = "INSERT INTO userorders (userid) VALUES (" + order.getCustomerid() +");";
+            dbConn.createStatement().executeUpdate(SQL);
+            SQL = "UPDATE balance SET balance = " + order.getNewBalance() +  "WHERE userid = " + order.getCustomerid() + ";";
+            dbConn.createStatement().executeUpdate(SQL);
+            Message msgToClient = new Message();
+            msgToClient.setCommand("order created");
+            try {
+                client.sendToClient(msgToClient);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            Message errorMsg = new Message();
+            errorMsg.setCommand("error creating order");
+            e.printStackTrace();
+            try {
+                client.sendToClient(errorMsg);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+    }
+
+    //    private void sendMessageToClient(Object msg, ConnectionToClient client){
+//        Message msgtoclient = new Message();
+//        String[] msgFromClient = (String[]) ((Message)msg).getMsg();
+//        int id = Integer.parseInt(msgFromClient[0]);
+//        String popupMsg = msgFromClient[1];
+//        msgtoclient.setCommand("newPopUpMessage");
+//        msgtoclient.setMsg(popupMsg);
+//        for(int i = 0;i<idAndConnectionList.size();i++){
+//            if(idAndConnectionList.get(i).getUserid() == id){
+//                try {
+//                    idAndConnectionList.get(i).getConnection().sendToClient(msgtoclient);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//        msgtoclient.setCommand("send");
+//        try {
+//            client.sendToClient(msgtoclient);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+    private void getCreditCardData(Object msg, ConnectionToClient client) {
+        Connection dbConn = SqlConnector.getConnection();
+        CachedRowSet rowSet;
+        int userid = (int) ((Message) msg).getMsg();
+        String SQL = "SELECT * FROM creditcards WHERE userid = "+ userid + ";";
+        try {
+            ResultSet rs = dbConn.createStatement().executeQuery(SQL);
+            RowSetFactory factory = RowSetProvider.newFactory();
+            rowSet = factory.createCachedRowSet();
+            rowSet.populate(rs);
+            Message msgToClient = new Message();
+            msgToClient.setCommand("card data");
+            msgToClient.setMsg(rowSet);
+            client.sendToClient(msgToClient);
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+            Message errormsg = new Message();
+            errormsg.setCommand("error getting or sending credit card data");
+            try {
+                client.sendToClient(errormsg);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    private void isFirstOrder(Object msg, ConnectionToClient client) {
+        boolean res = false;
+        Connection dbConn = SqlConnector.getConnection();
+        int userid = (int) ((Message) msg).getMsg();
+        String SQL = "SELECT * from userorders WHERE userid = " + userid + ";";
+        try {
+            ResultSet rs = dbConn.createStatement().executeQuery(SQL);
+            if(!rs.next())
+                res = true;
+            Message msgToClient = new Message();
+            msgToClient.setCommand("isFirstOrder result");
+            msgToClient.setMsg(res);
+            client.sendToClient(msgToClient);
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+            try {
+                client.sendToClient(null);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    private void getUserData(Object msg, ConnectionToClient client){
         Connection dbConn = SqlConnector.getConnection();
         CachedRowSet rowSet;
         int userid = (int) ((Message) msg).getMsg();
@@ -174,8 +297,12 @@ public class ServerControl extends AbstractServer {
         } catch (Exception e) {
             System.out.println("error getting user data " + e);
             e.printStackTrace();
+            try {
+                client.sendToClient(null);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
-
 
     }
 
@@ -892,6 +1019,33 @@ public class ServerControl extends AbstractServer {
         }//if(username.equals("manager"))
     }
 
+    private void getAllTheShops(Object msg, ConnectionToClient client){
+        Connection dbConn = SqlConnector.getConnection();
+        String SQL ="SELECT shop FROM shopmanager;";
+        ResultSet rs = null;
+        CachedRowSet cachedMsg;
+        Message m = new Message();
+        try {
+            rs = dbConn.createStatement().executeQuery(SQL);
+            RowSetFactory factory = RowSetProvider.newFactory();
+            cachedMsg = factory.createCachedRowSet();
+            cachedMsg.populate(rs);
+            rs.close();
+            m.setCommand("list of shops");
+            m.setMsg(cachedMsg);
+            client.sendToClient(m);
+        } catch (SQLException e) {
+            try {
+                client.sendToClient(null);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
     private void logout(Object msg, ConnectionToClient client) {
         Message message = (Message) msg;
@@ -974,6 +1128,8 @@ public class ServerControl extends AbstractServer {
         if (status.equals("active"))
             connectedClientdIdList.add(userid); //add new user id to the list
         try {
+            //ConnectedClient newclient = new ConnectedClient(userid,client);
+ //           idAndConnectionList.add(newclient);
             userLoginData.setCommand("logged in");
             userLoginData.setMsg(cachedMsg);
             client.sendToClient(userLoginData); //send login data to client
@@ -1372,6 +1528,11 @@ public class ServerControl extends AbstractServer {
                 connectedClientdIdList.remove(i);
             }
         }
+//        for(int i = 0;i<idAndConnectionList.size();i++){
+//            if(userid==idAndConnectionList.get(i).getUserid()){
+//                idAndConnectionList.remove(i);
+//            }
+//        }
         try {
             message.setCommand("disconnect accepted");
             client.sendToClient(message);

@@ -17,7 +17,7 @@
             <Image url="@../pictures/button_back.png" />
          </image>
       </ImageView>
-      <TabPane layoutX="43.0" layoutY="84.0" prefHeight="575.0" prefWidth="1135.0" side="LEFT" stylesheets="@TabPaneCSS.css" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="43.0" layoutY="84.0" prefHeight="575.0" prefWidth="1143.0" side="LEFT" stylesheets="@TabPaneCSS.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="   Bundles">
             <content>

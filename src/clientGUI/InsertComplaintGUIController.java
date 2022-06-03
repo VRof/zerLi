@@ -1,7 +1,7 @@
 package clientGUI;
 
 import client.ClientController;
-import clientClasses.Message;
+import commonClasses.Message;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -9,7 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javax.sql.rowset.CachedRowSet;
+
 import static client.ClientController.savedWindows;
 
 public class InsertComplaintGUIController {

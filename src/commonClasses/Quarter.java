@@ -1,4 +1,4 @@
-package client;
+package commonClasses;
 
 import java.io.Serializable;
 
@@ -21,7 +21,7 @@ public class Quarter implements Serializable {
     public Quarter() {
     }
 
-    public Quarter(int year, int quarter,String shop){
+    public Quarter(int year, int quarter, String shop){
         this.year=year;
         this.quarter=quarter;
         this.shop=shop;

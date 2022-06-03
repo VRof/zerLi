@@ -2,9 +2,8 @@ package clientGUI;
 
 import client.ClientController;
 import client.NewWindowFrameController;
-import clientClasses.CancellationRequest;
 import clientClasses.Customer;
-import clientClasses.Message;
+import commonClasses.Message;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,7 +19,6 @@ import javafx.stage.Stage;
 import javax.sql.rowset.CachedRowSet;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 
 public class ManageCustomersGUIController implements Initializable {

@@ -5,16 +5,22 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.text.DecimalFormat;
+
+
 public class ItemInCatalog {
     private VBox itemInCatalogVBox;
     private int id;
     private String isBundle;
     private String itemColor;
-    private float itemPrice;
+    private double itemPrice;
 
-    public ItemInCatalog(int id, ImageView itemImage, String itemName, float itemPrice,String itemColor, String isBundle) {
+    public ItemInCatalog(int id, ImageView itemImage, String itemName, double itemPrice,String itemColor, String isBundle) {
         this.id = id;
         this.isBundle = isBundle;
+        itemPrice = itemPrice*100;
+        itemPrice = Math.round(itemPrice);
+        itemPrice = itemPrice /100;
         this.itemPrice = itemPrice;
         this.itemColor = itemColor;
         Text lbl_itemName = new Text(itemName);
@@ -32,7 +38,7 @@ public class ItemInCatalog {
         return itemColor;
     }
 
-    public float getItemPrice() {
+    public double getItemPrice() {
         return itemPrice;
     }
 
