@@ -73,6 +73,16 @@ public class IncomeReportGUIController implements Initializable {
     public List<String> months1 = Arrays.asList("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
     int quarterCount;
 
+    /**
+     *Method(initialize) to setup the values in the window including shops that depend on the type of user connected
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         errorLbl.setText("");
@@ -101,16 +111,17 @@ public class IncomeReportGUIController implements Initializable {
         year1.getItems().add(2023);
         year1.getItems().add(2024);
         year1.getItems().add(2025);
-        //year quarter shop
-
-
 
         ObservableList<String> months = FXCollections.observableArrayList(months1);
         incomeMonths.setCategories(months);
 
     }
 
-
+    /**.
+     * Method(clickedShowBtn) method that contacts server to get relevant information from DB
+     * and display them in a barchart that contains the overall income and months in quarter .
+     * @param event
+     */
     @FXML
     void clickedShowBtn(MouseEvent event)  {
        // incomeMonths.getCategories().clear();
@@ -127,8 +138,8 @@ public class IncomeReportGUIController implements Initializable {
             msg.setMsg(quarterMsg);
             cc.send(msg);
             while (cc.awaitResponse) ; //wait for data from server
-            quarter = (Quarter) (cc.messageFromServer.getMsg()); //message received from server (details about quarter)
-            for (int i = 0; i < months1.size(); i++) {
+            quarter = (Quarter)cc.messageFromServer.getMsg(); //message received from server
+            for (int i = 0; i < months1.size(); i++) {//loop to add the relevant months to use in the barchart
                 if (quarter.getMonth1().equals(months1.get(i))) {
                     m1 = i;
                 }
@@ -140,25 +151,27 @@ public class IncomeReportGUIController implements Initializable {
                 }
             }
 
-
+        /*add the relevant details into series to display in a barchart*/
             XYChart.Series<String, Double> series1 = new XYChart.Series<>();
             series1.setName("Income for : " + shop1.getSelectionModel().getSelectedItem()+"\nQuarter :"+quarter1.getSelectionModel().getSelectedItem()+" Year : "+year1.getSelectionModel().getSelectedItem());
             series1.getData().add(new XYChart.Data(incomeMonths.getCategories().get(m1), quarter.getResult1()));
             series1.getData().add(new XYChart.Data(incomeMonths.getCategories().get(m2), quarter.getResult2()));
             series1.getData().add(new XYChart.Data(incomeMonths.getCategories().get(m3), quarter.getResult3()));
-            IncomeReport1.getData().addAll(series1);
-
+            IncomeReport1.getData().addAll(series1);//display the series in a barchart
+        //counter for quarters displayed no more than 2 at once
             quarterCount++;
             if (quarterCount == 2) {
                 quarterCount = 0;
-                showBtn.setDisable(true);
+                showBtn.setDisable(true);//disable button after showing relevant details
             }
         }
         }
 
 
-
-
+    /**
+     * Method(clickedClearBtn) clears the data from the barchart and enable the show button
+     * @param event
+     */
     @FXML
     void clickedClearBtn(MouseEvent event) {
         IncomeReport1.getData().clear();
@@ -167,7 +180,11 @@ public class IncomeReportGUIController implements Initializable {
     }
 
 
-
+    /**
+     * Method(clickedBackBtn) returns to the previous window when button back is clicked and hide the current one
+     * @param event
+     * @throws Exception
+     */
     @FXML
     void clickedBackBtn(MouseEvent event) throws Exception {
         new NewWindowFrameController("CEOGUI").start(new Stage());

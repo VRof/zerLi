@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -65,6 +66,10 @@ public class ServerWindowController {
 	@FXML
 	private TableColumn<Client, String> col_status;
 
+	@FXML
+	private Button importBtn;
+
+
 	private ServerControl sv;
 	private static ObservableList<Client> listOfClients = FXCollections.observableArrayList();;
 	private ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -77,9 +82,41 @@ public class ServerWindowController {
 		txt_ip.setText(InetAddress.getLocalHost().getHostAddress()); // set ip of this pc
 		ClientsTableSet(); // initialise clients table
 		redirectConsole(); // redirect standard system output to server console textfield
+		importBtn.setDisable(true);
 	}
 
-	
+	/**
+	 * Method(clickedImportBtn) activates when clicked import at server GUI and it extracs detaials
+	 * for tables registration,shopmanager,login from external DB filled in csv files
+	 * @param event
+	 */
+	@FXML
+	void clickedImportBtn(ActionEvent event) {
+		Connection dbConn = SqlConnector.getConnection();
+		String SQLregistration = "load data local infile 'src\\\\external\\\\registration.csv' into table registration fields terminated by ','" +
+				"enclosed by '\"'\r\n" +
+				"lines terminated by '\r\n'";
+		String SQLshopmanager = "load data local infile 'src\\\\external\\\\shopmanager.csv' into table shopmanager fields terminated by ','" +
+				"enclosed by '\"'\r\n" +
+				"lines terminated by '\r\n'";
+		String SQLloginManagers = "load data local infile 'src\\\\external\\\\loginmanagers.csv' into table login fields terminated by ','" +
+				"enclosed by '\"'\r\n" +
+				"lines terminated by '\r\n'";
+
+		try{
+			dbConn.createStatement().executeUpdate(SQLregistration);
+			dbConn.createStatement().executeUpdate(SQLshopmanager);
+			dbConn.createStatement().executeUpdate(SQLloginManagers);
+			importBtn.setDisable(true);
+		}catch(SQLException e){
+			System.out.println("ERROR IMPORTING DATA :" + e);
+		}
+
+
+	}
+
+
+
 	@FXML
 	void btnConnectClick(ActionEvent event) {
 		String[] args = { txt_dbPath.getText(), txt_username.getText(), txt_password.getText() }; // get connection data
@@ -91,6 +128,7 @@ public class ServerWindowController {
 		ServerControl.setConnection(sv); //start server
 		btn_connect.setDisable(true);
 		btn_disconnect.setDisable(false);
+		importBtn.setDisable(false);
 		try {
 			sv.listen(); //start listening for clients
 		} catch (IOException e) {
@@ -107,6 +145,7 @@ public class ServerWindowController {
 			System.out.println("Disconnected"); //check if everything is closed
 		btn_connect.setDisable(false);
 		btn_disconnect.setDisable(true);
+		importBtn.setDisable(false);
 	}
 
 	@FXML

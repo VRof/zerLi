@@ -6,6 +6,8 @@ import clientClasses.Message;
 import clientClasses.WantedReport;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -18,9 +20,12 @@ import javafx.stage.Stage;
 import javax.sql.rowset.CachedRowSet;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ViewReportsGUIController implements Initializable {
+
 
     @FXML
     private ChoiceBox<String> shopName;
@@ -40,6 +45,9 @@ public class ViewReportsGUIController implements Initializable {
     private ImageView backBtn;
 
     @FXML
+    private ImageView viewMonthlyReportsBtn;
+
+    @FXML
     private Label errorLbl;
 
     public ClientController cc = ClientController.getClientController();
@@ -47,7 +55,22 @@ public class ViewReportsGUIController implements Initializable {
     public static ViewReportsGUIController controller;
     private String userType = "";
 
+    public ObservableList<String> getShops() {
+        return shops;
+    }
 
+    ObservableList<String> shops;
+
+    /**
+     * Method(initialize) initialize the window of view orders add shops depends on the user who logged in
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
        controller = this;
@@ -57,6 +80,7 @@ public class ViewReportsGUIController implements Initializable {
         msg.setCommand("viewReports");
         msg.setMsg("aa");
         cc.send(msg);
+        List<String> tempShops = new ArrayList<>();
 
         while (cc.awaitResponse) ; //wait for data from server
         cachedMsg = (CachedRowSet) (cc.messageFromServer.getMsg()); //message received from server (row from cancellationrequests table)
@@ -64,10 +88,13 @@ public class ViewReportsGUIController implements Initializable {
         try {
             while (cachedMsg.next()) { //get user data
                 shopName.getItems().add(cachedMsg.getString("shop"));
+                tempShops.add(cachedMsg.getString("shop"));
+
             }
         } catch (SQLException e) {
             System.out.println("Error read data from server " + e);
         }
+        shops = FXCollections.observableArrayList(tempShops);
         reportType.getItems().add("Income report");
         reportType.getItems().add("Orders report");
         reportType.getItems().add("Complaint report");
@@ -88,6 +115,13 @@ public class ViewReportsGUIController implements Initializable {
 
 
     }
+
+    /**
+     * Method(clickedSearchBtn) activates when search button is pressed
+     * checks if the fields are filled and displays the desired report
+     * @param event
+     * @throws Exception
+     */
     @FXML
     void clickedSearchBtn(MouseEvent event) throws Exception {
 
@@ -129,8 +163,27 @@ public class ViewReportsGUIController implements Initializable {
         }
     }
 
+    /**
+     * Method(clickedViewMonthlyReportsBtn) when clicked on button moves the user to a new window
+     * @param event
+     * @throws Exception
+     */
+    @FXML
+    void clickedViewMonthlyReportsBtn(MouseEvent event) throws Exception {
+        NewWindowFrameController reportsWindow = new NewWindowFrameController("viewMonthlyReports");
+        reportsWindow.start(new Stage());
+        Stage stage = (Stage) errorLbl.getScene().getWindow();
+        ClientController.savedWindows.setViewReportsWindow(stage);
+        stage.hide();
 
+    }
 
+    /**
+     * Method(clickedBackBtn) return to the previous window depends on what user were connected because its a shared window
+     * between 2 users
+     * @param event
+     * @throws Exception
+     */
     @FXML
     void clickedBackBtn(MouseEvent event) throws Exception {
         if(userType.equals("shopmanager")) {
@@ -156,6 +209,10 @@ public class ViewReportsGUIController implements Initializable {
         cc.enteredButton(searchBtn);
 
     }
+    @FXML
+    void enteredViewMonthlyReportsBtn(MouseEvent event) {
+        cc.enteredButton(viewMonthlyReportsBtn);
+    }
 
     @FXML
     void leavedBackBtn(MouseEvent event) {
@@ -167,7 +224,17 @@ public class ViewReportsGUIController implements Initializable {
         cc.leavedButton(searchBtn);
     }
 
+    @FXML
+    void leavedViewMonthlyReportsBtn(MouseEvent event) {
+        cc.leavedButton(viewMonthlyReportsBtn);
+    }
+
+    /**
+     * Method(getWr) returns details about wanted report
+     * @return
+     */
     public WantedReport getWr() {
         return wr;
     }
+
 }

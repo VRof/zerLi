@@ -3,6 +3,7 @@ package clientGUI;
 import client.ClientController;
 import clientClasses.Message;
 import clientClasses.WantedReport;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -31,6 +32,18 @@ public class SpeceficReportGUIController implements Initializable {
     private TextArea reportType;
     public ClientController cc = ClientController.getClientController();
 
+
+    /**
+     * Method(initialize) initialize the window with relevant details that were filled in previous window
+     * reports GUI and call method ViewReports
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     WantedReport wr = ViewReportsGUIController.controller.getWr();
@@ -41,6 +54,14 @@ public class SpeceficReportGUIController implements Initializable {
 
     }
 
+    /**
+     * Method(ViewReport) contacts server with a request for a report with the relevant details'
+     * user wish to see and display the data into a text area
+     * @param reportType - the type of report user want to see
+     * @param from - from this date
+     * @param to - till this date
+     * @param shopName - name of shop that the user want to see the report for
+     */
     private void ViewReport(String reportType, LocalDate from, LocalDate to, String shopName) {
 
         Message m = new Message();
@@ -84,6 +105,11 @@ public class SpeceficReportGUIController implements Initializable {
         }
     }
 
+    /**
+     * Method(clickedBackBtn) method that moves the user to the previous window "view reports GUI"
+     * after clicking on back button and also hides the current window
+     * @param event
+     */
     @FXML
     void clickedBackBtn(MouseEvent event) {
         Stage stage = (Stage) reportsLbl.getScene().getWindow();

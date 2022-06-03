@@ -50,8 +50,16 @@ public class ComplaintReportGUIController implements Initializable {
     private ChoiceBox<Integer> selectYear;
 
 
-
-
+    /**
+     * Method(initialize) initialize the relevant fields in window when opened
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         selectQuarter.getItems().add(1);
@@ -66,7 +74,12 @@ public class ComplaintReportGUIController implements Initializable {
     }
 
 
-
+    /**
+     *Method(clickedShowBtn) activates when button show is pressed checks if the input from choice boxes is correct
+     * if not its shows relevant msg to the client otherwise send a msg to db to extract the relevant data to fill
+     * a barchart depends on quarters and number of complaints
+     * @param event
+     */
     @FXML
     void clickedShowBtn(MouseEvent event) {
         errorLbl.setText("");
@@ -94,6 +107,7 @@ public class ComplaintReportGUIController implements Initializable {
             monthsInQuarter.setCategories(months);
 
             XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+            series1.setName("shop :"+wr.getShopName());
             series1.getData().add(new XYChart.Data(monthsInQuarter.getCategories().get(0), quarter.getResult1()));
             series1.getData().add(new XYChart.Data(monthsInQuarter.getCategories().get(1), quarter.getResult2()));
             series1.getData().add(new XYChart.Data(monthsInQuarter.getCategories().get(2), quarter.getResult3()));
@@ -101,6 +115,11 @@ public class ComplaintReportGUIController implements Initializable {
         }
     }
 
+    /**
+     * Method(clickedBackBtn) activates when pressing the button back showing the window from before that been
+     * saved (view reports window)
+     * @param event
+     */
     @FXML
     void clickedBackBtn(MouseEvent event) {
         Stage stage = (Stage) ComplaintDiagram.getScene().getWindow();

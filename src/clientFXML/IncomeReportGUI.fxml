@@ -29,15 +29,15 @@
          </image>
       </ImageView>
       <Label layoutX="89.0" layoutY="191.0" text="Diagram:" />
-      <Label layoutX="263.0" layoutY="161.0" text="Quarter:" />
+      <Label layoutX="282.0" layoutY="161.0" text="Quarter:" />
       <ImageView fx:id="showBtn" fitHeight="150.0" fitWidth="200.0" layoutX="621.0" layoutY="553.0" onMouseClicked="#clickedShowBtn" onMouseEntered="#enteredShowBtn" onMouseExited="#leavedShowBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/button_show.png" />
          </image>
       </ImageView>
-      <ChoiceBox fx:id="quarter1" layoutX="328.0" layoutY="156.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="shop1" layoutX="328.0" layoutY="111.0" prefWidth="150.0" />
-      <Label layoutX="270.0" layoutY="116.0" text="Shop:" />
+      <ChoiceBox fx:id="quarter1" layoutX="347.0" layoutY="156.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="shop1" layoutX="347.0" layoutY="111.0" prefWidth="150.0" />
+      <Label layoutX="289.0" layoutY="116.0" text="Shop:" />
       <BarChart fx:id="IncomeReport1" alternativeColumnFillVisible="true" animated="false" categoryGap="30.0" layoutY="232.0" prefHeight="321.0" prefWidth="821.0">
          <xAxis>
             <CategoryAxis fx:id="incomeMonths" animated="false" endMargin="0.0" label="Months" side="BOTTOM" startMargin="0.0" />
@@ -46,19 +46,22 @@
             <NumberAxis fx:id="income1" animated="false" label="Income" side="LEFT" />
          </yAxis>
       </BarChart>
-      <ChoiceBox fx:id="year1" layoutX="328.0" layoutY="195.0" prefWidth="150.0" />
-      <Label layoutX="280.0" layoutY="200.0" text="Year:" />
-      <Text layoutX="328.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Income report" wrappingWidth="200.00000149011612">
+      <ChoiceBox fx:id="year1" layoutX="347.0" layoutY="195.0" prefWidth="150.0" />
+      <Label layoutX="299.0" layoutY="200.0" text="Year:" />
+      <Text layoutX="292.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Income report" wrappingWidth="222.00000149011612">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <Text layoutX="542.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here you can chose show income reports.At any time you can press &quot;Clear&quot; to clear the diagram" wrappingWidth="200.00000149011612" />
+      <Text layoutX="100.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Here you can choose up to 2 different income reports at a time (for comparison) " wrappingWidth="579.0000014901161">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
       <ImageView fx:id="clearBtn" fitHeight="150.0" fitWidth="200.0" layoutX="621.0" layoutY="601.0" onMouseClicked="#clickedClearBtn" onMouseEntered="#enteredClearBtn" onMouseExited="#leavedClearBtn" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/button_clear.png" />
          </image>
       </ImageView>
-      <Label fx:id="errorLbl" layoutX="328.0" layoutY="226.0" prefHeight="21.0" prefWidth="191.0" text="lable" textFill="RED" />
+      <Label fx:id="errorLbl" layoutX="328.0" layoutY="226.0" prefHeight="21.0" prefWidth="191.0" textFill="RED" />
    </children>
 </AnchorPane>

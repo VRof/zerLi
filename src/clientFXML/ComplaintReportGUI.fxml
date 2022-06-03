@@ -38,9 +38,9 @@
                </image>
             </ImageView>
             <ChoiceBox fx:id="selectQuarter" layoutX="376.0" layoutY="134.0" prefWidth="150.0" />
-            <Label layoutX="358.0" layoutY="81.0" text="Complaint Report">
+            <Label layoutX="317.0" layoutY="68.0" text="Complaint Report">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="30.0" />
                </font></Label>
             <BarChart fx:id="ComplaintDiagram" categoryGap="30.0" layoutX="164.0" layoutY="231.0" prefHeight="321.0" prefWidth="500.0">
               <xAxis>
