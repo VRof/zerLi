@@ -123,7 +123,7 @@
             <Image url="@../pictures/pina3.png" />
          </image>
       </ImageView>
-      <Label fx:id="lbl_msg" layoutX="356.0" layoutY="677.0" prefHeight="27.0" prefWidth="628.0" text="message" textFill="RED">
+      <Label fx:id="lbl_msg" layoutX="356.0" layoutY="701.0" prefHeight="27.0" prefWidth="628.0" text="message" textFill="RED">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -177,5 +177,6 @@
             </ImageView>
          </children>
       </AnchorPane>
+      <Label fx:id="lbl_msgDiscount" layoutX="581.0" layoutY="655.0" text="Label" textFill="#15d798" />
    </children>
 </AnchorPane>

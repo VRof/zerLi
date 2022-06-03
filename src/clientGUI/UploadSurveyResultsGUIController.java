@@ -4,6 +4,7 @@ import client.ClientController;
 import clientClasses.Message;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -15,13 +16,20 @@ import java.util.Objects;
 
 import static client.ClientController.savedWindows;
 
+/**
+ *
+ *  Upload Survey Result - Marketing Worker can upload survey result for customers using this window,
+ *  user will be able to choose specific survey and then answer results
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
 public class UploadSurveyResultsGUIController {
 
     @FXML
     private ChoiceBox<Integer> dr_surveyNumber;
-
-    @FXML
-    private TextField lbl_surveyDate;
 
     @FXML
     private Label lbl_q1;
@@ -71,18 +79,22 @@ public class UploadSurveyResultsGUIController {
     private Message msg = new Message();
     private ClientController conn = ClientController.getClientController();
 
+
     /**
+     * initialize function sets up labels in GUI and calls seUpWindow function to set up all relative values
      *
      */
     @FXML
     public void initialize() throws SQLException {
         lbl_error.setText("");
-        lbl_surveyDate.setText("");
         seUpWindow();
     }
 
     /**
-     * seUpWindow -
+     * seUpWindow - set up the choice boxes with suitable values,
+     *  user enters the number of survey to upload the questions in the GUI
+     *  If there is no question available for specific survey, user will see suitable message.
+     *
      */
     private void seUpWindow(){
         for (Integer i = 1 ; i<=10 ; i++) {
@@ -105,7 +117,10 @@ public class UploadSurveyResultsGUIController {
     }
 
     /**
-     * setSurveyQuestions -
+     * setSurveyQuestions - controller send message to server to collect data from database for specific survey
+     *
+     * @param value Integer value(number of survey)
+     * @throws SQLException - if CachedRowSet is not right, exception will be thrown
      */
     private void setSurveyQuestions(Integer value) throws SQLException {
         msg.setCommand("setSurveyQuestions"); msg.setMsg(value);
@@ -125,6 +140,7 @@ public class UploadSurveyResultsGUIController {
 
     /**
      *  clickedBackBtn - click in "<--" button to get back to user original window
+     *
      *  @param event - entering the button with the mouse
      */
     @FXML
@@ -137,7 +153,9 @@ public class UploadSurveyResultsGUIController {
     }
 
     /**
-     * clickedUploadResultBtn -
+     * clickedUploadResultBtn - save all answers and send to server in order to save into table for survey answers .
+     * if one of the info is empty, suitable message will show in window
+     *
      * @param event - entering the button with the mouse
      */
     @FXML
@@ -146,18 +164,15 @@ public class UploadSurveyResultsGUIController {
         String date;
         Object message[] = new Object[2];
         if (dr_q1.getValue()!=null && dr_q2.getValue()!=null && dr_q3.getValue()!=null && dr_q4.getValue()!=null && dr_q5.getValue()!=null && dr_q6.getValue()!=null){
-            if (!Objects.equals(lbl_surveyDate.getText(),"")){
                 answers[0] = dr_surveyNumber.getValue();
                 answers[1] = dr_q1.getValue(); answers[2] = dr_q2.getValue();
                 answers[3] = dr_q3.getValue(); answers[4] = dr_q4.getValue();
                 answers[5] = dr_q5.getValue(); answers[6] = dr_q6.getValue();
-                date = lbl_surveyDate.getText();
-                message[0] = answers; message[1] = date;
+                message[0] = answers;
                 msg.setCommand("insertSurveyAnswers"); msg.setMsg(message);
                 conn.send(msg);
                 while(conn.awaitResponse);
                 lbl_error.setText("Answers inserted successfully!");
-            } else{ lbl_error.setText("Please fill survey date!"); }
         } else{ lbl_error.setText("Please fill all answers!"); }
     }
 
