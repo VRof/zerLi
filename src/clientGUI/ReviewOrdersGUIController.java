@@ -8,9 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -18,6 +16,7 @@ import javafx.stage.Stage;
 
 import javax.sql.rowset.CachedRowSet;
 import java.net.URL;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
@@ -67,7 +66,7 @@ public class ReviewOrdersGUIController implements Initializable {
     }
 
     @FXML
-    void clickedConfirmBtn(MouseEvent event) {
+    void clickedConfirmBtn(MouseEvent event) throws SQLException {
         Message m = new Message();
         int savedOrderID = 0;
         try {
@@ -83,12 +82,37 @@ public class ReviewOrdersGUIController implements Initializable {
 
         if (savedOrderID==0)
             stringShownInErrorLabel = "Please select order !";
-        else
+        else {
             stringShownInErrorLabel = String.format("Order %d is confirmed", savedOrderID);
+            m.setCommand("getInfo");
+            m.setMsg(savedOrderID);
+            cc.send(m);// send the row key (orderId)
+            while (cc.awaitResponse);
+            CachedRowSet cachedMsg1 = (CachedRowSet) (cc.messageFromServer.getMsg());
+    String s1="",s2="";
+/*add email*/while(cachedMsg1.next()){
+              s1=cachedMsg1.getString("phonenumber");
+             s2=cachedMsg1.getString("email");
+            }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setResizable(true);
+            alert.setHeight(600);
+            alert.setTitle("Confirmation Message");
+            alert.setHeaderText(stringShownInErrorLabel);
+            alert.setContentText("Confirmation message sent to customer "+ordersTable.getSelectionModel().getSelectedItem().getFirstName()+" " +ordersTable.getSelectionModel().getSelectedItem().getLastName()
+                    +", phone number: "+s1+" Email : "+s2+"\nOrder :"+savedOrderID+" is confirmed by the manager.");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+        }
 
         errorLbl.setText(stringShownInErrorLabel);
         while (cc.awaitResponse) ; //wait for data from server
             refresh();
+
+
 
     }
     public void refresh(){

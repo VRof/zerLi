@@ -40,5 +40,10 @@
       <Label layoutX="146.0" layoutY="302.0" prefHeight="21.0" prefWidth="82.0" text="To date:" />
       <DatePicker fx:id="toDate" layoutX="241.0" layoutY="297.0" prefHeight="25.0" prefWidth="150.0" promptText="Date" />
       <Label fx:id="errorLbl" layoutX="221.0" layoutY="400.0" prefHeight="21.0" prefWidth="190.0" />
+      <ImageView fx:id="viewMonthlyReportsBtn" fitHeight="45.0" fitWidth="190.0" layoutX="419.0" layoutY="411.0" onMouseClicked="#clickedViewMonthlyReportsBtn" onMouseEntered="#enteredViewMonthlyReportsBtn" onMouseExited="#leavedViewMonthlyReportsBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/monthlyReportsBtn.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

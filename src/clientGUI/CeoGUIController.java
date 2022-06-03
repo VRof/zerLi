@@ -27,13 +27,22 @@ public class CeoGUIController implements Initializable {
     private ImageView viewSpecificShopReportBtn;
     public ClientController cc =ClientController.getClientController();
 
-
+    /**
+     * method(clickedLogoutBtn)logout activated when logout button is pressed
+     * @param event
+     */
     @FXML
     void clickedLogoutBtn(MouseEvent event) {
         Stage stage = (Stage)welcomeCeoLbl.getScene().getWindow();
         cc.logout(stage);
     }
 
+    /**
+     * method(clickedViewAnnualReport) opens aa new qindow income report GUI after pressing the button
+     * view annual report clicked
+     * @param event
+     * @throws Exception
+     */
     @FXML
     void clickedViewAnnualReport(MouseEvent event) throws Exception {
         NewWindowFrameController customerWindow = new NewWindowFrameController("IncomeReportGUI");
@@ -43,6 +52,12 @@ public class CeoGUIController implements Initializable {
 
     }
 
+    /**
+     * Method(clickedViewSpecificShopReportBtn) opens a new window view reports GUI when
+     * view specific report is pressed
+     * @param event
+     * @throws Exception
+     */
     @FXML
     void clickedViewSpecificShopReportBtn(MouseEvent event) throws Exception {
         NewWindowFrameController customerWindow = new NewWindowFrameController("ViewReportsGUI");
@@ -85,6 +100,16 @@ public class CeoGUIController implements Initializable {
         cc.leavedButton(viewSpecificShopReportBtn);
     }
 
+    /**
+     * Method(initialize) to initialize the window when opened and set text for label
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //we can add and option to get the name of the ceo

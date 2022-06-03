@@ -8,9 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -123,7 +121,7 @@ public class ReviewCancellationGUIController implements Initializable {
 
 
     @FXML
-    void clickedConfirmCancellationBtn(MouseEvent event) {
+    void clickedConfirmCancellationBtn(MouseEvent event) throws SQLException {
         Message m = new Message();
 
 
@@ -138,12 +136,12 @@ public class ReviewCancellationGUIController implements Initializable {
         m.setMsg(savedOrderID);
         cc.send(m);// send the row key (orderId)
         String stringShownInErrorLabel;
-
+        String s1="",s2="";
         if (savedOrderID==0)
             stringShownInErrorLabel = "Please select order !";
-        else
+        else {
             stringShownInErrorLabel = String.format("Order %d is deleted", savedOrderID);
-
+        }
         errorLbl.setText(stringShownInErrorLabel);
 
 
@@ -151,6 +149,27 @@ public class ReviewCancellationGUIController implements Initializable {
         if(cc.messageFromServer.getCommand().equals("refund")) {
             double refund = (double)cc.messageFromServer.getMsg();
             overAllRefund.setText("Refunded :" + refund);
+            m.setCommand("getInfo");
+            m.setMsg(savedOrderID);
+            cc.send(m);// send the row key (orderId)
+            while (cc.awaitResponse);
+            CachedRowSet cachedMsg1 = (CachedRowSet) (cc.messageFromServer.getMsg());
+            /*add email*/while(cachedMsg1.next()){
+                s1=cachedMsg1.getString("phonenumber");
+                s2=cachedMsg1.getString("email");
+            }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setResizable(true);
+            alert.setHeight(600);
+            alert.setTitle("Confirmation Message");
+            alert.setHeaderText(stringShownInErrorLabel);
+            alert.setContentText("Cancellation message sent to customer "+cancellationRequests.getSelectionModel().getSelectedItem().getFirstName()+" " +cancellationRequests.getSelectionModel().getSelectedItem().getLastName()
+                    +", phone number: "+s1+" Email : "+s2+"\nOrder :"+savedOrderID+" is cancelled by the manager.\nTotal refund : "+refund+"");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
 
             refresh();
         }

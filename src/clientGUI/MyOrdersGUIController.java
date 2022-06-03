@@ -126,6 +126,7 @@ public class MyOrdersGUIController {
             e.printStackTrace();
         }
         tbl_orders.setItems(ordersList);
+        tbl_orders.refresh();
     }
 
 
@@ -138,7 +139,11 @@ public class MyOrdersGUIController {
         if (selectedOrder != null) {
             if (selectedOrder.getStatus().equals("pending cancellation")) {
                 lbl_cancelation.setText("Cancellation request already exists for order " + selectedOrder.getOrderNumber());
-            } else {
+            }else
+                if (selectedOrder.getStatus().equals("cancelled")){
+                    lbl_cancelation.setText("Order "+ selectedOrder.getOrderNumber() +" is already cancelled ");
+                }
+                    else {
                 lbl_cancelation.setText("Cancellation request created for order number " + selectedOrder.getOrderNumber());
                 Message msgToServer = new Message();
                 msgToServer.setCommand("CreateCancellationRequest");
