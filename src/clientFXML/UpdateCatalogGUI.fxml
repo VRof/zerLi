@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.UpdateCatalogGUIController">
+<AnchorPane prefHeight="427.0" prefWidth="362.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.UpdateCatalogGUIController">
    <children>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -19,11 +19,34 @@
             <Image url="@../pictures/pina3.png" />
          </image>
       </ImageView>
-      <Label layoutX="314.0" layoutY="53.0" text="Update Catalog">
+      <Label layoutX="290.0" layoutY="44.0" text="Update Catalog">
          <font>
-            <Font size="25.0" />
+            <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="386.0" layoutY="487.0" text="Label" />
+      <Label fx:id="lbl_error" layoutX="313.0" layoutY="310.0" prefHeight="17.0" prefWidth="458.0" text="Please enter Discount Val!" textFill="#d71616" AnchorPane.bottomAnchor="292.0" AnchorPane.leftAnchor="313.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="310.0" />
+      <Label layoutX="131.0" layoutY="154.0" text="Enter discount amount">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="143.0" layoutY="227.0" text="Discount Persent:" />
+      <ImageView fx:id="btn_activeDiscount" fitHeight="51.0" fitWidth="204.0" layoutX="142.0" layoutY="377.0" onMouseClicked="#clickedActiveDiscountBtn" onMouseEntered="#enteredActiveDiscountBtn" onMouseExited="#leavedActiveDiscountBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_active-discount.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="btn_back" fitHeight="70.0" fitWidth="85.0" layoutX="42.0" layoutY="507.0" onMouseClicked="#clickedBackBtn" onMouseEntered="#enteredBackBtn" onMouseExited="#leavedBackBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_back.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="btn_inactiveDiscount" fitHeight="130.0" fitWidth="216.0" layoutX="484.0" layoutY="377.0" onMouseClicked="#clickedInactiveDiscountBtn" onMouseEntered="#enteredInactiveDiscountBtn" onMouseExited="#leavedInactiveDiscountBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_inactive-discount.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txt_p" layoutX="244.0" layoutY="223.0" prefHeight="25.0" prefWidth="36.0" />
+      <Label layoutX="281.0" layoutY="227.0" text="\%" />
    </children>
 </AnchorPane>

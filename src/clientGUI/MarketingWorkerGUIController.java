@@ -8,6 +8,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+/**
+ *
+ *  Marketing Worker Controller - made for users from type "Marketing Worker",
+ *  the controller include 2 buttons, User can "Update catalog"/"Upload Survey Results"
+ *  using specific window, if there is an error, a suitable message will be shown.
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
 public class MarketingWorkerGUIController {
 
     @FXML
@@ -25,7 +36,7 @@ public class MarketingWorkerGUIController {
 
     private ClientController conn = ClientController.getClientController();
     /**
-     *
+     * set up window
      */
     @FXML
     public void initialize() { lbl_userName.setText("Hello " + ClientController.userLoginData.getUsername()); }
@@ -47,7 +58,7 @@ public class MarketingWorkerGUIController {
      * @throws Exception - if error while creating new window
      */
     @FXML
-    void clickedUpdateCatalogBtn(MouseEvent event) throws Exception  { newWindow("UploadSurveyResultsGUI"); }
+    void clickedUpdateCatalogBtn(MouseEvent event) throws Exception  { newWindow("UpdateCatalogGUI"); }
 
     /**
      * clickedInsertComplaintBtn - user click on this button to pen "Upload Survey Results" window
@@ -60,7 +71,6 @@ public class MarketingWorkerGUIController {
     /**
      * enteredLogoutBtn - function for making shadow for button
      * @param event - entering the button with the mouse
-     *
      */
     @FXML
     void enteredLogoutBtn(MouseEvent event) { conn.enteredButton(btn_logout); }

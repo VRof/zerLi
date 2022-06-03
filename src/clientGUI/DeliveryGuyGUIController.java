@@ -5,10 +5,7 @@ import clientClasses.Message;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,6 +14,17 @@ import javax.sql.rowset.CachedRowSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+/**
+ *
+ *  Delivery Guy Controller - made for users from type "delivery Guy",
+ *  the controller include a big table with all order for specific user id
+ *  User can confirm delivery in using the table, if there is an error, a suitable message will be shown.
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
 public class DeliveryGuyGUIController {
 
     @FXML
@@ -189,14 +197,29 @@ public class DeliveryGuyGUIController {
      * Asking server to change some data In DB
      */
     private void confirmDelivery() {
-        Message msg = new Message();
+        Message msg = new Message();  Alert alert = new Alert(Alert.AlertType.INFORMATION);
         int[] orderData = new int[2];
+        CachedRowSet msgFromServer;
+        String userphnum = "",mail= "",fname="",lname="";
         orderData[0] = ClientController.userLoginData.getUserid();
         orderData[1] = Integer.parseInt(valOrder);
         msg.setCommand("confirmDelivery");
         msg.setMsg((Object)orderData);
         conn.send(msg);
         while(conn.awaitResponse);
+        msgFromServer= (CachedRowSet) (conn.messageFromServer.getMsg());
+        try { while (msgFromServer.next()) {
+                fname = msgFromServer.getString("firstname");
+                lname = msgFromServer.getString("lastname");
+                userphnum = msgFromServer.getString("phonenumber");
+                mail = msgFromServer.getString("email");
+            }}
+        catch (SQLException e) { System.out.println("Error read data from server " + e);}
+        alert.setTitle("Confirmation Details");
+        alert.setHeaderText("Delivery Confirmed!");
+        fname =fname +" "+lname;
+        alert.setContentText("Confirmation message has been sent to user \n" +"User Details : "+fname+"\nPhone number: "+ userphnum +"\nEmail: "+mail );
+        alert.showAndWait().ifPresent(rs -> { if (rs == ButtonType.OK) { System.out.println("deliver Confirmed"); }});
         lbl_errorMSG.setText("Delivery Confirmed Successfully!");
         initialize();
     }

@@ -24,8 +24,8 @@
          <font>
             <Font size="15.0" />
          </font></Label>
-        <Label fx:id="lbl_errorMSG" layoutX="361.0" layoutY="548.0" prefHeight="31.0" prefWidth="200.0" text="error text" textFill="RED" />
-        <Label fx:id="lbl_intro" layoutX="296.0" layoutY="25.0" text="Delivery Guy 3" textFill="#15d798">
+        <Label fx:id="lbl_errorMSG" layoutX="338.0" layoutY="534.0" prefHeight="31.0" prefWidth="200.0" text="error text" textFill="RED" />
+        <Label fx:id="lbl_intro" layoutX="296.0" layoutY="25.0" text="Delivery Guy 3" textFill="#272b2c">
             <font>
                 <Font size="30.0" />
             </font>

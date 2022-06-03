@@ -18,7 +18,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
 import javax.imageio.ImageIO;
 import javax.sql.rowset.CachedRowSet;
 import java.awt.image.BufferedImage;
@@ -96,8 +95,12 @@ public class NewOrderGUIController {
 
     @FXML
     private ImageView btn_editCustomOrCreateAnotherOne_Custom;
+
     @FXML
     private Tab tab_custom;
+
+    @FXML
+    private Label lbl_msgDiscount;
 
     private ObservableList<ItemInNewOrder> itemsListInOurItemsTab;
     private ObservableList<ItemInNewOrder> itemsListInCustomTab;
@@ -114,6 +117,7 @@ public class NewOrderGUIController {
         String[] colors = {"all", "red", "blue", "yellow", "purple", "pink", "white"};
         String[] prices = {"all", "< 10 ₪", "< 15 ₪", "< 20 ₪", "< 30 ₪", "< 100 ₪", "< 150 ₪", "< 200 ₪"};
         String[] types = {"all", "bundles", "flowers"};
+        lbl_msgDiscount.setText("");
         cBox_color_Custom.setItems(FXCollections.observableArrayList(colors));
         cBox_color_OurItems.setItems(FXCollections.observableArrayList(colors));
         cBox_price_Custom.setItems(FXCollections.observableArrayList(prices));
@@ -126,8 +130,18 @@ public class NewOrderGUIController {
         cBox_price_OurItems.setValue("all");
         cBox_type_Custom.setValue("all");
         cBox_type_OurItems.setValue("all");
+        float num1 = getDiscount();
+        if (num1 != 0.0){ lbl_msgDiscount.setText(num1* 100 +"% Discount Available On All Items!"); }
     }
-
+    private float getDiscount(){
+        Message msg = new Message();
+        msg.setCommand("ifDiscount");
+        msg.setMsg("");
+        ClientController.getClientController().send(msg);
+        while(ClientController.getClientController().awaitResponse);
+        float  msgFromServer = (float)(ClientController.getClientController().messageFromServer.getMsg());
+        return msgFromServer;
+    }
     private void setItems() {
         lbl_msg.setText("Loading items from catalog, please wait..."); //message to user that catalog is loading
         Platform.runLater(new Runnable() { //thread to build catalog without being "stuck" as it can be looked because of the loading time of catalog (pictures at most)
@@ -151,7 +165,6 @@ public class NewOrderGUIController {
                         ClientController.getClientController().send(getpic);
                         while (ClientController.awaitResponse) ;
                         //-------------------------------------------------------------------------
-
                         //----convert picture, set it size to 200x200 pixels-----------------------
                         byte[] bytearr = (byte[]) ClientController.messageFromServer.getMsg();
                         ByteArrayInputStream bis = new ByteArrayInputStream(bytearr);
@@ -237,18 +250,13 @@ public class NewOrderGUIController {
         Stage thisStage = (Stage) btn_back.getScene().getWindow();
         thisStage.hide();
         NewWindowFrameController customerWindow = new NewWindowFrameController("CustomerGUI");
-        customerWindow.start(new Stage());
-    }
+        customerWindow.start(new Stage());}
 
     @FXML
-    void clickedBtnSort_Custom(MouseEvent event) {
-        sortItems("Custom");
-    }
+    void clickedBtnSort_Custom(MouseEvent event) { sortItems("Custom"); }
 
     @FXML
-    void clickedBtnSort_OurItems(MouseEvent event) {
-        sortItems("OurItems");
-    }
+    void clickedBtnSort_OurItems(MouseEvent event) { sortItems("OurItems"); }
 
     private void sortItems(String selectedTab) {
         String color = "";
@@ -372,31 +380,26 @@ public class NewOrderGUIController {
     @FXML
     void enteredBackBtn(MouseEvent event) {
         ClientController.getClientController().enteredButton(btn_back);
-
     }
 
     @FXML
     void enteredBtnSort_Custom(MouseEvent event) {
         ClientController.getClientController().enteredButton(btn_Sort_Custom);
-
     }
 
     @FXML
     void enteredBtnSort_OurItems(MouseEvent event) {
         ClientController.getClientController().enteredButton(btn_sort_OurItems);
-
     }
 
     @FXML
     void enteredChooseItems_Custom(MouseEvent event) {
         ClientController.getClientController().enteredButton(btn_chooseItems_Custom);
-
     }
 
     @FXML
     void enteredEditCustomOrCreateAnotherOneBtn(MouseEvent event) {
         ClientController.getClientController().enteredButton(btn_editCustomOrCreateAnotherOne_Custom);
-
     }
 
     @FXML

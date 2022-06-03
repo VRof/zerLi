@@ -2,12 +2,10 @@
 
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.UploadSurveyResultsGUIController">
    <children>
@@ -21,16 +19,14 @@
             <Image url="@../pictures/pina3.png" />
          </image>
       </ImageView>
-      <Label layoutX="272.0" layoutY="67.0" prefHeight="44.0" prefWidth="257.0" text="Upload Survey Reuslts">
+      <Label layoutX="272.0" layoutY="67.0" prefHeight="45.0" prefWidth="318.0" text="Upload Survey Reuslts">
          <font>
-            <Font size="25.0" />
+            <Font name="System Bold" size="30.0" />
          </font>
       </Label>
       <ChoiceBox fx:id="dr_surveyNumber" layoutX="228.0" layoutY="221.0" prefHeight="25.0" prefWidth="44.0" />
       <Label layoutX="122.0" layoutY="225.0" text="Survey Number:" />
       <Label layoutX="123.0" layoutY="275.0" text="Question 1:" />
-      <TextField fx:id="lbl_surveyDate" layoutX="458.0" layoutY="221.0" prefHeight="25.0" prefWidth="85.0" text="22/05/2022" />
-      <Label layoutX="368.0" layoutY="225.0" text="Survey Date:" />
       <Label layoutX="123.0" layoutY="311.0" text="Question 2:" />
       <Label layoutX="123.0" layoutY="341.0" text="Question 3:" />
       <Label layoutX="123.0" layoutY="374.0" text="Question 4:" />
@@ -59,9 +55,9 @@
             <Image url="@../pictures/button_upload-result.png" />
          </image>
       </ImageView>
-      <Label layoutX="89.0" layoutY="164.0" text="Please fill Survey Number and date" textFill="#15d798">
+      <Label layoutX="113.0" layoutY="154.0" text="Please fill Survey Number and date">
          <font>
-            <Font size="15.0" />
+            <Font size="14.0" />
          </font>
       </Label>
    </children>
