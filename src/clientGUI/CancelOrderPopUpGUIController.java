@@ -1,8 +1,6 @@
 package clientGUI;
 
 import client.ClientController;
-import clientClasses.Message;
-import clientClasses.Order;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;

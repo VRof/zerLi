@@ -3,8 +3,8 @@ package clientGUI;
 
 import client.ClientController;
 import client.NewWindowFrameController;
-import client.Quarter;
-import clientClasses.Message;
+import commonClasses.Message;
+import commonClasses.Quarter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

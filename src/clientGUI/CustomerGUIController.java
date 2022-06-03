@@ -2,6 +2,7 @@ package clientGUI;
 
 import client.ClientController;
 import client.NewWindowFrameController;
+import commonClasses.Message;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -29,9 +30,30 @@ public class CustomerGUIController {
     private Label lbl_balance;
 
     @FXML
+    private Label lbl_discount;
+
+    public static CustomerGUIController controller;
+
+    @FXML
     public void initialize() {
+        controller = this;
+        ClientController.userData.setFirstOrder(ifFirstOrder());
+        if(ClientController.userData.isFirstOrder())
+            lbl_discount.setText("You have 20% discount on first order!");
+        else
+            lbl_discount.setText("");
         lbl_username.setText("Hello, " + ClientController.userData.getFirstname() + " " + ClientController.userData.getLastname());
         lbl_balance.setText("Your balance is " + ClientController.userData.getBalance() + " ₪");
+    }
+
+    private boolean ifFirstOrder(){
+        Message msg = new Message();
+        boolean res;
+        msg.setCommand("isFirstOrder");
+        msg.setMsg(ClientController.userLoginData.getUserid());
+        ClientController.getClientController().send(msg);
+        res = (boolean)(ClientController.messageFromServer).getMsg();
+        return res;
     }
 
     @FXML

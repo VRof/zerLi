@@ -2,7 +2,7 @@ package clientGUI;
 
 import client.ClientController;
 import clientClasses.ItemInCatalog;
-import clientClasses.Message;
+import commonClasses.Message;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +22,15 @@ import javax.imageio.ImageIO;
 import javax.sql.rowset.CachedRowSet;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+/**
+ *
+ *  Controller class for ViewCatalogGUI.fxml file
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
 
 public class ViewCatalogGUIController {
 
@@ -49,9 +58,9 @@ public class ViewCatalogGUIController {
 
 
 
-    private GridPane gridPaneBundles;
-    private GridPane gridPaneItems;
-    private ObservableList<ItemInCatalog> itemsList;
+    private GridPane gridPaneBundles; //grid pane for bundles
+    private GridPane gridPaneFlowers; //greid pane for flowers
+    private ObservableList<ItemInCatalog> itemsList; //list of all items in catalog from DB
 
     @FXML
     public void initialize() {
@@ -69,6 +78,7 @@ public class ViewCatalogGUIController {
         Stage thisStage = (Stage) btn_back.getScene().getWindow();
         thisStage.hide();
         ClientController.savedWindows.getClientGUIWindow().show();
+        CustomerGUIController.controller.initialize(); //reload user data
     }
 
     @FXML
@@ -96,22 +106,22 @@ public class ViewCatalogGUIController {
                     newList.add(item);
             }
         }
-        gridPaneItems = new GridPane();
+        gridPaneFlowers = new GridPane();
         int itemsGridPaneRow = 0;
         int itemsGridPaneCol = 0;
         for (ItemInCatalog item : newList) {
-            gridPaneItems.add(item.getItemInCatalogVBox(), itemsGridPaneCol, itemsGridPaneRow);
+            gridPaneFlowers.add(item.getItemInCatalogVBox(), itemsGridPaneCol, itemsGridPaneRow);
             itemsGridPaneCol++;
             if (itemsGridPaneCol == 5) {
                 itemsGridPaneCol = 0;
                 itemsGridPaneRow++;
             }
         }
-        gridPaneItems.setPadding(new Insets(10, 10, 10, 10));
-        gridPaneItems.setHgap(10);
-        gridPaneItems.setVgap(10);
-        gridPaneItems.setStyle("-fx-background-color:  #f7b77c");
-        scrollPaneItems.setContent(gridPaneItems);
+        gridPaneFlowers.setPadding(new Insets(10, 10, 10, 10));
+        gridPaneFlowers.setHgap(10);
+        gridPaneFlowers.setVgap(10);
+        gridPaneFlowers.setStyle("-fx-background-color:  #f7b77c");
+        scrollPaneItems.setContent(gridPaneFlowers);
     }
 
 
@@ -159,7 +169,7 @@ public class ViewCatalogGUIController {
                 /*
                  * ----------------------------------------build catalog UI from items we received-------------------------------------*/
                 gridPaneBundles = new GridPane();
-                gridPaneItems = new GridPane();
+                gridPaneFlowers = new GridPane();
                 int bundleGridPaneRow = 0;
                 int bundleGridPaneCol = 0;
                 int itemsGridPaneRow = 0;
@@ -173,7 +183,7 @@ public class ViewCatalogGUIController {
                             bundleGridPaneRow++;
                         }
                     } else {
-                        gridPaneItems.add(item.getItemInCatalogVBox(), itemsGridPaneCol, itemsGridPaneRow);
+                        gridPaneFlowers.add(item.getItemInCatalogVBox(), itemsGridPaneCol, itemsGridPaneRow);
                         itemsGridPaneCol++;
                         if (itemsGridPaneCol == 5) {
                             itemsGridPaneCol = 0;
@@ -181,11 +191,11 @@ public class ViewCatalogGUIController {
                         }
                     }
                 }
-                gridPaneItems.setPadding(new Insets(10, 10, 10, 10));
-                gridPaneItems.setHgap(10);
-                gridPaneItems.setVgap(10);
-                gridPaneItems.setStyle("-fx-background-color:  #f7b77c");
-                scrollPaneItems.setContent(gridPaneItems);
+                gridPaneFlowers.setPadding(new Insets(10, 10, 10, 10));
+                gridPaneFlowers.setHgap(10);
+                gridPaneFlowers.setVgap(10);
+                gridPaneFlowers.setStyle("-fx-background-color:  #f7b77c");
+                scrollPaneItems.setContent(gridPaneFlowers);
 
                 gridPaneBundles.setPadding(new Insets(10, 10, 10, 10));
                 gridPaneBundles.setHgap(10);

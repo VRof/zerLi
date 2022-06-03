@@ -1,9 +1,9 @@
 package clientGUI;
 
 import client.ClientController;
-import clientClasses.Message;
 import clientClasses.WantedReport;
 import javafx.collections.ObservableList;
+import commonClasses.Message;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;

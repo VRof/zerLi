@@ -1,4 +1,4 @@
-package clientClasses;
+package commonClasses;
 
 import java.sql.Timestamp;
 
@@ -12,7 +12,7 @@ public class CancellationRequest {
     private Timestamp requestDate;
     private Timestamp DeliveryDate;
 
-    public CancellationRequest(int orderID, String firstName, String lastName, String status, double price,Timestamp DeliveryDate, Timestamp requestDate) {
+    public CancellationRequest(int orderID, String firstName, String lastName, String status, double price, Timestamp DeliveryDate, Timestamp requestDate) {
         this.orderID = orderID;
         this.firstName = firstName;
         this.lastName = lastName;

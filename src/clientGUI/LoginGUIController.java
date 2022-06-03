@@ -2,14 +2,13 @@ package clientGUI;
 
 import client.ClientController;
 import client.NewWindowFrameController;
-import clientClasses.Message;
 import clientClasses.UserData;
 import clientClasses.UserLoginData;
+import commonClasses.Message;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -88,7 +87,7 @@ public class LoginGUIController {
         }
         //convert and send to server:
         msg.setCommand("login");
-        msg.setMsg((Object) userData);
+        msg.setMsg(userData);
         connection.send(msg);
         while(connection.awaitResponse); //wait for data from server
 
