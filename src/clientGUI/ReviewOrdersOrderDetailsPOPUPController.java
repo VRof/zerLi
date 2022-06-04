@@ -15,10 +15,9 @@ public class ReviewOrdersOrderDetailsPOPUPController {
     @FXML
     private TextArea txt_orderDetails;
 
-
     @FXML
     public void initialize(){
-        Order selectedOrder =  ReviewOrdersGUIController.controller.getSelectedOrder();
+        Order selectedOrder = ReviewOrdersGUIController.controller.getSelectedOrder();
         txt_orderDetails.setText(selectedOrder.getDetails());
     }
 

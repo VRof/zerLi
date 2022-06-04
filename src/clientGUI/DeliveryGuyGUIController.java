@@ -1,4 +1,5 @@
 package clientGUI;
+
 import client.ClientController;
 import clientClasses.Delivery;
 import commonClasses.Message;
@@ -10,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
 import javax.sql.rowset.CachedRowSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -34,19 +36,12 @@ public class DeliveryGuyGUIController {
     private TableColumn<Delivery, Integer> col_orderID;
 
     @FXML
-    private TableColumn<Delivery, String> col_customerName;
+    private TableColumn<Delivery,Float> col_price;
 
     @FXML
-    private TableColumn<Delivery, String> col_address;
-
+    private TableColumn<Delivery,Timestamp> col_deliveryDate;
     @FXML
-    private TableColumn<Delivery, Timestamp> col_deliveryDate;
-
-    @FXML
-    private TableColumn<Delivery, String> col_phone;
-
-    @FXML
-    private TableColumn<Delivery, Double> col_price;
+    private TableColumn<?, ?> col_shop;
 
     @FXML
     private Label lbl_userName;
@@ -63,18 +58,40 @@ public class DeliveryGuyGUIController {
     @FXML
     private ImageView btn_confirmDelivery;
 
+    @FXML
+    private ImageView btn_orderDetails;
+
     private ClientController conn = ClientController.getClientController();
     private String valOrder = null;
+    private int x=1;
 
     /**
      * GUI Init
      */
     @FXML
     public void initialize() {
-        //this.setUpSQL(); // for later update delivery table !!
+        if (x==1)
+        this.setUpSQL(); // for later update delivery table !!
+        CachedRowSet cachedMsg;
+        String first = "", last = "";
+        //1.send msg to server
+        Message msg = new Message(); //msg to be sent to server
+        msg.setCommand("getName");
+        msg.setMsg(ClientController.userLoginData.getUserid());
+        conn.send(msg);
+        //2.receive from server
+        while (conn.awaitResponse) ; //wait for data from server
+        cachedMsg = (CachedRowSet) (conn.messageFromServer.getMsg());
+        try {
+            while (cachedMsg.next()) {
+                first = cachedMsg.getString("firstname");
+                last = cachedMsg.getString("lastname");
+            }
+        } catch (SQLException e) {
+        }
+        lbl_userName.setText("Hello" + " " + first + " " + last);
         lbl_intro.setText("Delivery Guy " + ClientController.userLoginData.getUserid());
         lbl_errorMSG.setText("");
-        lbl_userName.setText("Hello " + ClientController.userLoginData.getUsername());
         this.getTableFromDB();
     }
 
@@ -82,6 +99,7 @@ public class DeliveryGuyGUIController {
      * setUpSQL -
      */
     private void setUpSQL() {
+        x=0;
         Message msg = new Message();
         msg.setCommand("setUpSQL");
         msg.setMsg(ClientController.userLoginData.getUserid());
@@ -106,8 +124,41 @@ public class DeliveryGuyGUIController {
      */
     @FXML
     void clickedLogoutBtn(MouseEvent event) {
+        Message msg = new Message();
+        msg.setCommand("initTableForDelivery");
+        msg.setMsg(ClientController.userLoginData.getUserid());
+        conn.send(msg);
+        while(conn.awaitResponse);
         Stage stage = (Stage)lbl_userName.getScene().getWindow();
         conn.logout(stage);
+    }
+
+    /**
+     * clickedOrderDetailsBtn - show order details
+     * @param event - mouse click
+     */
+    @FXML
+    void clickedOrderDetailsBtn(MouseEvent event) {
+        Message msg = new Message() ;
+        int val;
+        Alert alert;
+        try{
+            val = Integer.parseInt(valOrder);
+            alert= new Alert(Alert.AlertType.INFORMATION);
+        msg.setCommand("getOrderDetails");
+        msg.setMsg(val);
+        conn.send(msg);
+        CachedRowSet msgFromServer;
+        String details = "";
+        while(conn.awaitResponse);
+        msgFromServer= (CachedRowSet) (conn.messageFromServer.getMsg());
+        try { while (msgFromServer.next()) { details = msgFromServer.getString("dOrder");}}
+        catch (SQLException e) { System.out.println("Error read data from server " + e);}
+        alert.setTitle("Order Details");
+        alert.setHeaderText("Order Number " + valOrder);
+        alert.setContentText(details);
+        alert.showAndWait().ifPresent(rs -> { if (rs == ButtonType.OK) { System.out.println("deliver Confirmed"); }});}
+        catch (Exception e) { lbl_errorMSG.setText("Select order to confirm"); }
     }
 
     /**
@@ -124,6 +175,10 @@ public class DeliveryGuyGUIController {
     @FXML
     void enteredLogoutBtn(MouseEvent event) { conn.enteredButton(btn_logout);}
 
+    @FXML
+    void enteredOrderDetailsBtn(MouseEvent event) {conn.enteredButton(btn_orderDetails); }
+
+
     /**
      * leavedConfirmDeliveryBtn - function ti hide shadow for button
      * @param event - leaving the button with the mouse
@@ -138,17 +193,18 @@ public class DeliveryGuyGUIController {
     @FXML
     void leavedLogoutBtn(MouseEvent event) { conn.leavedButton(btn_logout);}
 
+    @FXML
+    void leavedOrderDetailsBtn(MouseEvent event) {conn.leavedButton(btn_orderDetails); }
+
 
     /**
      * setColumns - this function set up the columns in the table view before values are putted in
      */
     private void setColumns() {
         col_orderID.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
-        col_customerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        col_address.setCellValueFactory(new PropertyValueFactory<>("address"));
-        col_phone.setCellValueFactory(new PropertyValueFactory<>("telephoneNumber"));
         col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
         col_deliveryDate.setCellValueFactory(new PropertyValueFactory<>("deliveryDate"));
+        col_shop.setCellValueFactory(new PropertyValueFactory<>("Shop"));
         DeliveryMenuTable.setOnMouseClicked(click -> {
             try{
             if (click.getClickCount() == 1) {
@@ -179,11 +235,8 @@ public class DeliveryGuyGUIController {
                     Delivery delivery =  new Delivery(
                     msgFromServer.getInt("deliveryGuyID"),
                     msgFromServer.getInt("orderNumber"),
-                    msgFromServer.getString("customerName"),
-                    msgFromServer.getString("customerID"),
-                    msgFromServer.getString("address"),
-                    msgFromServer.getDouble("price"),
-                    msgFromServer.getString("telephoneNumber"),
+                            msgFromServer.getDouble("price"),
+                    msgFromServer.getString("shop"),
                     msgFromServer.getTimestamp("date"),
                     msgFromServer.getString("confirmed"));
                 deliverylist.add(delivery);

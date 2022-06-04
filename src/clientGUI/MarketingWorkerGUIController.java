@@ -2,11 +2,15 @@ package clientGUI;
 
 import client.ClientController;
 import client.NewWindowFrameController;
+import commonClasses.Message;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
+import javax.sql.rowset.CachedRowSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -39,7 +43,26 @@ public class MarketingWorkerGUIController {
      * set up window
      */
     @FXML
-    public void initialize() { lbl_userName.setText("Hello " + ClientController.userLoginData.getUsername()); }
+    public void initialize() {
+        CachedRowSet cachedMsg;
+        String first = "", last = "";
+        //1.send msg to server
+        Message msg = new Message(); //msg to be sent to server
+        msg.setCommand("getName");
+        msg.setMsg(ClientController.userLoginData.getUserid());
+        conn.send(msg);
+        //2.receive from server
+        while (conn.awaitResponse) ; //wait for data from server
+        cachedMsg = (CachedRowSet) (conn.messageFromServer.getMsg());
+        try {
+            while (cachedMsg.next()) {
+                first = cachedMsg.getString("firstname");
+                last = cachedMsg.getString("lastname");
+            }
+        } catch (SQLException e) {
+        }
+        lbl_userName.setText("Hello" + " " + first + " " + last);
+    }
 
     /**
      * * clickedLogoutBtn - user click on this button to log out and then return to log in window
