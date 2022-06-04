@@ -185,9 +185,17 @@ public class ServerControl extends AbstractServer {
             case "getOrderDetails":
                 getOrderDetails(msg,client);
                 break;
-
+            case "setUpSQL":
+                setUpSQL(client);
+                break;
+            case "initTableForDelivery":
+                initTableForDelivery(msg,client);
+                break;
         }
     }
+
+
+
 
     private void getOrderDetails(Object msg, ConnectionToClient client){
         Connection dbConn = SqlConnector.getConnection();
@@ -199,7 +207,6 @@ public class ServerControl extends AbstractServer {
             RowSetFactory factory = RowSetProvider.newFactory();
             rowSet = factory.createCachedRowSet();
             rowSet.populate(rs);
-
             Message msgToClient = new Message();
             msgToClient.setCommand("orders data");
             msgToClient.setMsg((Object) rowSet);
@@ -539,6 +546,39 @@ public class ServerControl extends AbstractServer {
     }
 
     /////// Habib Ibrahim Part | Delivery Guy + Customer Services + Marketing Worker
+
+    /**
+     * initTableForDelivery - init table for delivery guy
+     *
+     * @param msg    -  receives message from client connection
+     */
+    private void initTableForDelivery(Object msg, ConnectionToClient client) {
+        Connection dbConn = SqlConnector.getConnection();
+        Message message = new Message();
+        int userid = (int) ((Message) msg).getMsg();
+        String SQL1 = "DELETE FROM delivery WHERE deliveryGuyID ='"+ userid +"';";
+        try {
+            dbConn.createStatement().executeUpdate(SQL1);
+            message.setCommand("");
+            message.setMsg("Done");
+            client.sendToClient(message);
+        } catch (SQLException | IOException e) { System.out.println("error data to client " + client + " error " + e); }
+    }
+    /**
+     * setUpSQL - set up data for delivery guy in table
+     *
+     */
+    private void setUpSQL(ConnectionToClient client) {
+        Connection dbConn = SqlConnector.getConnection();
+        Message message = new Message();
+        String SQL1 = "INSERT INTO delivery (orderNumber,price,date,shop) SELECT orderNumber,price,deliveryDate,shop FROM orders WHERE status = 'pending for delivery' AND confirmed = 'yes';";
+        try {
+            dbConn.createStatement().executeUpdate(SQL1);
+            message.setCommand("");
+            message.setMsg("Done");
+            client.sendToClient(message);
+        } catch (SQLException | IOException e) { System.out.println("error data to client " + client + " error " + e); }
+    }
 
     /**
      * DistinctiveDiscount - ends the discount, return origin price to catalog, update all filed as in origin

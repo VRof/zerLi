@@ -4,32 +4,27 @@ public class Delivery {
 
     private int deliveryGuyID;
     private int orderNumber;
-    private String customerName;
-    private String customerID;
-
-
-
-    private String address;
     private double price;
-    private String telephoneNumber;
     private Timestamp deliveryDate;
     private String confirmed;
+    private String shop;
 
-    public Delivery(){}
-    public Delivery(int deliveryGuyID, int orderNumber, String customerName, String customerID, String address, double price, String telephoneNumber, Timestamp deliveryDate, String confirmed) {
+    public Delivery(int deliveryGuyID, int orderNumber,double price,String shop, Timestamp deliveryDate, String confirmed) {
         this.deliveryGuyID = deliveryGuyID;
         this.orderNumber = orderNumber;
-        this.customerName = customerName;
-        this.customerID = customerID;
-        this.address = address;
         this.price = price;
-        this.telephoneNumber = telephoneNumber;
         this.deliveryDate = deliveryDate;
         this.confirmed = confirmed;
+        this.shop = shop;
     }
-    public String getAddress() { return address;}
 
-    public void setAddress(String address) {this.address = address; }
+    public String getShop() {
+        return shop;
+    }
+
+    public void setShop(String shop) {
+        this.shop = shop;
+    }
     public int getDeliveryGuyID() {
         return deliveryGuyID;
     }
@@ -46,37 +41,12 @@ public class Delivery {
         this.orderNumber = orderNumber;
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(String customerID) {
-        this.customerID = customerID;
-    }
-
-
     public double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public String getTelephoneNumber() {
-        return telephoneNumber;
-    }
-
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
     }
 
     public Timestamp getDeliveryDate() {
@@ -94,4 +64,7 @@ public class Delivery {
     public void setConfirmed(String confirmed) {
         this.confirmed = confirmed;
     }
+
+
+
 }
