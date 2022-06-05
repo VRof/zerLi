@@ -8,9 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
@@ -140,11 +138,12 @@ public class ApproveCustomersGUIController implements Initializable {
     /**
      * clickedApproveCustomerBtn method approves the customer when clicking Approve customer button,
      * and sends the selected customer data (new username password) to the server
-     * in order to save them in DB
+     * in order to save them in DB also checks if username already there
      * @param event mouse click
      */
     @FXML
     void clickedApproveCustomerBtn(MouseEvent event) {
+        int count=0;
         Message m = new Message();
         String savedUsername="",savedPassword="";
         int savedUserID = 0;
@@ -156,6 +155,15 @@ public class ApproveCustomersGUIController implements Initializable {
                 errorLbl.setText("Fields username or password is empty");
                 return;
             }
+            m.setCommand("checkUserName");
+            m.setMsg(savedUsername);
+            cc.send(m);
+            while (cc.awaitResponse) ; //wait for data from server
+            count = (int) (cc.messageFromServer.getMsg());
+            if(count >=1){
+                errorLbl.setText("Username already exsit please choose another");
+                return;
+            }
         } catch (Exception e) {
             System.out.println("null row selected");
         }
@@ -164,12 +172,29 @@ public class ApproveCustomersGUIController implements Initializable {
         Object [] data = {savedUserID,savedUsername,savedPassword};
         m.setMsg(data);
         cc.send(m);// send the row key (orderId) + username and password that the manager entered.
-        String stringShownInErrorLabel;
+        String stringShownInErrorLabel = "";
 
         if (savedUserID==0)
             stringShownInErrorLabel = "Please select customer !";
-        else
+        else {
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setResizable(true);
+            alert.setHeight(600);
+            alert.setTitle("Confirmation Message");
+            alert.setHeaderText(stringShownInErrorLabel);
+            alert.setContentText("Approve registration message sent to customer "+manageUsers.getSelectionModel().getSelectedItem().getFirstName()+" " +manageUsers.getSelectionModel().getSelectedItem().getLastName()
+                    +", phone number : "+manageUsers.getSelectionModel().getSelectedItem().getTelNum()+"\nEmail : "+
+                    manageUsers.getSelectionModel().getSelectedItem().getEmail()+"\nYour request for registration is aprroved by manager\n" +
+                    "Your username is : "+manageUsers.getSelectionModel().getSelectedItem().getUsername()+"\n" +
+                    "Your password is : "+manageUsers.getSelectionModel().getSelectedItem().getPassword());
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
             stringShownInErrorLabel = String.format("customer %d is approved", savedUserID);
+        }
 
         errorLbl.setText(stringShownInErrorLabel);
 
@@ -192,8 +217,8 @@ public class ApproveCustomersGUIController implements Initializable {
         }
     /**
      * clickedBackBtn method directs the user to the previous GUI - ShopManagerGUI - when clicking back
-     * @param event mouse click
-     * @throws Exception javafx exception when creating a new window
+     * @param event mouse clicked
+     * @throws Exception error opening a window
      */
     @FXML
     void clickedBackBtn(MouseEvent event) throws Exception {

@@ -17,9 +17,7 @@ import java.util.TimerTask;
  */
 
 public class AutoGenerateMonthlyReports extends TimerTask {
-    /**
-     * thread runs on the server and generates monthly reports
-     */
+
     @Override
     public void run() {//thread start running
         Connection dbConn = SqlConnector.getConnection();
@@ -54,12 +52,14 @@ public class AutoGenerateMonthlyReports extends TimerTask {
                     ResultSet rs1 = dbConn.createStatement().executeQuery(SQL);
                     rs1.beforeFirst();
                     String orderReport = "";
+                    int count = 0;
 
                     while(rs1.next()){
                         orderReport =orderReport+ "\norder number: " + rs1.getString("orderNumber")
-                                +"\nprice: "+rs1.getDouble("price")
-                                +"\norder details:"+rs1.getString("dOrder")+"\ndelivery date: " + rs1.getDate("deliveryDate");
+                                +"\norder details:"+rs1.getString("dOrder");
+                        count++;
                     }
+                    orderReport=orderReport+"\nNumber of orders in this month "+count+"";
                     //insert orders report to DB
                         String SQLin = "INSERT INTO reports Values (NULL,'order report','"+year+"/"+month+"/1','"+rs.getString("shop")+"','"+orderReport+"');";
                         dbConn.createStatement().execute(SQLin);

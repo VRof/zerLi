@@ -195,6 +195,33 @@ public class ServerControl extends AbstractServer {
             case "initTableForDelivery":
                 initTableForDelivery(msg,client);
                 break;
+            case "checkUserName":
+                checkUserName(msg,client);
+                break;
+
+        }
+    }
+
+    private void checkUserName(Object msg, ConnectionToClient client) {
+        int count =0;
+        Connection dbConn = SqlConnector.getConnection();
+        String userName = (String) ((Message) msg).getMsg();
+        String SQL = "SELECT COUNT(login.username) FROM login WHERE login.username = '" + userName + "';";
+        try {
+            ResultSet rs = dbConn.createStatement().executeQuery(SQL);
+            rs.first();
+            count=rs.getInt(1);
+            Message msgToClient = new Message();
+            msgToClient.setCommand("orders data");
+            msgToClient.setMsg(count);
+            client.sendToClient(msgToClient);
+
+
+        }catch (SQLException e){
+            System.out.println("error getting or sending username details" + e);
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -214,6 +241,7 @@ public class ServerControl extends AbstractServer {
             RowSetFactory factory = RowSetProvider.newFactory();
             rowSet = factory.createCachedRowSet();
             rowSet.populate(rs);
+
             Message msgToClient = new Message();
             msgToClient.setCommand("orders data");
             msgToClient.setMsg((Object) rowSet);
