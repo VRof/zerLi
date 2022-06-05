@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.ViewComplaintsGUIController">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/pina.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="636.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/pina3.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="268.0" layoutY="34.0" prefHeight="45.0" prefWidth="265.0" text="View Complaints">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tbl_complaints" layoutX="230.0" layoutY="119.0" prefHeight="363.0" prefWidth="380.0">
+        <columns>
+          <TableColumn fx:id="col_complaintId" prefWidth="100.0" text="Complaint Id" />
+          <TableColumn fx:id="col_done" prefWidth="131.0" text="Done?" />
+            <TableColumn fx:id="col_insertedTime" prefWidth="148.0" text="Inserted Time" />
+        </columns>
+      </TableView>
+      <ImageView fx:id="btn_done" fitHeight="52.0" fitWidth="150.0" layoutX="647.0" layoutY="533.0" onMouseClicked="#clickedDoneBtn" onMouseEntered="#enteredDoneBtn" onMouseExited="#leavedDoneBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_done.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="btn_sendRefund" fitHeight="52.0" fitWidth="177.0" layoutX="180.0" layoutY="534.0" onMouseClicked="#clickedSendRefundBtn" onMouseEntered="#enteredSendRefundBtn" onMouseExited="#leavedSendRefundBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_send-refund.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="btn_viewDetails" fitHeight="52.0" fitWidth="183.0" layoutX="416.0" layoutY="533.0" onMouseClicked="#clickedViewDetailsBtn" onMouseEntered="#enteredViewDetailsBtn" onMouseExited="#leavedViewDetailsBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_view-details.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="141.0" layoutY="89.0" prefHeight="20.0" prefWidth="177.0" text="Select Complaint to view:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_error" layoutX="402.0" layoutY="498.0" text="Label" textFill="#dd1919" />
+      <ImageView fx:id="btn_back" fitHeight="75.0" fitWidth="72.0" layoutX="35.0" layoutY="497.0" onMouseClicked="#clickedBackBtn" onMouseEntered="#enteredBackBtn" onMouseExited="#leavedBackBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_back.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txt_amount" layoutX="194.0" layoutY="502.0" onKeyTyped="#changeRefund" promptText="Amount" />
+      <Label layoutX="150.0" layoutY="506.0" prefHeight="17.0" prefWidth="42.0" text="Refund:" />
+   </children>
+</AnchorPane>

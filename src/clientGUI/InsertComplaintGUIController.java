@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -31,6 +32,8 @@ public class InsertComplaintGUIController {
     private ChoiceBox<String> dr_shop;
     @FXML
     private ImageView btn_insert;
+    @FXML
+    private TextField txy_orderId;
 
     ClientController conn = ClientController.getClientController();
 
@@ -43,13 +46,11 @@ public class InsertComplaintGUIController {
         msg.setCommand("getAllTheShops");
         ClientController.getClientController().send(msg);
         CachedRowSet cachedMsg = (CachedRowSet) ClientController.messageFromServer.getMsg();
-        while(cachedMsg.next()){
-            dr_shop.getItems().add(cachedMsg.getString("shop"));
-        }
+        while(cachedMsg.next()){ dr_shop.getItems().add(cachedMsg.getString("shop")); }
     }
 
     /**
-     *  clickedBackBtn - click in "<--" button to get back to user original window
+     *  clickedBackBtn - click on back button to get back to user original window
      *  @param event - mouse click
      */
     @FXML
@@ -71,10 +72,12 @@ public class InsertComplaintGUIController {
         if (dr_shop.getValue() != null){
             if (!text_complaintText.getText().equals("")){
         Message msg = new Message();
-        String[] orderData = new String[3];
+        String[] orderData = new String[4];
         orderData[0] = String.valueOf(ClientController.userLoginData.getUserid());
         orderData[1] = text_complaintText.getText();
         orderData[2] = dr_shop.getValue();
+        if(!txy_orderId.getText().equals("")){ orderData[3] = txy_orderId.getText(); }
+        else { lbl_error.setText("Please enter order number"); return;}
         msg.setCommand("insertComplaint");
         msg.setMsg(orderData);
         conn.send(msg);

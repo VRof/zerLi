@@ -40,6 +40,10 @@ public class CustomerServicesGUIController {
     @FXML
     private ImageView btn_logout;
 
+    @FXML
+    private ImageView btn_viewComplaints;
+
+
     private ClientController conn = ClientController.getClientController();
 
     /**
@@ -96,6 +100,14 @@ public class CustomerServicesGUIController {
     void clickedReviewSurveyBtn(MouseEvent event) throws Exception { newWindow("ReviewSurveyGUI");}
 
     /**
+     * ClickedViewComplaintsBtn - user can see all related complaints in table
+     * @param event - mouse click
+     * @throws Exception - if error while creating new window
+     */
+    @FXML
+    void ClickedViewComplaintsBtn(MouseEvent event) throws Exception { newWindow("ViewComplaintsGUI"); }
+
+    /**
      * enteredInsertComplaintBtn - function for making shadow for button
      * @param event - entering the button with the mouse
      *
@@ -120,9 +132,15 @@ public class CustomerServicesGUIController {
     void enteredReviewSurveyBtn(MouseEvent event) { ClientController.getClientController().enteredButton(btn_reviewSurvey);}
 
     /**
+     * enteredViewComplaintsBtn - function for making shadow for button
+     * @param event - entering the button with the mouse
+     */
+    @FXML
+    void enteredViewComplaintsBtn(MouseEvent event) { ClientController.getClientController().enteredButton(btn_viewComplaints);}
+
+    /**
      * leavedInsertComplaintBtn - function to hide shadow for button
      * @param event - leaving the button with the mouse
-     *
      */
     @FXML
     void leavedInsertComplaintBtn(MouseEvent event) { ClientController.getClientController().leavedButton(btn_insertComplaint);}
@@ -142,6 +160,13 @@ public class CustomerServicesGUIController {
      */
     @FXML
     void leavedReviewSurveyBtn(MouseEvent event) { ClientController.getClientController().leavedButton(btn_reviewSurvey);}
+
+    /**
+     * leavedViewComplaintsBtn - function to hide shadow for button
+     * @param event - leaving the button with the mouse
+     */
+    @FXML
+    void leavedViewComplaintsBtn(MouseEvent event) { ClientController.getClientController().leavedButton(btn_viewComplaints); }
 
     /**
      * newWindow - creates new window and hides login window

@@ -191,10 +191,58 @@ public class ServerControl extends AbstractServer {
             case "initTableForDelivery":
                 initTableForDelivery(msg,client);
                 break;
+            case "complaintsTable":
+                complaintsTable(msg,client);
+                break;
+            case "complaintDone":
+                complaintDone(msg,client);
+                break;
+            case "getComplaintDetails":
+                getComplaintDetails(msg,client);
+                break;
+            case "addRefundCustomerServes":
+                addRefundCustomerServes(msg,client);
+                break;
+
+
+
         }
     }
 
+    /**
+     *
+     * @param msg - message from client
+     * @param client - connection to client
+     */
+    private void addRefundCustomerServes(Object msg, ConnectionToClient client) {
+        Message message = (Message) msg;
+        Connection dbConn = SqlConnector.getConnection();
+        String data[] = (String[]) message.getMsg();
+        int orderData = Integer.parseInt(data[0]),num = 0;
+        double refund = Double.parseDouble(data[1]);
+        CachedRowSet rowSet = null;
+        String SQL = "SELECT orderid FROM complaints o WHERE complaintid =" + orderData +  ";";
+        try {
+            ResultSet rs = dbConn.createStatement().executeQuery(SQL);
+            RowSetFactory factory = RowSetProvider.newFactory();
+            rowSet = factory.createCachedRowSet();
+            rowSet.populate(rs);
 
+        } catch (SQLException e) { System.out.println("error"); }
+        try {
+            while (rowSet.next()) { num = rowSet.getInt("orderid");
+            updateBalance(num,refund);}
+        } catch (SQLException e) {
+            System.out.println("Error read data from server " + e);
+        }
+        try {
+            message.setMsg("done");
+            message.setCommand("");
+            client.sendToClient(message);
+        } catch (IOException e) {
+            System.out.println("Cannot send to client");
+        }
+    }
 
 
     private void getOrderDetails(Object msg, ConnectionToClient client){
@@ -215,7 +263,6 @@ public class ServerControl extends AbstractServer {
             System.out.println("error getting or sending order details from catalog to client " + e);
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -547,10 +594,81 @@ public class ServerControl extends AbstractServer {
 
     /////// Habib Ibrahim Part | Delivery Guy + Customer Services + Marketing Worker
 
+
+    private void getComplaintDetails(Object msg, ConnectionToClient client){
+        Connection dbConn = SqlConnector.getConnection();
+        CachedRowSet rowSet;
+        int id = (int) ((Message) msg).getMsg();
+        String SQL = "SELECT complaintText FROM complaints WHERE complaintid =" + id +  ";";
+        try {
+            ResultSet rs = dbConn.createStatement().executeQuery(SQL);
+            RowSetFactory factory = RowSetProvider.newFactory();
+            rowSet = factory.createCachedRowSet();
+            rowSet.populate(rs);
+            Message msgToClient = new Message();
+            msgToClient.setCommand("orders data");
+            msgToClient.setMsg(rowSet);
+            client.sendToClient(msgToClient);
+        } catch (Exception e) { System.out.println("error getting or sending order details from catalog to client " + e);
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *  complaintDone - end of complaint, save in database
+     * @param msg  -  receives message from client connection
+     * @param client - ConnectionToClient type
+     */
+    private void complaintDone(Object msg, ConnectionToClient client) {
+        Connection dbConn = SqlConnector.getConnection();
+        Message message2 = new Message();
+        Message message = (Message) msg;
+        int[] orderData = {((int[]) message.getMsg())[0], ((int[]) message.getMsg())[1]};
+        String SQL = "Update complaints SET complaintDone = 'done' WHERE csid = '" + orderData[0] + "' AND complaintid = '" + orderData[1] + "'";
+        try { dbConn.createStatement().executeUpdate(SQL);
+            message2.setCommand("");
+            message2.setMsg("complaint Done");
+            client.sendToClient(message2);
+        }
+        catch (SQLException e) { System.out.println("error in updating sql complaint"); }
+        catch (IOException e) { System.out.println("Cannot send message to client !"); }
+    }
+
+    /**
+     *  complaintsTable - set up related complaint to customer serves but id
+     * @param msg  -  receives message from client connection
+     * @param client - ConnectionToClient type
+     */
+    private void complaintsTable(Object msg, ConnectionToClient client) {
+        Connection dbConn = SqlConnector.getConnection();
+        Message message = (Message) msg;
+        String SQL2 = "SELECT complaintid,complaintDone,date FROM complaints WHERE csid = '" + message.getMsg() + "' AND complaintDone = 'no' ;";
+        Message newMSG = new Message();
+        CachedRowSet cachedMsg;
+        ResultSet rs;
+        try {
+            rs = dbConn.createStatement().executeQuery(SQL2);
+            RowSetFactory factory = RowSetProvider.newFactory();
+            cachedMsg = factory.createCachedRowSet();
+            cachedMsg.populate(rs);
+            rs.close();
+            newMSG.setCommand("");
+            newMSG.setMsg(cachedMsg);
+            client.sendToClient(newMSG);
+        } catch (SQLException | IOException e) {
+            System.out.println("SQL request from client " + client + " error " + e);
+            try {
+                client.sendToClient("error in sql request or server");
+            } catch (IOException e1) {
+                System.out.println("sending data to client " + client + " error " + e1);
+            }
+        }
+    }
+
     /**
      * initTableForDelivery - init table for delivery guy
      *
-     * @param msg    -  receives message from client connection
+     * @param msg  -  receives message from client connection
      */
     private void initTableForDelivery(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
@@ -936,12 +1054,8 @@ public class ServerControl extends AbstractServer {
                             price = cachedMsg.getFloat("price");
                         }
                         updateBalance(orderData[1], price);
-                    } catch (SQLException e) {
-                        System.out.println("Error read data from server " + e);
-                    }
-                } catch (Exception e) {
-                    System.out.println("Error read data from server " + e);
-                }
+                    } catch (SQLException e) { System.out.println("Error read data from server " + e); }
+                } catch (Exception e) { System.out.println("Error read data from server " + e); }
             } else message.setCommand("no");
         } catch (SQLException e) {
             System.out.println("Error update delivery table : " + SQL + " " + e);
@@ -989,8 +1103,8 @@ public class ServerControl extends AbstractServer {
         Message message = (Message) msg;
         Long datetime = System.currentTimeMillis();
         Timestamp timestamp = new Timestamp(datetime);
-        String[] orderData = {((String[]) message.getMsg())[0], ((String[]) message.getMsg())[1], ((String[]) message.getMsg())[2]};
-        String SQL = "INSERT INTO complaints (complaintText,csid,shop,date) VALUES ('" + orderData[1] + "','" + orderData[0] + "','" + orderData[2] + "','" + timestamp + "')";
+        String[] orderData = {((String[]) message.getMsg())[0], ((String[]) message.getMsg())[1], ((String[]) message.getMsg())[2],((String[]) message.getMsg())[3]};
+        String SQL = "INSERT INTO complaints (complaintText,csid,shop,date,orderid) VALUES ('" + orderData[1] + "','" + orderData[0] + "','" + orderData[2] + "','" + timestamp + "','" + orderData[3] + "')";
         try {
             dbConn.createStatement().executeUpdate(SQL);
         } catch (SQLException e) {

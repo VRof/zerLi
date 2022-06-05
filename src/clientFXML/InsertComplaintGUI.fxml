@@ -3,6 +3,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -39,10 +40,12 @@
       </ImageView>
       <ChoiceBox fx:id="dr_shop" layoutX="171.0" layoutY="193.0" prefHeight="25.0" prefWidth="116.0" />
       <Label layoutX="120.0" layoutY="197.0" text="Shop:" />
-      <Label layoutX="85.0" layoutY="149.0" text="Please select sho and enter complaint" textFill="#15d798">
+      <Label layoutX="85.0" layoutY="149.0" prefHeight="21.0" prefWidth="437.0" text="Please select shop and enter complaint, insert order number first:" textFill="#15d798">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
+      <Label layoutX="372.0" layoutY="197.0" text="Order Number:" />
+      <TextField fx:id="txy_orderId" layoutX="469.0" layoutY="193.0" prefHeight="25.0" prefWidth="139.0" promptText="Order" />
    </children>
 </AnchorPane>
