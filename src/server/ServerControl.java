@@ -202,6 +202,11 @@ public class ServerControl extends AbstractServer {
         }
     }
 
+    /**
+     * check if username in database or not
+     * @param msg message from client
+     * @param client client connection
+     */
     private void checkUserName(Object msg, ConnectionToClient client) {
         int count =0;
         Connection dbConn = SqlConnector.getConnection();
