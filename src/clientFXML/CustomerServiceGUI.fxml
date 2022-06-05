@@ -42,5 +42,10 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
+      <ImageView fx:id="btn_viewComplaints" fitHeight="150.0" fitWidth="200.0" layoutX="300.0" layoutY="351.0" onMouseClicked="#ClickedViewComplaintsBtn" onMouseEntered="#enteredViewComplaintsBtn" onMouseExited="#leavedViewComplaintsBtn" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/button_view-complaints.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
