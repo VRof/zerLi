@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$USER_HOME$/Desktop/OCSF/OCSF.iml" filepath="$USER_HOME$/Desktop/OCSF/OCSF.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../OCSF/OCSF.iml" filepath="$PROJECT_DIR$/../OCSF/OCSF.iml" />
       <module fileurl="file://$PROJECT_DIR$/zerli.iml" filepath="$PROJECT_DIR$/zerli.iml" />
     </modules>
   </component>

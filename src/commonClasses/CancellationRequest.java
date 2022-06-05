@@ -2,6 +2,16 @@ package commonClasses;
 
 import java.sql.Timestamp;
 
+/**
+ *
+ *  order cancellation data class
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class CancellationRequest {
     private int orderID;
     private String firstName;
@@ -11,6 +21,7 @@ public class CancellationRequest {
 
     private Timestamp requestDate;
     private Timestamp DeliveryDate;
+    private String shop;
 
     public CancellationRequest(int orderID, String firstName, String lastName, String status, double price, Timestamp DeliveryDate, Timestamp requestDate) {
         this.orderID = orderID;
@@ -25,6 +36,13 @@ public class CancellationRequest {
     public CancellationRequest() {
     }
 
+    public String getShop() {
+        return shop;
+    }
+
+    public void setShop(String shop) {
+        this.shop = shop;
+    }
 
     public int getOrderID() {
         return orderID;

@@ -2,15 +2,18 @@ package clientClasses;
 
 public class Customer {
     private int userId;
-    private String firstName,lastName,telNum,email,status;
+    private String telNum;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String status;
     private double balance;
     public Customer(){}
 
-    public Customer(int userId, String firstName, String lastName, String telNum, String email, String status, double balance) {
+    public Customer(int userId, String firstName, String lastName, String email, String status, double balance) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.telNum = telNum;
         this.email = email;
         this.status = status;
         this.balance = balance;
@@ -40,12 +43,12 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public String getTelNum() {
-        return telNum;
-    }
-
     public void setTelNum(String telNum) {
         this.telNum = telNum;
+    }
+
+    public String getTelNum() {
+        return telNum;
     }
 
     public String getEmail() {

@@ -128,8 +128,8 @@ public class ReviewOrdersGUIController implements Initializable {
 
     /**
      * clickedBackBtn method directs the manager to the previous GUI -ShopManagerGUI- when he presses the back button
-     * @param event
-     * @throws Exception
+     * @param event mose click
+     * @throws Exception getting data from DB
      */
     @FXML
     void clickedBackBtn(MouseEvent event) throws Exception {
@@ -143,7 +143,8 @@ public class ReviewOrdersGUIController implements Initializable {
      * clicks confirm button, the order will be confirmed,
      * it does so by sending the server in order to update DB, after that it deletes
      * the confirmed order from the TableView
-     * @param event
+     * @param event mouse click
+     * @throws SQLException getting data from DB exception
      */
     @FXML
     void clickedConfirmBtn(MouseEvent event) throws SQLException {
@@ -195,6 +196,10 @@ public class ReviewOrdersGUIController implements Initializable {
 
 
     }
+
+    /**
+     * refresh orders table, delete confirmed order
+     */
     public void refresh(){
         ObservableList<OrderToConfirm>  selected,allTable;
         allTable = this.ordersTable.getItems();
@@ -205,6 +210,11 @@ public class ReviewOrdersGUIController implements Initializable {
         }
     }
 
+    /**
+     *  click on "Order details" button, shows popup with order data
+     * @param event mouse click on "Order details" button, shows order details in popup window
+     * @throws Exception javafx exception when creating a new window
+     */
     @FXML
     void clickedOrderDetails(MouseEvent event) throws Exception {
         errorLbl.setText("");
@@ -227,6 +237,10 @@ public class ReviewOrdersGUIController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @return selected order
+     */
     public Order getSelectedOrder(){
         return orderWithDetais;
     }

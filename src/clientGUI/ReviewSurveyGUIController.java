@@ -17,6 +17,17 @@ import java.awt.*;
 import java.io.*;
 import java.sql.SQLException;
 import static client.ClientController.savedWindows;
+
+/**
+ *
+ *  controller class for review survey window
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class ReviewSurveyGUIController {
 
     @FXML
@@ -45,7 +56,7 @@ public class ReviewSurveyGUIController {
     public void initialize() { this.getTableFromDB(); }
 
     /**
-     *  clickedBackBtn - click in "<--" button to get back to user original window
+     *  clickedBackBtn - click in back button to get back to user original window
      *  @param event - mouse click
      */
     @FXML

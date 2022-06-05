@@ -1,5 +1,16 @@
 package clientClasses;
 import java.sql.Timestamp;
+
+/**
+ *
+ *  Delivery data
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class Delivery {
 
     private int deliveryGuyID;
@@ -24,9 +35,6 @@ public class Delivery {
 
     public void setShop(String shop) {
         this.shop = shop;
-    }
-    public int getDeliveryGuyID() {
-        return deliveryGuyID;
     }
 
     public void setDeliveryGuyID(int deliveryGuyID) {

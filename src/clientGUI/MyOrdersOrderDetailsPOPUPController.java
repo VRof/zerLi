@@ -9,6 +9,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+/**
+ *
+ *  controller class for order details popup window in My Orders window
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class MyOrdersOrderDetailsPOPUPController {
 
     @FXML
@@ -27,6 +37,10 @@ public class MyOrdersOrderDetailsPOPUPController {
        lbl_orderNumber.setText("Order number " + selectedOrder.getOrderNumber() + ":");
     }
 
+    /**
+     * click on back button, closes this popup
+     * @param event mouse click
+     */
     @FXML
     void clickedBackBtn(MouseEvent event) {
         Stage thisStage = (Stage) btn_back.getScene().getWindow();

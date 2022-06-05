@@ -82,7 +82,7 @@ public class UploadSurveyResultsGUIController {
 
     /**
      * initialize function sets up labels in GUI and calls seUpWindow function to set up all relative values
-     *
+     * @throws SQLException getting info from DB exception
      */
     @FXML
     public void initialize() throws SQLException {
@@ -139,7 +139,7 @@ public class UploadSurveyResultsGUIController {
     }
 
     /**
-     *  clickedBackBtn - click in "<--" button to get back to user original window
+     *  clickedBackBtn - click in back button to get back to user original window
      *
      *  @param event - entering the button with the mouse
      */

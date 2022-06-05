@@ -1,8 +1,14 @@
 package clientClasses;
 
-import javafx.scene.control.Hyperlink;
-
-import java.net.URL;
+/**
+ *
+ * survey result data class
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
 
 public class SurveyResult {
 
@@ -14,14 +20,6 @@ public class SurveyResult {
         this.surveyid = surveyid;
         this.surveyinfo = surveyinfo;
         this.link = link;
-    }
-
-    public int getSurveyid() {
-        return surveyid;
-    }
-
-    public void setSurveyid(int surveyid) {
-        this.surveyid = surveyid;
     }
 
     public String getSurveyinfo() {

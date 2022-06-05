@@ -79,7 +79,6 @@ public class CustomerServicesGUIController {
     /**
      * clickedLogoutBtn - user click on this button to log out and then return to log in window
      * @param event - mouse click
-     * @throws Exception - if error while creating new window
      */
     @FXML
     void clickedLogoutBtn(MouseEvent event) {

@@ -108,7 +108,7 @@ public class ManagePermissionsGUIController implements Initializable {
     /**
      * clickedConfirmChangesBtn method sends the server
      * the userid that the manager selected and the new type (permission)
-     * @param event
+     * @param event ConfirmChanges button clicked
      */
     @FXML
     void clickedConfirmChangesBtn(MouseEvent event) {
@@ -139,8 +139,8 @@ public class ManagePermissionsGUIController implements Initializable {
     }
     /**
      * clickedBackBtn method directs the user to the previous GUI - ShopManagerGUI - when clicking back
-     * @param event
-     * @throws Exception
+     * @param event clicked back button
+     * @throws Exception javafx exception when creating new window
      */
     @FXML
     void clickedBackBtn(MouseEvent event) throws Exception {

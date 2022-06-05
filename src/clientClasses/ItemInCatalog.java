@@ -5,8 +5,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.text.DecimalFormat;
-
+/**
+ *
+ *  Item in catalog data class
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
 
 public class ItemInCatalog {
     private VBox itemInCatalogVBox;
@@ -50,6 +57,10 @@ public class ItemInCatalog {
         return isBundle.equals("TRUE");
     }
 
+    /**
+     *
+     * @return VBox representation of item
+     */
     public VBox getItemInCatalogVBox() {
         return itemInCatalogVBox;
     }

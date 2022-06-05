@@ -120,7 +120,7 @@ public class IncomeReportGUIController implements Initializable {
     /**.
      * Method(clickedShowBtn) method that contacts server to get relevant information from DB
      * and display them in a barchart that contains the overall income and months in quarter .
-     * @param event
+     * @param event mouse click
      */
     @FXML
     void clickedShowBtn(MouseEvent event)  {
@@ -170,7 +170,7 @@ public class IncomeReportGUIController implements Initializable {
 
     /**
      * Method(clickedClearBtn) clears the data from the barchart and enable the show button
-     * @param event
+     * @param event mouse click
      */
     @FXML
     void clickedClearBtn(MouseEvent event) {
@@ -182,8 +182,8 @@ public class IncomeReportGUIController implements Initializable {
 
     /**
      * Method(clickedBackBtn) returns to the previous window when button back is clicked and hide the current one
-     * @param event
-     * @throws Exception
+     * @param event mouse click
+     * @throws Exception javafx exception when creating a new scene
      */
     @FXML
     void clickedBackBtn(MouseEvent event) throws Exception {

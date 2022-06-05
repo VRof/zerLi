@@ -4,7 +4,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-//connection between database and server
+/**
+ *
+ *  connection between database and server
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
 
 public class SqlConnector {
 	
@@ -26,7 +34,6 @@ public class SqlConnector {
         try 
         {
             conn = DriverManager.getConnection("jdbc:mysql://"+ dbPath +"?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Jerusalem",dbUsername,dbPass);
-            //Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.3.68/test","root","Root");
             System.out.println("SQL connection succeed");
 
      	} catch (SQLException ex) 

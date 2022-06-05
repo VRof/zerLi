@@ -10,6 +10,16 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
+/**
+ *
+ *  new window frame creator, loads window by its name, sends disconnect request when closed
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class NewWindowFrameController extends Application {
     private AnchorPane mainLayout;
     private String windowName;

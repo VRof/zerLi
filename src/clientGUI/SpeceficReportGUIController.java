@@ -16,6 +16,16 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+/**
+ *
+ *  controller class for specific report window
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class SpeceficReportGUIController implements Initializable {
 
     @FXML
@@ -107,7 +117,7 @@ public class SpeceficReportGUIController implements Initializable {
     /**
      * Method(clickedBackBtn) method that moves the user to the previous window "view reports GUI"
      * after clicking on back button and also hides the current window
-     * @param event
+     * @param event mouse click
      */
     @FXML
     void clickedBackBtn(MouseEvent event) {

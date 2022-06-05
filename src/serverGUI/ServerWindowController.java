@@ -23,6 +23,8 @@ import server.ServerControl;
 import server.SqlConnector;
 import serverClasses.Client;
 
+
+
 public class ServerWindowController {
 
 	@FXML
@@ -75,6 +77,10 @@ public class ServerWindowController {
 	private ByteArrayOutputStream baos = new ByteArrayOutputStream();
 	private PrintStream ps = new PrintStream(baos);
 
+	/**
+	 *  initializes server
+	 * @throws UnknownHostException if bad hostname
+	 */
 	@FXML
 	public void initialize() throws UnknownHostException {
 		btn_disconnect.setDisable(true);
@@ -88,7 +94,7 @@ public class ServerWindowController {
 	/**
 	 * Method(clickedImportBtn) activates when clicked import at server GUI and it extracs detaials
 	 * for tables registration,shopmanager,login from external DB filled in csv files
-	 * @param event
+	 * @param event mouse click
 	 */
 	@FXML
 	void clickedImportBtn(ActionEvent event) {
@@ -124,7 +130,10 @@ public class ServerWindowController {
 	}
 
 
-
+	/**
+	 * connect to database and start listening for clients
+	 * @param event mouse click
+	 */
 	@FXML
 	void btnConnectClick(ActionEvent event) {
 		String[] args = { txt_dbPath.getText(), txt_username.getText(), txt_password.getText() }; // get connection data
@@ -144,8 +153,12 @@ public class ServerWindowController {
 		}
 		
 	}
-	
 
+	/**
+	 * disconnect from database and close client connections
+	 * @param event mouse click
+	 * @throws SQLException if connection wasn't closed
+	 */
 	@FXML
 	void btnDisconnectClick(ActionEvent event) throws SQLException {
 		ServerControl.closeAll(); //close all connection (DB & server)

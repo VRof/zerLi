@@ -22,7 +22,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
+/**
+ *
+ *  Controller class for complaint report window
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
 public class ComplaintReportGUIController implements Initializable {
     public ClientController cc = ClientController.getClientController();
     @FXML
@@ -78,7 +86,7 @@ public class ComplaintReportGUIController implements Initializable {
      *Method(clickedShowBtn) activates when button show is pressed checks if the input from choice boxes is correct
      * if not its shows relevant msg to the client otherwise send a msg to db to extract the relevant data to fill
      * a barchart depends on quarters and number of complaints
-     * @param event
+     * @param event mouse click
      */
     @FXML
     void clickedShowBtn(MouseEvent event) {
@@ -118,7 +126,7 @@ public class ComplaintReportGUIController implements Initializable {
     /**
      * Method(clickedBackBtn) activates when pressing the button back showing the window from before that been
      * saved (view reports window)
-     * @param event
+     * @param event mouse click
      */
     @FXML
     void clickedBackBtn(MouseEvent event) {

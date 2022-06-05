@@ -2,6 +2,16 @@ package clientClasses;
 
 import java.sql.Timestamp;
 
+/**
+ *
+ *  Order confirmation data
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class OrderToConfirm {
     private int orderID;
     private String firstName;

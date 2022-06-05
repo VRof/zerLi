@@ -62,6 +62,9 @@ public class ViewCatalogGUIController {
     private GridPane gridPaneFlowers; //greid pane for flowers
     private ObservableList<ItemInCatalog> itemsList; //list of all items in catalog from DB
 
+    /**
+     * initialize comboBoxes
+     */
     @FXML
     public void initialize() {
         setCatalog();
@@ -73,18 +76,27 @@ public class ViewCatalogGUIController {
         cBox_price.setValue("all");
     }
 
+    /**
+     * clicked on back button
+     * @param event mouse click
+     */
     @FXML
     void clickedBack(MouseEvent event) {
         Stage thisStage = (Stage) btn_back.getScene().getWindow();
         thisStage.hide();
-        ClientController.savedWindows.getClientGUIWindow().show();
+        ClientController.savedWindows.getClientGUIWindow().show(); //show main menu for customer
         CustomerGUIController.controller.initialize(); //reload user data
     }
 
+    /**
+     * sort items by chosen requirements in comboBoxes
+     * @param event mouse click
+     */
     @FXML
     void clickedBtnSort(MouseEvent event) {
         String color = cBox_color.getValue();
         String priceStr = cBox_price.getValue();
+        //convert string to float:
         float price = 0;
         if (priceStr.equals("< 10 ₪"))
             price = 10;
@@ -109,10 +121,10 @@ public class ViewCatalogGUIController {
         gridPaneFlowers = new GridPane();
         int itemsGridPaneRow = 0;
         int itemsGridPaneCol = 0;
-        for (ItemInCatalog item : newList) {
+        for (ItemInCatalog item : newList) { //add items to gridPane
             gridPaneFlowers.add(item.getItemInCatalogVBox(), itemsGridPaneCol, itemsGridPaneRow);
             itemsGridPaneCol++;
-            if (itemsGridPaneCol == 5) {
+            if (itemsGridPaneCol == 5) {//new row
                 itemsGridPaneCol = 0;
                 itemsGridPaneRow++;
             }
@@ -124,7 +136,9 @@ public class ViewCatalogGUIController {
         scrollPaneItems.setContent(gridPaneFlowers);
     }
 
-
+    /**
+     * thread method, get all items from database
+     */
     private void setCatalog() {
         lbl_loadingMsg.setText("Loading catalog, please wait..."); //message to user that catalog is loading
         Platform.runLater(new Runnable() { //thread to build catalog without being "stuck" as it can be looked because of the loading time of catalog (pictures at most)
