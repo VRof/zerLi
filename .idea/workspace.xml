@@ -2,24 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae90c0da-2d4b-4397-9cd0-facc2755ab48" name="Changes" comment="habib changes accepted">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pictures/button_active-discount.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pictures/button_inactive-discount.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zerli.userlibraries" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientClasses/Delivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientClasses/Delivery.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clientFXML/CustomerServiceGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/CustomerServiceGUI.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clientFXML/DeliveryGuyGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/DeliveryGuyGUI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientFXML/NewOrderGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/NewOrderGUI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientFXML/UpdateCatalogGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/UpdateCatalogGUI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientFXML/UploadSurveyResultsGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/UploadSurveyResultsGUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientFXML/MarketingWorkerGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/MarketingWorkerGUI.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clientGUI/CustomerServicesGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/CustomerServicesGUIController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clientGUI/DeliveryGuyGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/DeliveryGuyGUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientGUI/IncomeReportGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/IncomeReportGUIController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clientGUI/MarketingWorkerGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/MarketingWorkerGUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientGUI/NewOrderGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/NewOrderGUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientGUI/UpdateCatalogGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/UpdateCatalogGUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientGUI/UploadSurveyResultsGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/UploadSurveyResultsGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ReviewOrdersOrderDetailsPOPUPController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ReviewOrdersOrderDetailsPOPUPController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pictures/button_review-survey.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/pictures/button_review-survey.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ServerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerControl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,6 +34,10 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/clientGUI/LoginGUIController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/server/ServerControl.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -176,9 +172,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/server/ServerControl.java</url>
-          <line>536</line>
-          <option name="timeStamp" value="6" />
+          <url>jar://$PROJECT_DIR$/../../../../Program Files/BellSoft/LibericaJDK-11-Full/lib/src.zip!/javafx.fxml/javafx/fxml/FXMLLoader.java</url>
+          <line>2605</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

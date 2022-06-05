@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f7e7ce;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientGUI.CustomerServicesGUIController">
    <children>
-      <Label fx:id="lbl_userName" layoutX="104.0" layoutY="150.0" prefHeight="30.0" prefWidth="84.0" text="Hello, Yossi">
+      <Label fx:id="lbl_userName" layoutX="104.0" layoutY="150.0" prefHeight="30.0" prefWidth="180.0" text="Hello, Yossi">
          <font>
             <Font size="14.0" />
          </font></Label>
@@ -37,7 +37,7 @@
             <Image url="@../pictures/button_logout.png" />
          </image>
       </ImageView>
-      <Label fx:id="lbl_intro" layoutX="269.0" layoutY="75.0" prefHeight="53.0" prefWidth="279.0" text="Customer Service 3">
+      <Label fx:id="lbl_intro" layoutX="269.0" layoutY="75.0" prefHeight="53.0" prefWidth="367.0" text="Customer Service 3">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
