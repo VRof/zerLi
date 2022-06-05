@@ -1,5 +1,15 @@
 package clientClasses;
 
+/**
+ *
+ *  user's login data
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class UserLoginData {
     private int userid;
     private String username;

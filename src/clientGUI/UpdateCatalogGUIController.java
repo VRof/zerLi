@@ -86,7 +86,7 @@ public class UpdateCatalogGUIController {
     }
 
     /**
-     * clickedBackBtn - click in "<--" button to get back to user original window
+     * clickedBackBtn - click in back button to get back to user original window
      * @param event - entering the button with the mouse
      */
     @FXML

@@ -329,7 +329,7 @@ public class NewOrderGUIController {
 
     /**
      * ComboBox sort by color in custom tab value changed, sort items according to new value
-     * @param event new value chosen
+     * @param event comboBox changed
      */
     @FXML
     void changedCBox_color_Custom(ActionEvent event) {
@@ -338,7 +338,7 @@ public class NewOrderGUIController {
 
     /**
      * ComboBox sort by color in "Our items" tab value changed, sort items according to new value
-     * @param event
+     * @param event comboBox changed
      */
     @FXML
     void changedCBox_color_OurItems(ActionEvent event) {
@@ -347,7 +347,7 @@ public class NewOrderGUIController {
 
     /**
      * ComboBox sort by price in custom tab value changed, sort items according to new value
-     * @param event
+     * @param event comboBox changed
      */
     @FXML
     void changedCBox_price_Custom(ActionEvent event) {
@@ -356,7 +356,7 @@ public class NewOrderGUIController {
 
     /**
      * ComboBox sort by price in "Our items" tab value changed, sort items according to new value
-     * @param event
+     * @param event comboBox changed
      */
     @FXML
     void changedCBox_price_OurItems(ActionEvent event) {
@@ -365,7 +365,7 @@ public class NewOrderGUIController {
 
     /**
      * ComboBox sort by type(bundle/flower) in custom tab value changed, sort items according to new value
-     * @param event
+     * @param event comboBox changed
      */
     @FXML
     void changedCBox_type_Custom(ActionEvent event) {
@@ -374,7 +374,7 @@ public class NewOrderGUIController {
 
     /**
      * ComboBox sort by type(bundle/flower) in "Our items" tab value changed, sort items according to new value
-     * @param event
+     * @param event comboBox changed
      */
     @FXML
     void changedCBox_type_OurItems(ActionEvent event) {

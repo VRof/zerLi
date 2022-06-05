@@ -111,7 +111,7 @@ public class MyOrdersGUIController {
     }
 
     /**
-     *
+     *  click on "Order details" button, shows popup with order data
      * @param event mouse click on "Order details" button, shows order details in popup window
      * @throws Exception javafx exception when creates new window MyOrdersOrderDetailsPOPUP.fxml
      */

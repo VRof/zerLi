@@ -11,6 +11,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+/**
+ *
+ *  Item in new order data, describes item from catalog data and +, - buttons
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class ItemInNewOrder {
     private VBox itemInNewOrderVBox;
     private int id;
@@ -72,7 +82,7 @@ public class ItemInNewOrder {
             public void handle(ActionEvent event) {
                 if (quantity > 9)
                     quantity -= 10;
-                else
+                else //if less than 10, just set it 0
                     quantity = 0;
                 lbl_quantity.setText("" + quantity);
                 if (!itemInCustom)
@@ -112,7 +122,9 @@ public class ItemInNewOrder {
         itemInNewOrderVBox.setStyle("-fx-background-color:  #b6f2e0");
     }
 
-
+    /**
+     * User's order update when clicked on + or - in "Our items" tab
+     */
     private void updateOrderFromCatalog() {
         for (NewOrder catalogItemInOrder : NewOrderGUIController.controller.getItemsInNewOrderList()) {
             if (!catalogItemInOrder.isCustom() && catalogItemInOrder.getCatalogItem() == this) {
@@ -125,11 +137,16 @@ public class ItemInNewOrder {
                 return;
             }
         }
-        if (quantity > 0)
+        if (quantity > 0) //new item in order
             NewOrderGUIController.controller.getItemsInNewOrderList().add(new NewOrder(this));
         NewOrderGUIController.controller.printFullOrder();
     }
 
+    /**
+     * compare items in new order by its id's
+     * @param other other item
+     * @return true if same
+     */
     @Override
     public boolean equals(Object other) {
         return ((ItemInNewOrder) other).id == this.id;
@@ -146,10 +163,6 @@ public class ItemInNewOrder {
                 return;
             }
         }
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 
     public String getItemColor() {
@@ -186,10 +199,6 @@ public class ItemInNewOrder {
 
     public String getIsBundle() {
         return isBundle;
-    }
-
-    public boolean isItemInCustom() {
-        return itemInCustom;
     }
 
     @Override

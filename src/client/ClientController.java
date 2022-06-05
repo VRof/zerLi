@@ -11,6 +11,16 @@ import ocsf.client.AbstractClient;
 
 import java.io.IOException;
 
+/**
+ *
+ *  Client connection class describes client side of project
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class ClientController extends AbstractClient {
     private static ClientController clientController;
     public static boolean awaitResponse = false;
@@ -26,32 +36,21 @@ public class ClientController extends AbstractClient {
         clientController = this;
     }
 
-
+    /**
+     * handles message from server
+     * @param msg   the message sent from server
+     */
     @Override
     protected void handleMessageFromServer(Object msg) {
         messageFromServer = (Message) msg;
         awaitResponse = false;
         System.out.println("received command : " + messageFromServer.getCommand() + " data: " + messageFromServer.getMsg());
-//        String msgFromServer = ((Message) msg).getCommand();
-//        if (msgFromServer.equals("newPopUpMessage")) {
-//            messageFromServer = (Message)msg;
-//            Platform.runLater(new Runnable() {
-//                @Override
-//                public void run() {
-//                    NewPopUpWindowFrameController popupmsg = new NewPopUpWindowFrameController("PopUpMessage");
-//                    try {
-//                        popupmsg.start(new Stage());
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
-//        } else {
-
- //       }
     }
 
-
+    /**
+     * to send messages to serever
+     * @param msg message to server
+     */
     public void send(Object msg) {
         awaitResponse = true;
         try {
@@ -70,6 +69,9 @@ public class ClientController extends AbstractClient {
         }
     }
 
+    /**
+     * send request to disconnect this client from server
+     */
     public void disconnect() {
         Message msg = new Message();
         msg.setCommand("disconnect");
@@ -78,6 +80,10 @@ public class ClientController extends AbstractClient {
         send(msg);
     }
 
+    /**
+     * send request to logout for this client and create new window
+     * @param stage new window to show
+     */
     public void logout(Stage stage) {
         Message msg = new Message();
         msg.setCommand("logout");
@@ -90,22 +96,38 @@ public class ClientController extends AbstractClient {
         loginStage.show();
     }
 
+    /**
+     *
+     * @return client controller of project
+     */
     public static ClientController getClientController() {
         return clientController;
     }
 
+    /**
+     * change color to more dark when entered button image
+     * @param btn image of button
+     */
     public void enteredButton(ImageView btn) {
         ColorAdjust blackout = new ColorAdjust();
         blackout.setBrightness(-0.2);
         btn.setEffect(blackout);
     }
 
+    /**
+     * restore color of exited button image
+     * @param btn image to restore
+     */
     public void leavedButton(ImageView btn) {
         ColorAdjust blackout = new ColorAdjust();
         blackout.setBrightness(0);
         btn.setEffect(blackout);
     }
 
+    /**
+     *
+     * @return delivery price
+     */
     public int getDeliveryPrice() {
         return deliveryPrice;
     }

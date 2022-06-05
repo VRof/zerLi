@@ -19,6 +19,16 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+/**
+ *
+ *  controller class for payment window
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class PaymentGUIController {
 
     @FXML
@@ -65,16 +75,20 @@ public class PaymentGUIController {
     private Date expireDate = new Date();
     private String cardNumber = "";
     private String cvv = "";
-    private boolean balanceUsed = false;
-    private boolean cardNeeded = true;
+    private boolean balanceUsed = false; //if balance used
+    private boolean cardNeeded = true; //if final price is 0 (paid from balance), no need in card
 
     private String newFirstName = "";
     private String newLastName = "";
     private String newCardNumber = "";
     private Date newExpiredDate;
     private String newCvv = "";
-    double newBalance;
+    double newBalance; //updated balance after this purchase
 
+    /**
+     *  initialize this window, set currently connected customer's data as default data
+     * @throws SQLException if "getCreditCardData" fails to get card data from server
+     */
     @FXML
     public void initialize() throws SQLException {
         lbl_msg.setText("");
@@ -94,12 +108,16 @@ public class PaymentGUIController {
         txt_cardNumber.setDisable(true);
         txt_cvv.setText(cvv);
         txt_cvv.setDisable(true);
-        LocalDate date = LocalDate.of(expireDate.getYear() + 1900, expireDate.getMonth() + 1, expireDate.getDate());
+        LocalDate date = LocalDate.of(expireDate.getYear() + 1900, expireDate.getMonth() + 1, expireDate.getDate()); //Date -> LocalDate
         date_expireDate.setValue(date);
         date_expireDate.setDisable(true);
         printOrder();
     }
 
+    /**
+     * request credit card data of currently connected customer
+     * @throws SQLException if "getCreditCardData" fails to get card data from server
+     */
     private void setCreditCardData() throws SQLException {
         Message msgToServer = new Message();
         msgToServer.setCommand("getCreditCardData");
@@ -113,6 +131,9 @@ public class PaymentGUIController {
         }
     }
 
+    /**
+     * print order data in textfield, add payment method and data to it
+     */
     private void printOrder() {
         finalOrderData = OrdersDetailsGUIController.controller.getOrderPlusDeliveryDetails();
         finalOrderData = finalOrderData + "\n\nPayment method:\n";
@@ -125,13 +146,15 @@ public class PaymentGUIController {
             if (!newCardNumber.equals(""))
                 finalOrderData += "Credit card number: " + "************" + newCardNumber.substring(12) + "\n";
         }
-        if (balanceUsed) {
+        if (balanceUsed) { //print amount of balance was used
             double diff = ClientController.userData.getBalance() - newBalance;
             finalOrderData += "Will be paid from balance: " + diff + "₪" + "\n";
         }
+        //round up price:
         priceToPay = priceToPay*100;
         priceToPay = Math.round(priceToPay);
         priceToPay = priceToPay /100;
+        //-----------------------------------------------
         finalOrderData += "---------------------------\n" + "Final price: " + priceToPay + "₪" + "\n";
         txt_order.setText(finalOrderData);
         lbl_price.setText("Order price: " + priceToPay + "₪");
@@ -139,13 +162,17 @@ public class PaymentGUIController {
 
     }
 
+    /**
+     * card number field changed
+     * @param event field changed
+     */
     @FXML
     void changedCardNumber(KeyEvent event) {
         lbl_msg.setText("");
         newCardNumber = "";
-        if (cardNeeded && !event.getCharacter().matches("[0-9]+")) {
+        if (cardNeeded && !event.getCharacter().matches("[0-9]+")) { //only digits
             lbl_msg.setText("Card number must include only digits");
-        } else if (cardNeeded && txt_cardNumber.getText().length() != 16)
+        } else if (cardNeeded && txt_cardNumber.getText().length() != 16) //16 digits
             lbl_msg.setText("Card number must be 16-digit number");
         else {
             newCardNumber = txt_cardNumber.getText();
@@ -153,6 +180,10 @@ public class PaymentGUIController {
         printOrder();
     }
 
+    /**
+     * cvv field changed
+     * @param event field changed
+     */
     @FXML
     void changedCvv(KeyEvent event) {
         lbl_msg.setText("");
@@ -166,7 +197,10 @@ public class PaymentGUIController {
         }
         printOrder();
     }
-
+    /**
+     * expire date field changed
+     * @param event field changed
+     */
     @FXML
     void changedExpireDate(ActionEvent event) {
         LocalDate date = date_expireDate.getValue();
@@ -174,6 +208,10 @@ public class PaymentGUIController {
         printOrder();
     }
 
+    /**
+     * first name field changed
+     * @param event field changed
+     */
     @FXML
     void changedFirstName(KeyEvent event) {
         lbl_msg.setText("");
@@ -183,6 +221,10 @@ public class PaymentGUIController {
         printOrder();
     }
 
+    /**
+     * last name field changed
+     * @param event field changed
+     */
     @FXML
     void changedLastName(KeyEvent event) {
         lbl_msg.setText("");
@@ -192,9 +234,14 @@ public class PaymentGUIController {
         printOrder();
     }
 
+    /**
+     * saved card field changed
+     * @param event field changed
+     */
     @FXML
     void changedSavedCard(ActionEvent event) {
-        if (cardNeeded && checkBox_savedCard.isSelected()) {
+        if (cardNeeded && checkBox_savedCard.isSelected()) { //card needed and saved card selected
+            //disable fields:
             txt_firstName.setText(ClientController.userData.getFirstname());
             txt_firstName.setDisable(true);
             txt_lastName.setText(ClientController.userData.getLastname());
@@ -207,6 +254,7 @@ public class PaymentGUIController {
             date_expireDate.setValue(date);
             date_expireDate.setDisable(true);
         } else if(cardNeeded && !checkBox_savedCard.isSelected()) {
+            //restore fields
             newFirstName = "";
             txt_firstName.setText("");
             txt_firstName.setDisable(false);
@@ -224,6 +272,10 @@ public class PaymentGUIController {
         printOrder();
     }
 
+    /**
+     * clicked on back button
+     * @param event mouse click
+     */
     @FXML
     void clickedBackBtn(MouseEvent event) {
         Stage thisStage = (Stage) lbl_price.getScene().getWindow();
@@ -231,9 +283,14 @@ public class PaymentGUIController {
         thisStage.hide();
     }
 
+    /**
+     * clicked on pay button
+     * @param event mouse click
+     */
     @FXML
     void clickedPay(MouseEvent event) {
         lbl_msg.setText("");
+        //check if all required data is set:
         if (cardNeeded && checkBox_savedCard.isSelected()) {
             if (txt_firstName.getText().equals("")) {
                 lbl_msg.setText("First name field is empty");
@@ -253,7 +310,7 @@ public class PaymentGUIController {
                 return;
             }
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-            if(expireDate.getTime() < currentTime.getTime()){
+            if(expireDate.getTime() < currentTime.getTime()){ //check credit card expired
                 lbl_msg.setText("This card is expired");
                 return;
             }
@@ -289,6 +346,7 @@ public class PaymentGUIController {
             }
         }
         Timestamp currTime = new Timestamp(System.currentTimeMillis());
+        //create new order:
         Order order = new Order(0,priceToPay,OrdersDetailsGUIController.controller.getGreetingCard(),
                 finalOrderData,OrdersDetailsGUIController.controller.getShop(),
                 currTime,OrdersDetailsGUIController.controller.getDeliveryDate(),
@@ -297,9 +355,10 @@ public class PaymentGUIController {
         order.setCustomerid(ClientController.userLoginData.getUserid());
         order.setNewBalance(newBalance);
         Message orderMsg = new Message();
-        orderMsg.setCommand("addNewOrder");
+        orderMsg.setCommand("addNewOrder"); //command for server
         orderMsg.setMsg(order);
         ClientController.getClientController().send(orderMsg);
+        //create popup with success or fail messages:
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setOnCloseRequest(new EventHandler<DialogEvent>() {
             @Override
@@ -314,13 +373,13 @@ public class PaymentGUIController {
                 CustomerGUIController.controller.initialize(); //refresh userdata
             }
         });
-        if(ClientController.messageFromServer.getCommand().equals("error creating order")){
+        if(ClientController.messageFromServer.getCommand().equals("error creating order")){ //if order creation in database failed
             alert.setTitle("Oops...");
             alert.setHeaderText("Something went wrong...");
             alert.setContentText("Sorry and please try again later");
             alert.show();
         }
-        else {
+        else { //if order created in database
             alert.setTitle("Order completed");
             alert.setHeaderText("Order created successfully");
             alert.setContentText("Thank you");
@@ -329,27 +388,32 @@ public class PaymentGUIController {
         }
     }
 
+    /**
+     * clicked "use balance" button, check if it's not 0, if not, change order price
+     * @param event mouse click
+     */
     @FXML
     void clickedUseBalance(MouseEvent event) {
         lbl_msg.setText("");
-        if (balanceUsed) return;
+        if (balanceUsed) return; //if already used
         newBalance = ClientController.userData.getBalance();
         if (newBalance > 0) {
-            if (newBalance > priceToPay) {
+            if (newBalance > priceToPay) { //if balance > order price
                 newBalance = newBalance - priceToPay;
                 priceToPay = 0;
-                cardNeeded = false;
+                cardNeeded = false; //no need in card
                 txt_firstName.setText("");
                 txt_lastName.setText("");
                 txt_cvv.setText("");
                 txt_cardNumber.setText("");
+                //disable card fields:
                 date_expireDate.setValue(null);
                 txt_firstName.setDisable(true);
                 txt_lastName.setDisable(true);
                 txt_cardNumber.setDisable(true);
                 txt_cvv.setDisable(true);
                 date_expireDate.setDisable(true);
-            } else {
+            } else { //if balance < order price
                 priceToPay = priceToPay - newBalance;
                 newBalance = 0;
             }

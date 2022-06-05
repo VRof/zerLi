@@ -6,6 +6,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+/**
+ *
+ *  Controller class for cancel order popup in MyOrders window
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class CancelOrderPopUpGUIController {
 
     @FXML
@@ -22,8 +32,8 @@ public class CancelOrderPopUpGUIController {
 
     @FXML
     void clickedCancelOrderBtn(MouseEvent event) {
-        MyOrdersGUIController.getMyOrdersControl().cancelOrder();
-        Stage thisStage = (Stage) btn_back.getScene().getWindow();
+        MyOrdersGUIController.getMyOrdersControl().cancelOrder(); //cancel order
+        Stage thisStage = (Stage) btn_back.getScene().getWindow(); //close this window
         thisStage.close();
     }
 

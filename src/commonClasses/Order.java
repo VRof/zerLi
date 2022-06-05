@@ -3,6 +3,16 @@ package commonClasses;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+/**
+ *
+ *  order data class
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class Order implements Serializable {
     int orderNumber;
     int customerid;

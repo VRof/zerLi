@@ -1,18 +1,228 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="4" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae90c0da-2d4b-4397-9cd0-facc2755ab48" name="Changes" comment="habib changes accepted">
+    <list default="true" id="ae90c0da-2d4b-4397-9cd0-facc2755ab48" name="Changes" comment="alpha version 1.0a">
+      <change afterPath="$PROJECT_DIR$/javadoc/allclasses-index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/allclasses.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/allpackages-index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/client/ClientConnectionWindowFrameController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/client/ClientController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/client/LoginWindowFrameController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/client/MonthlyReport.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/client/MyFile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/client/NewPopUpWindowFrameController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/client/NewWindowFrameController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/client/SavedWindows.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/client/clientUI.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/client/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/client/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientClasses/Customer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientClasses/Delivery.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientClasses/ItemInCatalog.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientClasses/ItemInNewOrder.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientClasses/NewOrder.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientClasses/OrderToConfirm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientClasses/RegistrationTable.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientClasses/SurveyResult.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientClasses/UserData.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientClasses/UserLoginData.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientClasses/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientClasses/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/ApproveCustomersGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/CancelOrderPopUpGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/CeoGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/ClientConnectionWindowController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/ComplaintReportGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/CustomerGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/CustomerServicesGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/DeliveryGuyGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/HelpPOPUPController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/IncomeReportGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/InsertComplaintGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/LoginGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/ManageCustomersGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/ManagePermissionsGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/MarketingWorkerGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/MyOrdersGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/MyOrdersOrderDetailsPOPUPController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/NewOrderGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/OrdersDetailsGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/PaymentGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/PopUpMessageGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/ReviewCancellationGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/ReviewOrdersGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/ReviewOrdersOrderDetailsPOPUPController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/ReviewSurveyGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/ShopManagerGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/SpeceficReportGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/UpdateCatalogGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/UploadSurveyResultsGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/ViewCatalogGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/ViewMonthlyReportsGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/ViewReportsGUIController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/clientGUI/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/commonClasses/CancellationRequest.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/commonClasses/Message.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/commonClasses/Order.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/commonClasses/Quarter.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/commonClasses/WantedReport.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/commonClasses/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/commonClasses/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/constant-values.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/deprecated-list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/element-list" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/help-doc.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-10.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-11.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-12.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-13.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-14.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-15.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-16.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-17.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-18.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-19.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-20.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-21.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-22.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-23.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-4.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-5.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-6.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-7.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-8.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-9.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/external/jquery/jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/images/ui-bg_glass_55_fbf9ee_1x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/images/ui-bg_glass_65_dadada_1x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/images/ui-bg_glass_75_dadada_1x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/images/ui-bg_glass_75_e6e6e6_1x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/images/ui-bg_glass_95_fef1ec_1x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/images/ui-bg_highlight-soft_75_cccccc_1x100.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/images/ui-icons_222222_256x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/images/ui-icons_2e83ff_256x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/images/ui-icons_454545_256x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/images/ui-icons_888888_256x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/images/ui-icons_cd0a0a_256x240.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/jquery-3.5.1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/jquery-ui.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/jquery-ui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/jquery-ui.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/jquery-ui.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/jquery-ui.structure.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/jquery-ui.structure.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/jszip-utils/dist/jszip-utils-ie.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/jszip-utils/dist/jszip-utils-ie.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/jszip-utils/dist/jszip-utils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/jszip-utils/dist/jszip-utils.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/jszip/dist/jszip.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/jquery/jszip/dist/jszip.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/member-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/member-search-index.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/overview-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/overview-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/package-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/package-search-index.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/resources/glass.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/resources/x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/search.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/serialized-form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/server/AutoGenerateMonthlyReports.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/server/ServerControl.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/server/ServerUI.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/server/ServerWindowFrameController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/server/SqlConnector.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/server/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/server/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/serverClasses/Client.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/serverClasses/ConnectedClient.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/serverClasses/OrderCancellationData.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/serverClasses/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/serverClasses/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/serverGUI/ServerWindowController.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/serverGUI/package-summary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/serverGUI/package-tree.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/stylesheet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/type-search-index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/javadoc/type-search-index.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/ClientConnectionWindowFrameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/ClientConnectionWindowFrameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/LoginWindowFrameController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/MonthlyReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/MonthlyReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/MyFile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/NewPopUpWindowFrameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/NewPopUpWindowFrameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/NewWindowFrameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/NewWindowFrameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/SavedWindows.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/SavedWindows.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/clientUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/clientUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientClasses/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientClasses/Customer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clientClasses/Delivery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientClasses/Delivery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientFXML/CustomerServiceGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/CustomerServiceGUI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientFXML/DeliveryGuyGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/DeliveryGuyGUI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clientFXML/MarketingWorkerGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientFXML/MarketingWorkerGUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientClasses/ItemInCatalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientClasses/ItemInCatalog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientClasses/ItemInNewOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientClasses/ItemInNewOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientClasses/NewOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientClasses/NewOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientClasses/OrderToConfirm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientClasses/OrderToConfirm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientClasses/RegistrationTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientClasses/RegistrationTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientClasses/SurveyResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientClasses/SurveyResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientClasses/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientClasses/UserData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientClasses/UserLoginData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientClasses/UserLoginData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ApproveCustomersGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ApproveCustomersGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/CancelOrderPopUpGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/CancelOrderPopUpGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/CeoGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/CeoGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ClientConnectionWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ClientConnectionWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ComplaintReportGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ComplaintReportGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/CustomerGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/CustomerGUIController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clientGUI/CustomerServicesGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/CustomerServicesGUIController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clientGUI/DeliveryGuyGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/DeliveryGuyGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/HelpPOPUPController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/HelpPOPUPController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/IncomeReportGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/IncomeReportGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/InsertComplaintGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/InsertComplaintGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/LoginGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/LoginGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ManageCustomersGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ManageCustomersGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ManagePermissionsGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ManagePermissionsGUIController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clientGUI/MarketingWorkerGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/MarketingWorkerGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/MyOrdersGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/MyOrdersGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/MyOrdersOrderDetailsPOPUPController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/MyOrdersOrderDetailsPOPUPController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/NewOrderGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/NewOrderGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/OrdersDetailsGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/OrdersDetailsGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/PaymentGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/PaymentGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/PopUpMessageGUIController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ReviewCancellationGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ReviewCancellationGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ReviewOrdersGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ReviewOrdersGUIController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/clientGUI/ReviewOrdersOrderDetailsPOPUPController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ReviewOrdersOrderDetailsPOPUPController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pictures/button_review-survey.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/pictures/button_review-survey.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ReviewSurveyGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ReviewSurveyGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ShopManagerGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ShopManagerGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/SpeceficReportGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/SpeceficReportGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/UpdateCatalogGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/UpdateCatalogGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/UploadSurveyResultsGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/UploadSurveyResultsGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ViewCatalogGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ViewCatalogGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ViewMonthlyReportsGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ViewMonthlyReportsGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clientGUI/ViewReportsGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/clientGUI/ViewReportsGUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commonClasses/CancellationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commonClasses/CancellationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commonClasses/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commonClasses/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commonClasses/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commonClasses/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commonClasses/Quarter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commonClasses/Quarter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commonClasses/WantedReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commonClasses/WantedReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/external/users.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/external/users.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/AutoGenerateMonthlyReports.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/AutoGenerateMonthlyReports.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ServerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/ServerUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/ServerWindowFrameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerWindowFrameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/SqlConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/SqlConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverClasses/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverClasses/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverClasses/ConnectedClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverClasses/OrderCancellationData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverGUI/ServerWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverGUI/ServerWindowController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,17 +260,12 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/OCSF&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
-  }
-}</component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../OCSF" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Habeeb Ibrahem\IdeaProjects\zerli\src\DeliveryGuy" />
@@ -118,9 +323,9 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.tru" />
       <item itemvalue="Application.ServerUI" />
       <item itemvalue="Application.clientUI" />
+      <item itemvalue="Application.tru" />
     </list>
     <recent_temporary>
       <list>

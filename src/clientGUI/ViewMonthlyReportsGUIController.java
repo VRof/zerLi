@@ -15,6 +15,16 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ *
+ *  controller class for view monthly report window
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class ViewMonthlyReportsGUIController implements Initializable {
 
     @FXML
@@ -68,7 +78,7 @@ public class ViewMonthlyReportsGUIController implements Initializable {
     /**
      * Method(clickedBackBtn) method that moves the user to the previous window "view reports GUI"
      * after clicking on back button and also hides the current window
-     * @param event
+     * @param event mouse click
      */
     @FXML
     void clickedBackBtn(MouseEvent event) {
@@ -80,8 +90,8 @@ public class ViewMonthlyReportsGUIController implements Initializable {
     /**
      * Method(clickedSearchBtn) activates when search button is clicked if the details that user filled are not correct it shows relevant
      * meassage otherwise the method contacts server to get relevant details for reports and displays them
-     * @param event
-     * @throws SQLException
+     * @param event mouse lick
+     * @throws SQLException getting info from DB exception
      */
     @FXML
     void clickedSearchBtn(MouseEvent event) throws SQLException {

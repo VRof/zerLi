@@ -4,7 +4,6 @@ import client.MonthlyReport;
 import commonClasses.*;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
-import serverClasses.OrderCancellationData;
 import serverGUI.ServerWindowController;
 
 import javax.sql.rowset.CachedRowSet;
@@ -17,17 +16,23 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ *  main class of server, receives commands from client and sends back needed data or changes database if needed
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
 public class ServerControl extends AbstractServer {
     public static List<ConnectionToClient> clientsList = new ArrayList<>(); //list of connected users to server (used in table of connected clients in serverGUI)
     private List<Integer> connectedClientdIdList = new ArrayList<>(); //list of id's of connected users to server to prevent multiply login of the same user
-    // private List<ConnectedClient> idAndConnectionList = new ArrayList<>();
     private static ServerControl sv;
-    private int port;
     private int userid;
 
     public ServerControl(int port) {
         super(port);
-        this.port = port;
     }
 
     @Override
@@ -42,7 +47,7 @@ public class ServerControl extends AbstractServer {
 
     @Override
     protected void serverStarted() {
-        AutoGenerateMonthlyReports monthlyOrders = new AutoGenerateMonthlyReports();
+        AutoGenerateMonthlyReports monthlyOrders = new AutoGenerateMonthlyReports(); //create daemon thread to generate monthly reports every first day of month
         monthlyOrders.run();
         System.out.println("Server listening for connections on port " + sv.getPort());
     }
@@ -54,11 +59,10 @@ public class ServerControl extends AbstractServer {
 
     @Override
     protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-        Connection dbConn = SqlConnector.getConnection();
         Message message = (Message) msg;
         System.out.println("Message received: command: " + message.getCommand() + " data: " + message.getMsg() + " from " + client);
 
-        switch (message.getCommand()) {
+        switch (message.getCommand()) { //main server switchCase
             case "login":
                 login(msg, client);
                 break;
@@ -195,8 +199,11 @@ public class ServerControl extends AbstractServer {
     }
 
 
-
-
+    /**
+     * send order details of requested order by its orderName
+     * @param msg    -  receives message from client connection
+     * @param client - receives specific client connection
+     */
     private void getOrderDetails(Object msg, ConnectionToClient client){
         Connection dbConn = SqlConnector.getConnection();
         CachedRowSet rowSet;
@@ -221,8 +228,8 @@ public class ServerControl extends AbstractServer {
     /**
      * Method(getInfo) extracts the phone number and email from DB
      *
-     * @param msg
-     * @param client
+     * @param msg    -  receives message from client connection
+     * @param client - receives specific client connection
      */
     private void getInfo(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
@@ -289,10 +296,15 @@ public class ServerControl extends AbstractServer {
         }
     }
 
+    /**
+     * add new order to order table
+     * @param msg    -  receives message from client connection
+     * @param client - receives specific client connection
+     */
     private void addNewOrder(Object msg, ConnectionToClient client) {
         Order order = (Order) ((Message) msg).getMsg();
         Connection dbConn = SqlConnector.getConnection();
-        String SQL = "INSERT INTO orders(price,greetingCard,dOrder,shop,deliveryDate,orderDate,status,confirmed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String SQL = "INSERT INTO orders(price,greetingCard,dOrder,shop,deliveryDate,orderDate,status,confirmed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"; //insert into orders table
         PreparedStatement ps;
         try {
             ps = dbConn.prepareStatement(SQL);
@@ -305,7 +317,7 @@ public class ServerControl extends AbstractServer {
             ps.setString(7, order.getStatus());
             ps.setString(8, order.getConfirmed());
             ps.executeUpdate();
-            SQL = "INSERT INTO userorders (userid) VALUES (" + order.getCustomerid() + ");";
+            SQL = "INSERT INTO userorders (userid) VALUES (" + order.getCustomerid() + ");"; //add order to userorders
             dbConn.createStatement().executeUpdate(SQL);
             SQL = "UPDATE balance SET balance = " + order.getNewBalance() + "WHERE userid = " + order.getCustomerid() + ";";
             dbConn.createStatement().executeUpdate(SQL);
@@ -329,29 +341,11 @@ public class ServerControl extends AbstractServer {
 
     }
 
-    //    private void sendMessageToClient(Object msg, ConnectionToClient client){
-//        Message msgtoclient = new Message();
-//        String[] msgFromClient = (String[]) ((Message)msg).getMsg();
-//        int id = Integer.parseInt(msgFromClient[0]);
-//        String popupMsg = msgFromClient[1];
-//        msgtoclient.setCommand("newPopUpMessage");
-//        msgtoclient.setMsg(popupMsg);
-//        for(int i = 0;i<idAndConnectionList.size();i++){
-//            if(idAndConnectionList.get(i).getUserid() == id){
-//                try {
-//                    idAndConnectionList.get(i).getConnection().sendToClient(msgtoclient);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//        msgtoclient.setCommand("send");
-//        try {
-//            client.sendToClient(msgtoclient);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    /**
+     * send credit card data to client
+     * @param msg    -  receives message from client connection
+     * @param client - receives specific client connection
+     */
     private void getCreditCardData(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         CachedRowSet rowSet;
@@ -378,6 +372,11 @@ public class ServerControl extends AbstractServer {
         }
     }
 
+    /**
+     * check in userorders table if user (by its id) doesn't have orders, send true, else false
+     * @param msg    -  receives message from client connection
+     * @param client - receives specific client connection
+     */
     private void isFirstOrder(Object msg, ConnectionToClient client) {
         boolean res = false;
         Connection dbConn = SqlConnector.getConnection();
@@ -401,6 +400,11 @@ public class ServerControl extends AbstractServer {
         }
     }
 
+    /**
+     * send user data from users table and his balance from balance table
+     * @param msg    -  receives message from client connection
+     * @param client - receives specific client connection
+     */
     private void getUserData(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         CachedRowSet rowSet;
@@ -427,11 +431,15 @@ public class ServerControl extends AbstractServer {
         }
     }
 
-
+    /**
+     * create new cancellation request in cancelationrequests table
+     * @param msg    -  receives message from client connection
+     * @param client - receives specific client connection
+     */
     private void CreateCancellationRequest(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         int orderId = (int) ((Message) msg).getMsg();
-        OrderCancellationData orderData = new OrderCancellationData();
+        CancellationRequest orderData = new CancellationRequest();
         Timestamp timeNow = new Timestamp(System.currentTimeMillis());
         try {
             //get firstname and lastname of user that ordered:
@@ -440,8 +448,8 @@ public class ServerControl extends AbstractServer {
                     " WHERE o.orderNumber = " + orderId + " AND uo.orderid = " + orderId + " AND uo.userid = u.userid;";
             ResultSet rs = dbConn.createStatement().executeQuery(SQL);
             rs.next();
-            orderData.setFirstname(rs.getString("firstname"));
-            orderData.setLastname(rs.getString("lastname"));
+            orderData.setFirstName(rs.getString("firstname"));
+            orderData.setLastName(rs.getString("lastname"));
             //--------------------------------------------------------------------------------------------------
             //---------------------get other required data---------------------------------------------
             SQL = "SELECT status,price,deliveryDate,shop " +
@@ -449,7 +457,7 @@ public class ServerControl extends AbstractServer {
                     "WHERE orders.orderNumber = " + orderId + " ;";
             rs = dbConn.createStatement().executeQuery(SQL);
             rs.next();
-            orderData.setOrderDate(rs.getTimestamp("deliveryDate"));
+            orderData.setDeliveryDate(rs.getTimestamp("deliveryDate"));
             orderData.setStatus(rs.getString("status"));
             orderData.setPrice(rs.getDouble("price"));
             orderData.setShop(rs.getString("shop"));
@@ -458,12 +466,12 @@ public class ServerControl extends AbstractServer {
             SQL = "INSERT INTO cancellationrequests(orderID,firstname,lastname,status,price,deliveryDate,requestDate,shop) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = dbConn.prepareStatement(SQL);
             ps.setInt(1, orderId);
-            ps.setString(2, orderData.getFirstname());
-            ps.setString(3, orderData.getLastname());
+            ps.setString(2, orderData.getFirstName());
+            ps.setString(3, orderData.getLastName());
             ps.setString(4, orderData.getStatus());
             ps.setDouble(5, orderData.getPrice());
             ps.setTimestamp(7, timeNow);
-            ps.setTimestamp(6, orderData.getOrderDate());
+            ps.setTimestamp(6, orderData.getDeliveryDate());
             ps.setString(8, orderData.getShop());
             ps.executeUpdate();
             //-----------------------------------------------------------------------
@@ -488,6 +496,11 @@ public class ServerControl extends AbstractServer {
         }
     }
 
+    /**
+     * send orders of specific client by his id
+     * @param msg    -  receives message from client connection
+     * @param client - receives specific client connection
+     */
     private void getOrders(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         CachedRowSet rowSet;
@@ -510,6 +523,11 @@ public class ServerControl extends AbstractServer {
 
     }
 
+    /**
+     * send picture of item from catalog
+     * @param msg    -  receives message from client connection
+     * @param client - receives specific client connection
+     */
     private void sendItemPicture(Object msg, ConnectionToClient client) {
         Message msgFromClient = (Message) (msg);
         try {
@@ -524,6 +542,11 @@ public class ServerControl extends AbstractServer {
         }
     }
 
+    /**
+     * send catalog data
+     * @param msg    -  receives message from client connection
+     * @param client - receives specific client connection
+     */
     private void sendCatalog(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         CachedRowSet rowSet;
@@ -551,6 +574,7 @@ public class ServerControl extends AbstractServer {
      * initTableForDelivery - init table for delivery guy
      *
      * @param msg    -  receives message from client connection
+     * @param client - receives specific client connection
      */
     private void initTableForDelivery(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
@@ -564,9 +588,10 @@ public class ServerControl extends AbstractServer {
             client.sendToClient(message);
         } catch (SQLException | IOException e) { System.out.println("error data to client " + client + " error " + e); }
     }
+
     /**
      * setUpSQL - set up data for delivery guy in table
-     *
+     * @param client connected client
      */
     private void setUpSQL(ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
@@ -1436,6 +1461,11 @@ public class ServerControl extends AbstractServer {
         }
     }
 
+    /**
+     * get all the shops name and send them to client
+     * @param msg message from client
+     * @param client client connection
+     */
     private void getAllTheShops(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         String SQL = "SELECT shop FROM shopmanager;";
@@ -1464,6 +1494,11 @@ public class ServerControl extends AbstractServer {
 
     }
 
+    /**
+     * logout connected user by removing it from connected users list
+     * @param msg message from client
+     * @param client connection to client
+     */
     private void logout(Object msg, ConnectionToClient client) {
         Message message = (Message) msg;
         int userid = -1;
@@ -1481,6 +1516,10 @@ public class ServerControl extends AbstractServer {
         }
     }
 
+    /**
+     * close all connections, client connections and database connection
+     * @throws SQLException when can't close connection with DB
+     */
     public static void closeAll() throws SQLException {
         if (sv != null && SqlConnector.getConnection() != null && (!SqlConnector.getConnection().isClosed() || sv.isListening())) {
             SqlConnector.getConnection().close();
@@ -1494,6 +1533,11 @@ public class ServerControl extends AbstractServer {
         }
     }
 
+    /**
+     * login new user, send his login data from DB (type of user, account banned/active etc...)
+     * @param msg message from client
+     * @param client connection to client
+     */
     private void login(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         Message message = (Message) msg;
@@ -1507,11 +1551,12 @@ public class ServerControl extends AbstractServer {
         try {
             rs = dbConn.createStatement().executeQuery(SQL);
             //  rs.next();
-            if (rs.next() == false) {
+            if (rs.next() == false) { //if user not found
                 userLoginData.setCommand("wrong");
                 client.sendToClient(userLoginData);
                 return;
             }
+            //if found
             userid = rs.getInt("userid");
             status = rs.getString("status");
             rs.beforeFirst(); //reset rs pointer
@@ -1541,12 +1586,9 @@ public class ServerControl extends AbstractServer {
                 }
             }
         }
-        //  if (userid != -1)
         if (status.equals("active"))
             connectedClientdIdList.add(userid); //add new user id to the list
         try {
-            //ConnectedClient newclient = new ConnectedClient(userid,client);
-            //           idAndConnectionList.add(newclient);
             userLoginData.setCommand("logged in");
             userLoginData.setMsg(cachedMsg);
             client.sendToClient(userLoginData); //send login data to client
@@ -1562,7 +1604,6 @@ public class ServerControl extends AbstractServer {
      * @param msg     -  receives message from client connection
      * @param client- receives specific client connection
      */
-
     private void reviewCancellation(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
         CancellationRequest cnlRequest = new CancellationRequest();
@@ -1636,7 +1677,7 @@ public class ServerControl extends AbstractServer {
     /**
      * @param orderID - order id that we want to calculate the refund for after cancellation
      * @param client  - receives specific client connection
-     * @throws IOException
+     * @throws IOException sendin to client exception
      * @throws SQLException Method(calculateRefund) calculates the time difference between delivery date and cancellation request date
      *                      depends on that calculates the relevant refund for customer .
      */
@@ -1773,9 +1814,11 @@ public class ServerControl extends AbstractServer {
         int key = (int) m.getMsg();
         String SQL = "UPDATE orders SET confirmed = 'yes' WHERE (`orderNumber` = " + key + ");";
         String SQL1 = "UPDATE orders SET confirmDate = now() where orderNUmber = " + key + ";";
+        String SQL2 = "UPDATE orders set status = 'finished'  WHERE (`orderNumber` = " + key + ") AND status = 'pending for pickup';";
         try {
             dbConn.createStatement().executeUpdate(SQL);
             dbConn.createStatement().executeUpdate(SQL1);
+            dbConn.createStatement().executeUpdate(SQL2);
             msgToClient.setCommand("confirmed");
             msgToClient.setMsg("");
             client.sendToClient(msgToClient);
@@ -1793,8 +1836,8 @@ public class ServerControl extends AbstractServer {
     /**
      * manageCustomers method gets an information from 2 tables DB and sends it to the client who asked for it.
      *
-     * @param msg
-     * @param client
+     * @param msg message from client
+     * @param client connection to client
      */
     private void manageCustomers(Object msg, ConnectionToClient client) {
 
@@ -1828,8 +1871,8 @@ public class ServerControl extends AbstractServer {
     /**
      * confirmFreeze method updates the login status field in the DB to 'frozen' for userid sent by client.
      *
-     * @param msg
-     * @param client
+     * @param msg message from client
+     * @param client connection to client
      */
     private void confirmFreeze(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
@@ -1855,8 +1898,8 @@ public class ServerControl extends AbstractServer {
     /**
      * confirmUnfreeze method updates the login status field in the DB to 'active' for userid sent by client.
      *
-     * @param msg
-     * @param client
+     * @param msg message from client
+     * @param client connection to client
      */
     private void confirmUnfreeze(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
@@ -1885,8 +1928,8 @@ public class ServerControl extends AbstractServer {
      * and sending the information regarding the customers in registration
      * table to the client who asked for it
      *
-     * @param msg
-     * @param client
+     * @param msg message from client
+     * @param client connection to client
      */
     private void manageUsers(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
@@ -1920,8 +1963,8 @@ public class ServerControl extends AbstractServer {
      * inserts the customer to users list (users list is for customers),
      * then it inserts the user to login table and removes it from registration table because it's already approved.
      *
-     * @param msg
-     * @param client
+     * @param msg message from client
+     * @param client connection to client
      */
     private void approveCustomer(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
@@ -1965,8 +2008,8 @@ public class ServerControl extends AbstractServer {
      * showUsersPermissionsTable method is responsible for accessing the DB,
      * getting the users' info from login table and sending it to the client who asked for it.
      *
-     * @param msg
-     * @param client
+     * @param msg message from client
+     * @param client connection to client
      */
     private void showUsersPermissionsTable(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
@@ -1999,8 +2042,8 @@ public class ServerControl extends AbstractServer {
      * changePermission method changes the permission of user according to what it got from client,
      * it does so by accessing the DB - login table - and changing the usertype field in it.
      *
-     * @param msg
-     * @param client
+     * @param msg message from client
+     * @param client connection to client
      */
     private void changePermission(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();
@@ -2029,8 +2072,8 @@ public class ServerControl extends AbstractServer {
     /**
      * getName method gets an userid and sends the first and last name that belongs to that userid to the client asked for it.
      *
-     * @param msg
-     * @param client
+     * @param msg message from client
+     * @param client connection to client
      */
     private void getName(Object msg, ConnectionToClient client) {
         Connection dbConn = SqlConnector.getConnection();

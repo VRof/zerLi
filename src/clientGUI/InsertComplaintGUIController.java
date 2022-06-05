@@ -16,6 +16,16 @@ import java.sql.SQLException;
 
 import static client.ClientController.savedWindows;
 
+/**
+ *
+ *  controller class for insert complaint window
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class InsertComplaintGUIController {
 
     @FXML
@@ -36,6 +46,7 @@ public class InsertComplaintGUIController {
 
     /**
      * Gui init
+     * @throws SQLException getting data from DB
      */
     public void initialize() throws SQLException {
         lbl_error.setText("");
@@ -49,7 +60,7 @@ public class InsertComplaintGUIController {
     }
 
     /**
-     *  clickedBackBtn - click in "<--" button to get back to user original window
+     *  clickedBackBtn - click in back button to get back to user original window
      *  @param event - mouse click
      */
     @FXML

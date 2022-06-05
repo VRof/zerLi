@@ -1,5 +1,14 @@
 package serverClasses;
 
+/**
+ *
+ *  Client connected to server
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
 public class Client {
 	private String ip;
 	private String host;

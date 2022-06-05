@@ -73,7 +73,7 @@ public class CeoGUIController implements Initializable {
 
     /**
      * method(clickedLogoutBtn)logout activated when logout button is pressed
-     * @param event
+     * @param event mouse click
      */
     @FXML
     void clickedLogoutBtn(MouseEvent event) {
@@ -84,8 +84,8 @@ public class CeoGUIController implements Initializable {
     /**
      * method(clickedViewAnnualReport) opens aa new qindow income report GUI after pressing the button
      * view annual report clicked
-     * @param event
-     * @throws Exception
+     * @param event mouse click
+     * @throws Exception javafx exception when creating a new window
      */
     @FXML
     void clickedViewAnnualReport(MouseEvent event) throws Exception {
@@ -99,8 +99,8 @@ public class CeoGUIController implements Initializable {
     /**
      * Method(clickedViewSpecificShopReportBtn) opens a new window view reports GUI when
      * view specific report is pressed
-     * @param event
-     * @throws Exception
+     * @param event mouse click
+     * @throws Exception javafx exception when creating a new window
      */
     @FXML
     void clickedViewSpecificShopReportBtn(MouseEvent event) throws Exception {

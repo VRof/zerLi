@@ -77,12 +77,22 @@ public class ShopManagerGUIController {
         lblManager.setText("Hello " +first+" "+last);
     }
 
+    /**
+     * clicked logout button, send logout request to server
+     * @param event mouse click
+     */
     @FXML
     void ClickedLogoutBtn(MouseEvent event) {
         Stage stage = (Stage)lblManager.getScene().getWindow();
         cc.logout(stage);
 
     }
+
+    /**
+     * clicked on "cancellation request" button
+     * @param event mouse click
+     * @throws Exception javafx exception when creating a new window
+     */
     @FXML
     void clickedViewCancellationRequestBtn(MouseEvent event) throws Exception{
         NewWindowFrameController customerWindow = new NewWindowFrameController("ReviewCancellationGUI");
@@ -91,6 +101,11 @@ public class ShopManagerGUIController {
         stage.hide();
     }
 
+    /**
+     * clicked on "View orders" button
+     * @param event mouse click
+     * @throws Exception javafx exception when creating a new window
+     */
     @FXML
     void clickedViewOrdersBtn(MouseEvent event) throws Exception {
         NewWindowFrameController customerWindow = new NewWindowFrameController("ReviewOrdersGUI");
@@ -100,6 +115,11 @@ public class ShopManagerGUIController {
 
     }
 
+    /**
+     * clicked "ViewReports" button
+     * @param event mouse click
+     * @throws Exception javafx exception when creating a new window
+     */
     @FXML
     void clickedViewReportsBtn(MouseEvent event) throws Exception {
         NewWindowFrameController customerWindow = new NewWindowFrameController("ViewReportsGUI");
@@ -108,13 +128,22 @@ public class ShopManagerGUIController {
         stage.hide();
     }
     @FXML
+    /**
+     * clicked "ManageCustomers" button
+     * @param event mouse click
+     * @throws Exception javafx exception when creating a new window
+     */
     void clickedManageCustomersBtn(MouseEvent event) throws Exception {
         NewWindowFrameController customerWindow = new NewWindowFrameController("ManageCustomersGUI");
         customerWindow.start(new Stage());
         Stage stage = (Stage) lblManager.getScene().getWindow();
         stage.hide();
     }
-
+    /**
+     * clicked "ApproveCustomers" button
+     * @param event mouse click
+     * @throws Exception javafx exception when creating a new window
+     */
     @FXML
     void clickedApproveCustomersBtn(MouseEvent event) throws Exception {
         NewWindowFrameController customerWindow = new NewWindowFrameController("ApproveCustomersGUI");
@@ -122,6 +151,11 @@ public class ShopManagerGUIController {
         Stage stage = (Stage) lblManager.getScene().getWindow();
         stage.hide();
     }
+    /**
+     * clicked "ManagePermissions" button
+     * @param event mouse click
+     * @throws Exception javafx exception when creating a new window
+     */
     @FXML
     void clickedManagePermissionsBtn(MouseEvent event) throws Exception {
         NewWindowFrameController customerWindow = new NewWindowFrameController("ManagePermissionsGUI");

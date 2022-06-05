@@ -141,7 +141,7 @@ public class ApproveCustomersGUIController implements Initializable {
      * clickedApproveCustomerBtn method approves the customer when clicking Approve customer button,
      * and sends the selected customer data (new username password) to the server
      * in order to save them in DB
-     * @param event
+     * @param event mouse click
      */
     @FXML
     void clickedApproveCustomerBtn(MouseEvent event) {
@@ -192,8 +192,8 @@ public class ApproveCustomersGUIController implements Initializable {
         }
     /**
      * clickedBackBtn method directs the user to the previous GUI - ShopManagerGUI - when clicking back
-     * @param event
-     * @throws Exception
+     * @param event mouse click
+     * @throws Exception javafx exception when creating a new window
      */
     @FXML
     void clickedBackBtn(MouseEvent event) throws Exception {

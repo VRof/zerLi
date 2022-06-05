@@ -129,7 +129,8 @@ public class ReviewCancellationGUIController implements Initializable {
      * clickedConfirmCancellationBtn method sends a message to the server - when selecting order and
      * clicking confirm cancellation button - in order to update that the order is cancelled in the DB,
      * then it shows the manager the total refund after the cancellation.
-     * @param event
+     * @param event mouse click
+     * @throws SQLException getting data from DB
      */
     @FXML
     void clickedConfirmCancellationBtn(MouseEvent event) throws SQLException {
@@ -195,8 +196,8 @@ public class ReviewCancellationGUIController implements Initializable {
 
     /**
      * clickedBackBtn method directs the manager to the previous GUI - ShopManagerGUI - when clicking back button.
-     * @param mouseEvent
-     * @throws Exception
+     * @param mouseEvent mose click
+     * @throws Exception getting data from DB
      */
     public void clickedBackBtn(MouseEvent mouseEvent) throws Exception {
         new NewWindowFrameController("ShopManagerGUI").start(new Stage());

@@ -132,8 +132,8 @@ public class ManageCustomersGUIController implements Initializable {
 
     /**
      * clickedBackBtn method directs the user to the previous GUI when clicking back
-     * @param event
-     * @throws Exception
+     * @param event mouse click
+     * @throws Exception javafx exception when creating a new scene
      */
     @FXML
     void clickedBackBtn(MouseEvent event) throws Exception {
@@ -144,7 +144,7 @@ public class ManageCustomersGUIController implements Initializable {
 
     /**
      * clickedFreezeBtn method freezes the selected customer when clicking Freeze button
-     * @param event
+     * @param event mose click
      */
     @FXML
     void clickedFreezeBtn(MouseEvent event) {
@@ -173,7 +173,7 @@ public class ManageCustomersGUIController implements Initializable {
 
     /**
      * clickedUnfreezeBtn method unfreezes the selected customer when clicking UnFreeze button
-     * @param event
+     * @param event mouse click
      */
     @FXML
     void clickedUnfreezeBtn(MouseEvent event) {

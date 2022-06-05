@@ -24,6 +24,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ *
+ *  controller class for view reports window
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class ViewReportsGUIController implements Initializable {
 
 
@@ -119,8 +129,8 @@ public class ViewReportsGUIController implements Initializable {
     /**
      * Method(clickedSearchBtn) activates when search button is pressed
      * checks if the fields are filled and displays the desired report
-     * @param event
-     * @throws Exception
+     * @param event mouse click
+     * @throws Exception javafx exception when creating a new window
      */
     @FXML
     void clickedSearchBtn(MouseEvent event) throws Exception {
@@ -165,8 +175,8 @@ public class ViewReportsGUIController implements Initializable {
 
     /**
      * Method(clickedViewMonthlyReportsBtn) when clicked on button moves the user to a new window
-     * @param event
-     * @throws Exception
+     * @param event mouse click
+     * @throws Exception javafx create scene exception
      */
     @FXML
     void clickedViewMonthlyReportsBtn(MouseEvent event) throws Exception {
@@ -181,8 +191,8 @@ public class ViewReportsGUIController implements Initializable {
     /**
      * Method(clickedBackBtn) return to the previous window depends on what user were connected because its a shared window
      * between 2 users
-     * @param event
-     * @throws Exception
+     * @param event mouse click
+     * @throws Exception javafx create scene exception
      */
     @FXML
     void clickedBackBtn(MouseEvent event) throws Exception {
@@ -231,7 +241,7 @@ public class ViewReportsGUIController implements Initializable {
 
     /**
      * Method(getWr) returns details about wanted report
-     * @return
+     * @return details about wanted report
      */
     public WantedReport getWr() {
         return wr;

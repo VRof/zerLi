@@ -2,20 +2,25 @@ package client;
 
 import javafx.stage.Stage;
 
+/**
+ *
+ *  new popup window frame creator, loads popup by its name, doesn't disconnect when closed
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class SavedWindows {
     private Stage loginWindow;
     private Stage UserWindow;
-    private Stage viewOrdersWindow;
     private Stage clientGUIWindow;
     private Stage viewReportsWindow;
     private Stage incomeReportWindow;
     private Stage orderDetailsWindow;
     private Stage newOrderWindow;
     private Stage paymentWindow;
-
-    public Stage getIncomeReportWindow() {
-        return incomeReportWindow;
-    }
 
     public void setIncomeReportWindow(Stage incomeReportWindow) {
         this.incomeReportWindow = incomeReportWindow;
@@ -37,14 +42,6 @@ public class SavedWindows {
 
     public void setClientGUIWindow(Stage clientGUIWindow) {
         this.clientGUIWindow = clientGUIWindow;
-    }
-
-    public Stage getViewOrdersWindow() {
-        return viewOrdersWindow;
-    }
-
-    public void setViewOrdersWindow(Stage viewOrdersWindow) {
-        this.viewOrdersWindow = viewOrdersWindow;
     }
 
 

@@ -6,6 +6,16 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ *
+ *  new popup window frame creator, loads popup by its name, doesn't disconnect when closed
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class NewPopUpWindowFrameController extends Application {
     private AnchorPane mainLayout;
     private String windowName;

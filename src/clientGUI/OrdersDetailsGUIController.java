@@ -25,6 +25,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ *
+ *  controller class for order details window
+ *
+ * <p> Project Name: Zer-Li (Java Application Flower Store) </p>
+ *
+ * @author Habib Ibrahim, Vitaly Rofman, Ibrahim Daoud, Yosif Hosen
+ * @version  V1.00  2022
+ */
+
 public class OrdersDetailsGUIController {
 
     @FXML
@@ -77,8 +87,12 @@ public class OrdersDetailsGUIController {
     private String orderPlusDeliveryDetails;
     public static OrdersDetailsGUIController controller;
     private String deliveryAndPrice = ""; //string with delivery price in it "delivery(30₪)"
-    private double finalPrice;
+    private double finalPrice; //final price include delivery cost
 
+    /**
+     * initialize window, fill all comboBoxes with relevant data
+     * @throws SQLException if "getAllTheShops" commands fails in server controller class
+     */
     @FXML
     public void initialize() throws SQLException {
         controller = this;
@@ -86,7 +100,7 @@ public class OrdersDetailsGUIController {
         lbl_msg.setText("");
         Message msgToServer = new Message();
         List<String> shopsList = new ArrayList<>();
-        msgToServer.setCommand("getAllTheShops");
+        msgToServer.setCommand("getAllTheShops"); //get shops list
         ClientController.getClientController().send(msgToServer);
         CachedRowSet cachedRowSet = null;
         if (ClientController.messageFromServer != null)
@@ -96,6 +110,7 @@ public class OrdersDetailsGUIController {
         while (cachedRowSet.next()) {
             shopsList.add(cachedRowSet.getString("shop"));
         }
+        //add data to comboBoxes:
         deliveryAndPrice = "delivery(" + ClientController.getClientController().getDeliveryPrice() + "₪)";
         String[] deliveryMethods = {"pick-up", deliveryAndPrice};
         String[] hours = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
@@ -106,6 +121,9 @@ public class OrdersDetailsGUIController {
         cBox_shop.getItems().addAll(FXCollections.observableArrayList(shopsList));
     }
 
+    /**
+     * print order list include delivery data
+     */
     public void printOrderWithDeliveryDetails() {
         String order = NewOrderGUIController.controller.getFullOrder();
         orderPlusDeliveryDetails = "";
@@ -120,13 +138,13 @@ public class OrdersDetailsGUIController {
             }
             orderPlusDeliveryDetails = orderPlusDeliveryDetails + "Delivery method: " + cBox_deliveryMethod.getValue() + "\n";
         }
-        if (!txt_fullName.getText().equals(""))
+        if (!txt_fullName.getText().equals("")) //full name isn't empty
             orderPlusDeliveryDetails = orderPlusDeliveryDetails + "Full name: " + txt_fullName.getText() + "\n";
-        if (!txt_address.getText().equals(""))
+        if (!txt_address.getText().equals(""))//address isn't empty
             orderPlusDeliveryDetails = orderPlusDeliveryDetails + "Delivery address: " + txt_address.getText() + "\n";
-        if (!phoneNumber.equals(""))
+        if (!phoneNumber.equals(""))//phone number isn't empty
             orderPlusDeliveryDetails = orderPlusDeliveryDetails + "Phone: " + txt_phoneNumeber.getText() + "\n";
-        if (date_deliveryDate.getValue() != null && cBox_hour.getValue() != null && cBox_minutes.getValue() != null) {
+        if (date_deliveryDate.getValue() != null && cBox_hour.getValue() != null && cBox_minutes.getValue() != null) {// delivery date fields isn't empty
             //---------------------------create timestamp to write in db:
             int year = date_deliveryDate.getValue().getYear();
             int month = date_deliveryDate.getValue().getMonthValue();
@@ -148,9 +166,9 @@ public class OrdersDetailsGUIController {
             //------------------------------------------------------
             orderPlusDeliveryDetails = orderPlusDeliveryDetails + "Delivery date: " + date_deliveryDate.getValue() + " " + cBox_hour.getValue() + ":" + cBox_minutes.getValue() + "\n";
         }
-        if (cBox_shop.getValue() != null)
+        if (cBox_shop.getValue() != null) //shop selected
             orderPlusDeliveryDetails = orderPlusDeliveryDetails + "Shop: " + cBox_shop.getValue() + "\n";
-        if (!txt_blessing.getText().equals(""))
+        if (!txt_blessing.getText().equals("")) //blessing added
             orderPlusDeliveryDetails = orderPlusDeliveryDetails + "Blessing message: " + txt_blessing.getText() + "\n";
         orderPlusDeliveryDetails = order + "\n" + orderPlusDeliveryDetails;
         finalPrice = finalPrice*100;
@@ -161,53 +179,90 @@ public class OrdersDetailsGUIController {
         lbl_orderPrice.setText("Order price: " + finalPrice + "₪");
     }
 
+    /**
+     *
+     * @return string representation of order and delivery data
+     */
     public String getOrderPlusDeliveryDetails() {
         return orderPlusDeliveryDetails;
     }
 
+    /**
+     *
+     * @return greeting card text
+     */
     public String getGreetingCard() {
         return greetingCard;
     }
 
+    /**
+     *
+     * @return name of shop ordered from
+     */
     public String getShop() {
         return shop;
     }
 
+    /**
+     *
+     * @return wanted date of delivery
+     */
     public Timestamp getDeliveryDate() {
         return deliveryDate;
     }
 
+    /**
+     *
+     * @return "pending for..." "delivery/pickup" text
+     */
     public String getPendingForText() {
         return pendingForText;
     }
 
+    /**
+     *
+     * @return price include delivery cost
+     */
     public double getFinalPrice() {
         return finalPrice;
     }
 
+    /**
+     * if full name field is changed
+     * @param event field changed
+     */
     @FXML
     void changedFullname(KeyEvent event) {
         printOrderWithDeliveryDetails();
     }
-
+    /**
+     * if blessing field is changed
+     * @param event field changed
+     */
     @FXML
     void changedBlessing(KeyEvent event) {
         greetingCard = txt_blessing.getText();
         printOrderWithDeliveryDetails();
     }
-
+    /**
+     * if delivery address name field is changed
+     * @param event field changed
+     */
     @FXML
     void changedDeliveryAddress(KeyEvent event) {
         printOrderWithDeliveryDetails();
     }
-
+    /**
+     * if phone number name field is changed
+     * @param event field changed
+     */
     @FXML
     void changedPhoneNumber(KeyEvent event) {
         lbl_msg.setText("");
         phoneNumber = "";
-        if (!event.getCharacter().matches("[0-9]+")) {
+        if (!event.getCharacter().matches("[0-9]+")) { //only digits
             lbl_msg.setText("Phone number must include only digits");
-        } else if (txt_phoneNumeber.getText().length() != 10)
+        } else if (txt_phoneNumeber.getText().length() != 10) //10 digits
             lbl_msg.setText("Phone number must be 10-digit number");
         else {
             phoneNumber = txt_phoneNumeber.getText();
@@ -215,14 +270,21 @@ public class OrdersDetailsGUIController {
         printOrderWithDeliveryDetails();
     }
 
+    /**
+     * date field is changed
+     * @param event field changed
+     */
     @FXML
     void selectedDate(ActionEvent event) {
         printOrderWithDeliveryDetails();
     }
-
+    /**
+     * delivery method field is changed
+     * @param event field changed
+     */
     @FXML
     void selectedDeliveryMethod(ActionEvent event) {
-        if(cBox_deliveryMethod.getValue().equals("pick-up")){
+        if(cBox_deliveryMethod.getValue().equals("pick-up")){ // disable address field when picking up
             txt_address.setDisable(true);
             txt_address.setText("");
         }
@@ -231,23 +293,36 @@ public class OrdersDetailsGUIController {
         }
         printOrderWithDeliveryDetails();
     }
-
+    /**
+     * hour field is changed
+     * @param event field changed
+     */
     @FXML
     void selectedHour(ActionEvent event) {
         printOrderWithDeliveryDetails();
     }
-
+    /**
+     * minutes field is changed
+     * @param event field changed
+     */
     @FXML
     void selectedMinutes(ActionEvent event) {
         printOrderWithDeliveryDetails();
     }
-
+    /**
+     * shop field is changed
+     * @param event field changed
+     */
     @FXML
     void selectedShop(ActionEvent event) {
         printOrderWithDeliveryDetails();
         shop = cBox_shop.getValue();
     }
 
+    /**
+     * hides this window and returns to customer's main window
+     * @param event mouse click on back button
+     */
     @FXML
     void clickedBackBtn(MouseEvent event) {
         Stage thisWindow = (Stage) btn_back.getScene().getWindow();
@@ -256,9 +331,15 @@ public class OrdersDetailsGUIController {
         ClientController.savedWindows.getNewOrderWindow().show();
     }
 
+    /**
+     *
+     * @param event moude click on "Proceed with the payment" button
+     * @throws Exception javafx exception when creating a new window
+     */
     @FXML
     void clickedProceedWithThePayment(MouseEvent event) throws Exception {
         lbl_msg.setText("");
+        //check if all relevant fields aren't empty:
         if (cBox_deliveryMethod.getValue() == null) {
             lbl_msg.setText("please choose delivery method");
             return;
@@ -281,7 +362,7 @@ public class OrdersDetailsGUIController {
         }
         if (!cBox_deliveryMethod.getValue().equals("pick-up") && date_deliveryDate.getValue() != null && cBox_hour.getValue() != null && cBox_minutes.getValue() != null) {
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-            if (deliveryDate.getTime() < (currentTime.getTime() + 10810000)) {
+            if (deliveryDate.getTime() < (currentTime.getTime() + 10810000)) { //check if wanted delivery date is at least 3 hours from now
                 lbl_msg.setText("please select correct date and time for delivery,it must be at least 3 hours from now");
                 return;
             }
@@ -290,6 +371,8 @@ public class OrdersDetailsGUIController {
             lbl_msg.setText("please select shop to order from");
             return;
         }
+        //-------------------------------------------------------------------------------
+        //create payment window:
         Stage thisScene = (Stage) btn_back.getScene().getWindow();
         ClientController.savedWindows.setOrderDetailsWindow(thisScene);
         thisScene.hide();
