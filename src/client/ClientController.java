@@ -7,7 +7,6 @@ import commonClasses.Message;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import ocsf.client.AbstractClient;
 
 import java.io.IOException;
 

@@ -2,9 +2,7 @@ package server;
 
 import client.MonthlyReport;
 import commonClasses.*;
-import ocsf.server.AbstractServer;
-import ocsf.server.ConnectionToClient;
-import serverGUI.ServerWindowController;
+import serverGUI.*;
 
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetFactory;
@@ -15,7 +13,6 @@ import java.nio.file.Path;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  *
  *  main class of server, receives commands from client and sends back needed data or changes database if needed
@@ -198,7 +195,18 @@ public class ServerControl extends AbstractServer {
             case "checkUserName":
                 checkUserName(msg,client);
                 break;
-
+            case "complaintsTable":
+                complaintsTable(msg,client);
+                break;
+            case "complaintDone":
+                complaintDone(msg,client);
+                break;
+            case "getComplaintDetails":
+                getComplaintDetails(msg,client);
+                break;
+            case "addRefundCustomerServes":
+                addRefundCustomerServes(msg,client);
+                break;
         }
     }
 
@@ -227,21 +235,6 @@ public class ServerControl extends AbstractServer {
             e.printStackTrace();
         } catch (IOException e) {
             throw new RuntimeException(e);
-            case "complaintsTable":
-                complaintsTable(msg,client);
-                break;
-            case "complaintDone":
-                complaintDone(msg,client);
-                break;
-            case "getComplaintDetails":
-                getComplaintDetails(msg,client);
-                break;
-            case "addRefundCustomerServes":
-                addRefundCustomerServes(msg,client);
-                break;
-
-
-
         }
     }
 

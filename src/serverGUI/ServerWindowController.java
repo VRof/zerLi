@@ -18,7 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import ocsf.server.ConnectionToClient;
+import server.ConnectionToClient;
 import server.ServerControl;
 import server.SqlConnector;
 import serverClasses.Client;

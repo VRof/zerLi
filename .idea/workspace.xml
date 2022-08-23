@@ -4,8 +4,58 @@
     <option name="SCOPE_TYPE" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae90c0da-2d4b-4397-9cd0-facc2755ab48" name="Changes" comment="added javadoc">
+    <list default="true" id="ae90c0da-2d4b-4397-9cd0-facc2755ab48" name="Changes" comment="database script provided + ocsf moved to project folder">
+      <change afterPath="$PROJECT_DIR$/DB.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ocsf/client/AbstractClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ocsf/client/AdaptableClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ocsf/client/ObservableClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ocsf/server/AbstractServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ocsf/server/AdaptableServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ocsf/server/ConnectionToClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ocsf/server/ObservableOriginatorServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ocsf/server/ObservableServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ocsf/server/OriginatorMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/picturesCatalog/items/rose.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/picturesCatalog/items/sunflower.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/bundles/1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/bundles/1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/bundles/10.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/bundles/10.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/bundles/11.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/bundles/11.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/bundles/12.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/bundles/12.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/bundles/13.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/bundles/13.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/bundles/14.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/bundles/14.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/bundles/2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/bundles/2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/bundles/3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/bundles/3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/bundles/4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/bundles/4.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/bundles/5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/bundles/5.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/bundles/6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/bundles/6.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/bundles/7.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/bundles/7.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/bundles/8.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/bundles/8.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/bundles/9.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/bundles/9.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/Amaryllis.png" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/Amaryllis.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/Gerbera.png" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/Gerbera.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/Lily.png" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/Lily.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/Narcissus.webp" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/Narcissus.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/Peony.webp" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/Peony.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/Rose.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/Snapdragon.png" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/Snapdragon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/Sunflower.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/Tulip.webp" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/Tulip.webp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/aster.png" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/aster.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/bluebell.png" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/bluebell.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/cornflower.png" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/cornflower.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/forget me not.png" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/forget me not.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/foxglove.png" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/foxglove.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/iris.png" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/iris.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/jasmine.png" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/jasmine.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/lavender.png" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/lavender.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/peony.png" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/peony.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/picturesCatalog/items/tulips.png" beforeDir="false" afterPath="$PROJECT_DIR$/picturesCatalog/items/tulips.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ServerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ServerControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serverGUI/ServerWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serverGUI/ServerWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zerli.iml" beforeDir="false" afterPath="$PROJECT_DIR$/zerli.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +87,8 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/clientGUI/LoginGUIController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/server/ServerControl.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/clientGUI/LoginGUIController.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -54,11 +104,14 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../OCSF" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\zerli" />
+      <recent name="C:\zerli\src" />
       <recent name="C:\Users\Habeeb Ibrahem\IdeaProjects\zerli\src\DeliveryGuy" />
     </key>
   </component>
@@ -89,19 +142,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="tru" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="clientClasses.tru" />
-      <module name="zerli" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="clientClasses.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -116,13 +156,11 @@
     <list>
       <item itemvalue="Application.ServerUI" />
       <item itemvalue="Application.clientUI" />
-      <item itemvalue="Application.tru" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.clientUI" />
         <item itemvalue="Application.ServerUI" />
-        <item itemvalue="Application.tru" />
       </list>
     </recent_temporary>
   </component>
@@ -162,7 +200,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Habib#2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Habib#2" />
+    <MESSAGE value="database script provided + ocsf moved to project folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="database script provided + ocsf moved to project folder" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
